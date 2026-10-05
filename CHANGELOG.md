@@ -1,3 +1,11 @@
+# v0.3 / October5,2026 / finalized bounded mainnet canary
+
+- Eight finalized transactions: excess refund, fixed1USDC delegation, three0.01USDC result settlements, revoke and full5USDC return. No token or new custody program.
+- Forced exit74 after second dispatch; resume same signature and exact finalized bytes/USDC deltas. Repeated run creates0 new transfers. Public RPC429 reads paced/retried; sends retain durable uncertainty.
+- Three negative mainnet preflight simulations reject over-cap,wrong signer and revoked worker; no failed transaction broadcasts.
+- Public proof, offline relationship verifier and independent finalized-RPC verification. ASCII evidence/docs/status/source updated; local-only private state excluded.
+- Hosted paid-provider execution, customer task quality and distributed leases remain open gates.
+
 # v0.3 / October 5, 2026 / unfunded mainnet canary preparation
 
 - Explicit mainnet researcher with immutable cluster state, actual Qwen-to-Llama recovery:3 tasks/3 calls/0 duplicates/5.938s restart through completion.

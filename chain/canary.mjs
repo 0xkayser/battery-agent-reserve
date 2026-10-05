@@ -6,7 +6,7 @@ import {execFileSync} from 'node:child_process';
 import {getTransferSolInstruction} from '@solana-program/system';
 import {kit,token,subscriptions,RPC,GENESIS,PROGRAM,USDC,POLICY,hash,rpc,account,bytes,
  requireMainnet,addresses,setupInstructions,paymentInstructions,revokeInstruction,signedTransaction,
- chainState,programArtifact,guardPolicy,withdrawalInstructions,decodeToken} from './reserve.mjs';
+ chainState,programArtifact,guardPolicy,withdrawalInstructions,decodeToken,excessRefundAmount} from './reserve.mjs';
 import {budgetPrice} from './budget.mjs';
 import {durableJson,driveTransaction} from './settlement.mjs';
 const root=fileURLToPath(new URL('..',import.meta.url)),state=join(root,'mainnet-state/canary');
@@ -59,8 +59,8 @@ async function prepare(owner,worker){
 async function main(){
  if(process.env.BATTERY_CANARY_LOCK!=='1')throw Error('Use python3 chain/canary.py for kernel single-operator lock');
  const [command,...flags]=process.argv.slice(2);
- if(!['prepare','status','setup','run','revoke','return-address','withdraw'].includes(command))throw Error('Commands: prepare | status | setup | run | revoke | return-address WALLET | withdraw');
- if(['setup','run','revoke','withdraw'].includes(command)&&!flags.includes('--execute-budget-5-usdc'))throw Error('Financial command disabled: explicit --execute-budget-5-usdc required after funding');
+ if(!['prepare','status','setup','run','revoke','return-address','refund-extra','verify-guards','withdraw'].includes(command))throw Error('Commands: prepare | status | setup | run | revoke | return-address WALLET | refund-extra | verify-guards | withdraw');
+ if(['setup','run','revoke','refund-extra','verify-guards','withdraw'].includes(command)&&!flags.includes('--execute-budget-5-usdc'))throw Error('Financial command disabled: explicit --execute-budget-5-usdc required after funding');
  mkdirSync(state,{recursive:true,mode:0o700});chmodSync(state,0o700);
  if(command!=='prepare'&&!existsSync(join(state,'plan.json')))throw Error('Prepare and review the canary plan first');
  const owner=await signer('owner'),worker=await signer('worker');
@@ -70,7 +70,7 @@ async function main(){
  if(JSON.stringify(a)!==JSON.stringify(plan.addresses)||JSON.stringify(POLICY)!==JSON.stringify(plan.policy))throw Error('Plan/key/policy mismatch');
  const artifact=await programArtifact();if(artifact.sha256!==plan.programSha256)throw Error('Program upgraded since localSVM review; stop');
  if(command==='return-address'){
-  const destination=kit.address(flags[0]);if([a.owner,a.worker].includes(destination))throw Error('Use original external funding wallet');
+  const destination=kit.address(flags[0]);if([a.owner,a.worker].includes(destination))throw Error('Use explicit external return wallet');
   if(plan.returnAddress&&plan.returnAddress!==destination)throw Error('Return address already bound; inspect rather than overwrite');
   plan.returnAddress=destination;durableJson(join(state,'plan.json'),plan);
   console.log(JSON.stringify({returnAddress:destination,mainnetSigning:false}));return;
@@ -103,14 +103,27 @@ async function main(){
     feeLamports:fee,amountUsdc,resultHash,owner:withdrawTo?payer.address:a.owner,worker:withdrawTo??a.worker,preparedAt:new Date().toISOString()};
   }});
  };
- if(command==='setup'){
-  if(!plan.returnAddress)throw Error('Bind original funding wallet with return-address before financial setup');
+ if(command==='refund-extra'){
+  if(!plan.returnAddress)throw Error('Bound user-bound return wallet required');
+  if(outbox.setup)throw Error('Excess refund only before setup');
+  const s=await chainState(a),authority=await account(a.authority);
+  const amount=outbox['refund-extra']?.amountUsdc??excessRefundAmount({...s,authority});
+  if(!Number.isSafeInteger(amount)||amount<1||amount>POLICY.budgetUsdc-POLICY.reserveUsdc)throw Error('Refund must only remove excess above the reviewed3USDC reserve');
+  if(s.delegation||authority||s.receiverUsdc!==0||s.gasLamports!==0)throw Error('Excess refund requires fresh dedicated accounts');
+  const [destination]=await token.findAssociatedTokenPda({owner:plan.returnAddress,mint:USDC,tokenProgram:token.TOKEN_PROGRAM_ADDRESS});
+  decodeToken(await account(destination),plan.returnAddress);
+  const receipt=await execute('refund-extra',await withdrawalInstructions(owner,a.sourceAta,plan.returnAddress,amount),owner,amount,hash(Buffer.from(plan.returnAddress)),plan.returnAddress);
+  if((await chainState(a)).reserveUsdc!==POLICY.reserveUsdc)throw Error('Reserve after excess refund mismatch');
+  console.log(JSON.stringify({receipt,returnedTo:plan.returnAddress,reserveUsdc:POLICY.reserveUsdc}));
+ }else if(command==='setup'){
+  if(!plan.returnAddress)throw Error('Bind user-bound return wallet with return-address before financial setup');
   if(outbox.setup?.receipt){console.log(JSON.stringify(outbox.setup.receipt));return;}
   if(!outbox.setup){
    const s=await chainState(a),ownerSol=(await rpc('getBalance',[a.owner])).value;
    if(s.reserveUsdc!==POLICY.reserveUsdc||s.receiverUsdc!==0||s.delegation||await account(a.authority)||s.gasLamports!==0)
     throw Error('Only fresh dedicated accounts with exactly3USDC may initialize; unexpected prior authority/balances');
-   if(ownerSol<POLICY.gasFundingLamports||ownerSol>POLICY.gasFundingLamports+POLICY.maxFeeLamports)throw Error('Fund exactly0.008SOL for the reviewed canary');
+   const refundedFee=outbox['refund-extra']?.receipt?.feeLamports??0;
+   if(ownerSol<POLICY.gasFundingLamports-refundedFee||ownerSol>POLICY.gasFundingLamports+POLICY.maxFeeLamports)throw Error('Fund exactly0.008SOL for the reviewed canary; only confirmed excess-refund fee may reduce it');
   }
   const expiry=Math.floor(Date.now()/1000)+POLICY.validSeconds;
   const ixs=await setupInstructions(owner,worker,a,expiry);
@@ -139,14 +152,32 @@ async function main(){
    reserveUsdc:s.reserveUsdc,remainingUsdc:s.remainingUsdc,workerUsdc:s.receiverUsdc,
    boundary:plan.boundary,mainnetTransactions:Object.values(outbox).filter(x=>x.receipt).length};
   durableJson(join(state,'proof.json'),proof);console.log(JSON.stringify(proof,null,2));
+ }else if(command==='verify-guards'){
+  if(!outbox.setup?.receipt)throw Error('Confirmed setup required');
+  const s=await chainState(a),stage=s.delegation?'active':'revoked';
+  const cases=s.delegation?[['over-remaining-cap',worker,s.remainingUsdc+1],['wrong-delegate',owner,1]]:[['revoked-worker',worker,1]];
+  const checks=[];
+  for(const [id,payer,amount] of cases){
+   const ixs=await paymentInstructions(payer,a,amount,'0'.repeat(64),'research-001');
+   const {lifetime}=await feeQuote(ixs,payer);
+   const tx=await signedTransaction(ixs,payer,{...lifetime,lastValidBlockHeight:BigInt(lifetime.lastValidBlockHeight)});
+   const sim=await rpc('simulateTransaction',[kit.getBase64EncodedWireTransaction(tx),{encoding:'base64',sigVerify:true,commitment:'confirmed'}]);
+   if(!sim.value?.err)throw Error('Negative mainnet guard unexpectedly permitted; no broadcast');
+   checks.push({id,amountUsdc:amount,error:sim.value.err,slot:sim.context.slot,broadcast:false});
+  }
+  const after=await chainState(a);
+  if(after.reserveUsdc!==s.reserveUsdc||after.receiverUsdc!==s.receiverUsdc||after.remainingUsdc!==s.remainingUsdc)throw Error('Balance changed during read-only guard checks');
+  const result={schema:'battery.mainnet-guard-simulations/1',observedAt:new Date().toISOString(),cluster:'mainnet',stage,checks,
+   boundary:'Signed preflight simulations on actual mainnet accounts; not broadcast failed transactions.'};
+  durableJson(join(state,'guards-'+stage+'.json'),result);console.log(JSON.stringify(result,null,2));
  }else if(command==='withdraw'){
-  if(!plan.returnAddress)throw Error('Original funding wallet required: return-address WALLET');
+  if(!plan.returnAddress)throw Error('User-bound return wallet required: return-address WALLET');
   if(await account(a.delegation))throw Error('Revoke the worker allowance first');
   for(const [id,payer,source] of [['return-owner',owner,a.sourceAta],['return-worker',worker,a.receiverAta]]){
    const amount=outbox[id]?.amountUsdc??decodeToken(await account(source),payer.address);
    if(!amount)continue;
    const [destination]=await token.findAssociatedTokenPda({owner:plan.returnAddress,mint:USDC,tokenProgram:token.TOKEN_PROGRAM_ADDRESS});
-   // Keep receipt balance proof unambiguous; original funding wallet has a USDC ATA already.
+   // Keep receipt balance proof unambiguous; user-bound return wallet has a USDC ATA already.
    if(!await account(destination))throw Error('Return wallet must already have its canonical USDC ATA');
    await execute(id,await withdrawalInstructions(payer,source,plan.returnAddress,amount),payer,amount,hash(Buffer.from(plan.returnAddress)),plan.returnAddress);
   }
@@ -157,7 +188,7 @@ async function main(){
   const receipt=await execute('revoke',[revokeInstruction(owner,a)],owner);
   if(await account(a.delegation))throw Error('Delegation remains active');
   console.log(JSON.stringify({receipt,delegationClosed:true,
-   remainingFunds:'Operator still owns remaining USDC/SOL; no withdrawal recipient has been authorized'}));
+   remainingFunds:'Operator retains remaining USDC/SOL; withdrawal uses only the previously bound return address'}));
  }
 }
 main().catch(e=>{console.error(e.message);process.exitCode=1;});

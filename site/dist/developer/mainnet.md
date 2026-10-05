@@ -1,12 +1,27 @@
 # BATTERY / bounded mainnet canary / v0.3
 
-Status, October 5, 2026: **prepared, unfunded, zero confirmed BATTERY mainnet transactions**. No live-ready or custody guarantee. Public console: https://usebattery.xyz/mainnet.
+Status, October 5, 2026: **completed bounded canary,8 finalized mainnet transactions,3 settlement payments,5USDC returned**. Delegation revoked. This is not hosted paid-service readiness or a custody guarantee. Public console: https://usebattery.xyz/mainnet.
 
 ## Demonstrated
 
 - Owned Qwen 2.5 7B researcher reads real mainnet genesis/epoch/performance. Exit73 after the second durable receipt; Llama3.2 3B resumes without another call and completes task3. Three tasks, three calls, zero duplicates; restart through completion5.938s in this dated local run. Evidence: /evidence/mainnet-agent.json.
-- Existing mainnet program downloaded and executed in local LiteSVM:15 checks, including cap exhaustion, outsider rejection, replay, expiry, revocation and return of token principal. **Fixture USDC/SOL; zero mainnet broadcasts.** /evidence/reserve-svm.json pins program SHA256 and deployment slot.
-- Offline policy/price/transaction-outbox tests exercise crash after send, accepted-but-timed-out dispatch, exact balance proof and expired uncertainty. Live financial recovery is pending.
+- Existing mainnet program downloaded and executed in local LiteSVM:15 checks, including cap exhaustion, outsider rejection, replay, expiry, revocation and return of token principal. **Fixture USDC/SOL in these15 local checks.** /evidence/reserve-svm.json pins program SHA256 and deployment slot.
+- Offline policy/price/transaction-outbox tests exercise crash after send, accepted-but-timed-out dispatch, exact balance proof and expired uncertainty. Real financial recovery now also has a finalized proof below.
+
+## Finalized financial result / October5,2026
+
+User funding was5USDC and0.008SOL. The reviewed reserve remained3USDC:2 excess USDC returned first to the explicitly user-bound wallet. Source funding came from a different wallet; the recipient was authorized before funding and was never inferred from incoming transfers.
+
+- Setup: fixed1USDC allowance,24h expiry, dedicated owner/worker.
+- Three0.01USDC settlements to our own worker, each with a saved research-result hash in a Memo.
+- Exit74 after research-002 dispatch, before persisting its receipt. Resume reconciled that exact signature; repeated run left the outbox unchanged,0 new transfers.
+- Actual settled balances:2.97USDC owner,0.03USDC worker,0.97USDC remaining allowance.
+- Active cap+1unit and wrong-delegate mainnet preflight simulations rejected with program errors300/130. Owner revoke finalized; a revoked-worker preflight rejected with InvalidAccountOwner. Negative attempts were **simulations, not broadcast failures**.
+- Return:2 excess +2.97 owner +0.03 worker = **all5USDC**, confirmed by finalized token-balance deltas.
+- Eight BATTERY transaction fees total40,000lamports (0.00004SOL). Sender funding fees49,999lamports are additional; sender also created the source ATA (1,488,440lamports). The sender USDC fee35,000lamports exceeded the initial per-send20,000 assumption, but the actual aggregate budget still fits:3USDC +0.009538439SOL valued at the conservative200SOL/USDC ceiling =4.9076878USDC. No swap.
+- Remaining liquid SOL:0.00430284 owner +0.00098 worker. Three token/authority accounts retain0.0041656SOL rent including the sender-created source ATA. These funds remain locally owned; no automatic account closure/SOL sweep is claimed.
+
+[Selected public proof](https://usebattery.xyz/evidence/mainnet-canary.json) contains signatures, finalized wire hashes, fee/USDC receipts, result bindings and dated negative checks; no private keys. Offline integrity is separate from `--live` finalized RPC verification. Research generation occurred before the financial canary and used free local inference; these are test settlements, not paid-model invoices.
 
 ## Existing program, exact boundary
 
@@ -49,20 +64,28 @@ Ollama and both approved models must already be installed/running for actual inf
 
 Only the operator should fund the private plan's owner address, with the exact amounts and network above. This public website is not a deposit service. Do not fund an address from a modified source file or another user's plan.
 
-Bind the original funding wallet for returning principal; no withdrawal address is inferred from a random incoming transfer. Then, from repository root:
+Bind the user-bound return wallet for returning principal; no withdrawal address is inferred from a random incoming transfer. Then, from repository root:
 
 ```sh
-python3 chain/canary.py return-address ORIGINAL_FUNDING_WALLET
+python3 chain/canary.py return-address USER_AUTHORIZED_RETURN_WALLET
+# Only if excess arrived: return excess to the bound wallet, leaving exactly3USDC.
+python3 chain/canary.py refund-extra --execute-budget-5-usdc
 python3 chain/canary.py setup --execute-budget-5-usdc
 python3 chain/canary.py run --execute-budget-5-usdc --crash-after-send
 # Expected exit74 after research-002 dispatch; resume identical state.
 python3 chain/canary.py run --execute-budget-5-usdc
+python3 chain/canary.py verify-guards --execute-budget-5-usdc
 python3 chain/canary.py revoke --execute-budget-5-usdc
+python3 chain/canary.py verify-guards --execute-budget-5-usdc
 python3 chain/canary.py withdraw --execute-budget-5-usdc
 ```
 
 Each command holds a kernel-released single-operator lock. Setup rejects prior authority/delegation and unexpected balances. Every new signed transaction gets a fee quote and simulation. Signed bytes persist with signature/last-valid-height before broadcast. Resume reconciles the same signature, finalized bytes, actual fees and USDC deltas; no replacement is signed for an expired uncertain transaction. A timeout/failure stops and retains state. Do not delete it or rerun setup with another key to conceal uncertainty.
 
-The original funding wallet must already have its canonical USDC ATA. Withdrawal follows confirmed revoke and returns both operator and worker USDC to that bound address. Small SOL and account rents remain locally owned; no automatic SOL sweep is implemented. Keys can be imported privately into an operator-controlled Solana wallet for later cleanup. Do not publish them.
+The optional excess refund accepts at most2USDC above the reviewed3USDC reserve, only before setup on fresh accounts, and only to the bound return wallet. Its confirmed fee may reduce the original0.008SOL balance; no new gas funding is needed. Public RPC requests are paced; only reads retry explicit429 responses. Sends retain their original durable signature.
+
+`verify-guards` signs mainnet preflight simulations and requires rejection: over remaining cap, wrong delegate while active; worker transfer after revocation. It never broadcasts those negative attempts. Export selected completed evidence with `node chain/export-proof.mjs`; verify integrity offline with `node chain/verify-canary.mjs` or independently read finalized transactions using `node chain/verify-canary.mjs --live`. Verification never signs or sends.
+
+The user-bound return wallet must already have its canonical USDC ATA. Withdrawal follows confirmed revoke and returns both operator and worker USDC to that bound address. Small SOL and account rents remain locally owned; no automatic SOL sweep is implemented. Keys can be imported privately into an operator-controlled Solana wallet for later cleanup. Do not publish them.
 
 Confirm all receipts, balances, revoke and return before publishing a funded experiment. The proof hash binds the selected result; it does not authenticate model truth or paid-provider receipts. No hosted customer wallets, distributed lease, paid inference adapter, BATTERY custody program or token has launched.

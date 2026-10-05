@@ -3,7 +3,7 @@
 Canonical website: https://usebattery.xyz
 Source: https://github.com/sproutagentai/battery-agent-reserve
 Source kit: https://usebattery.xyz/battery-pilot-kit.zip
-Release: v0.3 developer SDK / unfunded mainnet canary, October 5, 2026.
+Release: v0.3 developer SDK / completed bounded mainnet canary, October5,2026.
 
 ## Thesis
 
@@ -24,7 +24,7 @@ BATTERY's wedge is the seam between **allocated operator budget**, **what the pr
 
 A separate dated mainnet research run:3 tasks,3 calls,0 duplicates,5.938s restart through completion. Actual Qwen/Llama and live mainnet reads; paper inference budget, not provider billing. https://usebattery.xyz/evidence/mainnet-agent.json.
 
-The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM checks with fixture USDC/SOL: identity, cumulative cap, replay, expiry, revoke and principal return. https://usebattery.xyz/evidence/reserve-svm.json. No BATTERY mainnet transaction is confirmed. A fresh-owner3USDC reserve,1USDC worker cap and three0.01USDC test settlements await funding within a$5 total budget. Onchain allowance is separate from trusted-runtime task/day limits. https://usebattery.xyz/mainnet and https://usebattery.xyz/developer/mainnet.md.
+The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM checks with fixture USDC/SOL: identity, cumulative cap, replay, expiry, revoke and principal return. https://usebattery.xyz/evidence/reserve-svm.json. Eight mainnet transactions are finalized: fresh-owner3USDC reserve,1USDC worker cap,three0.01USDC settlements,real exit74/reconciliation,no replay payment,owner revoke and all5USDC returned including2USDC excess. Selected proof: https://usebattery.xyz/evidence/mainnet-canary.json. Three negative mainnet checks are preflight simulations, not broadcast failures. This is not paid-model billing. Onchain allowance is separate from trusted-runtime task/day limits. https://usebattery.xyz/mainnet and https://usebattery.xyz/developer/mainnet.md.
 
 ## Evidence / independently verify
 
@@ -45,7 +45,7 @@ Local inference has zero provider charge; hardware/electricity unmeasured. USD l
 
 ## Open gates / product research
 
-No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, USDC custody/deposits/withdrawals, audited contract, token launch or mainnet payments. No BATTERY custody/token contract exists; the prepared canary uses an existing mainnet delegation program.
+No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, hosted customer USDC custody/deposits/withdrawals, independently audited BATTERY contract, token launch or a production paid-service guarantee. No BATTERY custody/token contract exists; the completed canary used an existing mainnet delegation program.
 
 Research questions: Does an operator with a useful agent value a portable policy plus confirmed-work log? Can a provider adapter reliably bound maximum charges? Does a cheaper model meet task acceptance criteria after takeover? Does reduced lost work justify a service fee? Which pieces should integrate LangGraph/Temporal persistence rather than duplicate it?
 
@@ -76,11 +76,20 @@ Reserve policy + durable local receipts + controlled recovery for agents whose r
 
 October 5, 2026: **3 tasks / 3 inference calls / 0 duplicate calls**. Receipt survived exit 73; approved fallback inherited both prior results. Restart through completion: **5.641 seconds** in this one local run. Actual model generation and RPC reads; paper USD reserves. Zero provider charge; hardware/electricity not measured. Not an uptime SLA or a hosted AI service.
 
-## Mainnet canary / prepared, not yet funded
+## Mainnet canary / confirmed, revoked, principal returned
 
-Our owned researcher now also reads mainnet:3 real tasks, Qwen-to-Llama forced-exit recovery,0 duplicate calls,5.938s restart through completion. Existing Solana Subscriptions executable downloaded from mainnet passes15 local LiteSVM checks with **fixture balances**. Eight offline price/chain/outbox tests check policies, exact balance evidence and uncertainty. **Zero confirmed BATTERY mainnet payments.**
+October5,2026: **8 finalized mainnet transactions /3 settlements /5USDC returned**. Fixed1USDC worker allowance on a3USDC reserve, three0.01USDC payments bound to actual saved research results. Forced exit74 after the second dispatch; the same signature reconciled, and a repeated run created no new signatures or transfers. Delegation revoked and all principal returned. BATTERY fees:40,000lamports (0.00004SOL). Small SOL/account rents remain locally operator-owned.
 
-A reviewed$5-total canary allocates3USDC plus0.008SOL to fresh local owner/worker wallets. Fixed1USDC cumulative worker allowance; expiry/revoke onchain. Three0.01USDC transfers test settlement/recovery; they are not paid-model billing. Follow [the runbook](docs/mainnet.md) and [mainnet console](https://usebattery.xyz/mainnet). No swap or new contract deployment.
+The owned research run used local Qwen/Llama and actual mainnet reads before settlement:3 tasks,0 duplicate inference,5.938s restart through completion. Payments do not buy inference. Three negative mainnet preflight simulations rejected excess allowance, a wrong delegate and the revoked worker; those failures were not broadcast. Existing mainnet executable also passes15 local LiteSVM fixture checks.
+
+Inspect [financial proof](https://usebattery.xyz/evidence/mainnet-canary.json), [runbook](docs/mainnet.md), [mainnet console](https://usebattery.xyz/mainnet). Verify without signing:
+
+```sh
+node chain/verify-canary.mjs          # artifact integrity and relationships only
+node chain/verify-canary.mjs --live   # finalized RPC bytes, USDC deltas and final accounts
+```
+
+This closes the bounded owned-agent financial canary; hosted customer execution, authenticated paid-provider billing and a BATTERY custody/token deployment are still absent.
 
 ## Offline verification
 
@@ -133,7 +142,7 @@ Read [architecture](docs/architecture.md), [adapter contract](docs/adapters.md),
 
 One working owned-agent adapter, not universal framework/browser migration. Model output is text, never executable commands or financial authority. Local QA server: `cd site && node dev-server.mjs`, loopback only, port 4183.
 
-Open production gates: authenticated paid billing/headroom, customer task-quality acceptance, distributed leases and a reviewed USDC vault. No BATTERY custody program or token exists. The pending canary uses the existing Solana Subscriptions program. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; uninterrupted 72h uptime is unverified. [BRIEF.md](BRIEF.md) records the original finite research sample and limitations.
+Open production gates: authenticated paid billing/headroom, customer task-quality acceptance, distributed leases and a reviewed USDC vault. No BATTERY custody program or token exists. The completed canary used the existing Solana Subscriptions program. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; uninterrupted 72h uptime is unverified. [BRIEF.md](BRIEF.md) records the original finite research sample and limitations.
 
 
 ---
@@ -164,7 +173,7 @@ Optional test memo keys live privately in devnet-state. Lamport fee policy is se
 
 ## v0.3 / separate bounded financial canary
 
-An explicit mainnet cluster option pins genesis and immutable ledger cluster. Mainnet research remains local inference with a paper USD ledger. chain/reserve.mjs uses the existing Subscriptions fixed-delegation program for USDC; no new custody program. chain/settlement.mjs persists signed bytes before send and reconciles identical signatures/finalized bytes/token deltas. chain/canary.py supplies a kernel single-operator lock. Mainnet funding/broadcast proof is pending; see mainnet.md. The public /api/mainnet is fixed read-only with an isolated cache, never a signing endpoint.
+An explicit mainnet cluster option pins genesis and immutable ledger cluster. Mainnet research remains local inference with a paper USD ledger. chain/reserve.mjs uses the existing Subscriptions fixed-delegation program for USDC; no new custody program. chain/settlement.mjs persists signed bytes before send and reconciles identical signatures/finalized bytes/token deltas. chain/canary.py supplies a kernel single-operator lock. The bounded mainnet canary finalized8 transactions, including3 saved-result settlements,financial exit74 recovery,revoke and full5USDC return; see mainnet.md. Local inference ran before settlement, not paid-model billing. The public /api/mainnet is fixed read-only with an isolated cache, never a signing endpoint.
 
 
 ---
@@ -216,4 +225,4 @@ Sensitive reports must not include secrets in public issues. No dedicated privat
 
 ## Pending mainnet canary
 
-Separate fresh local owner/worker keys; program/mint/genesis/bytecode hash pinned. Fixed cumulative USDC allowance and expiry/revoke are onchain; floor applies only under the isolated no-other-delegations assumption. Owner/file access retains authority. Program upgradeability and broad underlying token delegation are material boundaries. No malicious-worker isolation, paid-provider guarantee or hosted custody. Default tests never broadcast; financial CLI requires an explicit budget flag and reviewed funding. Signed bytes remain held on ambiguity/expiry. See mainnet.md for scope, refund path and unpassed live gates.
+Separate fresh local owner/worker keys; program/mint/genesis/bytecode hash pinned. Fixed cumulative USDC allowance and expiry/revoke are onchain; floor applies only under the isolated no-other-delegations assumption. Owner/file access retains authority. Program upgradeability and broad underlying token delegation are material boundaries. No malicious-worker isolation, paid-provider guarantee or hosted custody. Default tests never broadcast; financial CLI requires an explicit budget flag and reviewed funding. Signed bytes remain held on ambiguity/expiry. See mainnet.md for confirmed canary scope, refund path and still-unpassed hosted paid-service gates.

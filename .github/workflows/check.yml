@@ -25,6 +25,7 @@ jobs:
         run: |
           npm ci --ignore-scripts --omit=dev
           npm test
+          node verify-canary.mjs
       - name: Offline logical replay
         run: python3 paper_replay.py
       - name: Devnet memo policy and serialization (no signing broadcast)

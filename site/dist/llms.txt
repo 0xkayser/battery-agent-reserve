@@ -1,5 +1,5 @@
 # BATTERY
-> Reserve policy and controlled recovery for owned agents. Developer SDK v0.3; mainnet canary preparation.
+> Reserve policy and controlled recovery for owned agents. Developer SDK v0.3; completed bounded mainnet canary.
 
 ## Documentation
 - [Research brief](https://usebattery.xyz/agents.md): hypothesis, evidence and limits.
@@ -9,7 +9,8 @@
 
 ## Evidence
 - [Actual local AI run](https://usebattery.xyz/evidence/live-agent.json): dated inference, crash and recovery.
-- [Mainnet preparation](https://usebattery.xyz/mainnet): real mainnet research, local program tests, pending funded canary.
+- [Mainnet financial proof](https://usebattery.xyz/mainnet):8 finalized transactions,3 test settlements,crash/recovery,revoke and5USDC return.
+- [Financial artifact](https://usebattery.xyz/evidence/mainnet-canary.json): signatures,wire hashes,exact USDC deltas,negative simulations and verifier.
 - [Canary runbook](https://usebattery.xyz/developer/mainnet.md): bounded USDC delegation, safety and return path.
 - [Human proof](https://usebattery.xyz/evidence): event trail and browser hash check.
 - [Anchor status](https://usebattery.xyz/evidence/devnet-anchor-status.json): unconfirmed; faucet refused test SOL.
@@ -17,4 +18,4 @@
 - [Source kit](https://usebattery.xyz/battery-pilot-kit.zip): SDK, tests and website source.
 
 ## Boundary
-Actual local inference/devnet reads; paper USD/browser simulations. No hosted paid agent, vault, token or confirmed mainnet payments. Existing mainnet delegation tested locally; funded canary pending.
+Actual local inference/devnet reads; paper USD/browser simulations. Eight mainnet canary transactions are finalized; test transfers bind saved results, not paid-model billing. Three negative mainnet checks were preflight simulations. No hosted paid agent,vault,token or independent BATTERY audit.

@@ -1,6 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {guardPolicy,requireMainnet,GENESIS,POLICY,decodeToken,USDC,kit,token} from './reserve.mjs';
+import {guardPolicy,requireMainnet,GENESIS,POLICY,decodeToken,USDC,kit,token,excessRefundAmount} from './reserve.mjs';
+test('excess funding returns only excess to bound owner before any delegation',()=>{
+ const state={reserveUsdc:5_000_000,receiverUsdc:0,gasLamports:0,delegation:null,authority:null};
+ assert.equal(excessRefundAmount(state),2_000_000);
+ for(const changed of [{reserveUsdc:3_000_000},{reserveUsdc:5_000_001},{reserveUsdc:NaN},{reserveUsdc:4_000_000.1},
+  {receiverUsdc:1},{gasLamports:1},{delegation:{}},{authority:{}}])assert.throws(()=>excessRefundAmount({...state,...changed}));
+});
 test('mainnet guard does not permit devnet or ambiguous cluster',()=>{
  assert.doesNotThrow(()=>requireMainnet(GENESIS));
  assert.throws(()=>requireMainnet('EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG'));

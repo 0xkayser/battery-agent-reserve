@@ -15,9 +15,26 @@ export const POLICY=Object.freeze({budgetUsdc:5_000_000,reserveUsdc:3_000_000,
   gasFundingLamports:8_000_000,gasFloorLamports:100_000,maxFeeLamports:20_000,
   maxSolPriceUsdc:200,validSeconds:86400});
 export const hash=b=>createHash('sha256').update(b).digest('hex');
+export function excessRefundAmount({reserveUsdc,receiverUsdc,gasLamports,delegation,authority}){
+ if(!Number.isSafeInteger(reserveUsdc)||reserveUsdc<=POLICY.reserveUsdc||reserveUsdc>POLICY.budgetUsdc||
+    receiverUsdc!==0||gasLamports!==0||delegation||authority)throw Error('Excess refund requires fresh dedicated accounts and bounded excess');
+ return reserveUsdc-POLICY.reserveUsdc;
+}
+let lastRpcAt=0;
 export async function rpc(method,params=[]){
- const r=await fetch(RPC,{method:'POST',headers:{'content-type':'application/json'},
-  body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(20000)});
+ // Public RPC rate limits are not evidence of transaction failure. Pace calls;
+ // retry only read requests after an explicit429. Signed sends stay in the outbox.
+ const readOnly=/^get/.test(method);
+ let r;
+ for(let attempt=0;attempt<4;attempt++){
+  const delay=Math.max(0,1000-(Date.now()-lastRpcAt));
+  if(delay)await new Promise(resolve=>setTimeout(resolve,delay));
+  lastRpcAt=Date.now();
+  r=await fetch(RPC,{method:'POST',headers:{'content-type':'application/json'},
+   body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(20000)});
+  if(r.status!==429||!readOnly||attempt===3)break;
+  await r.text();await new Promise(resolve=>setTimeout(resolve,2000*2**attempt));
+ }
  if(!r.ok)throw Error(`Mainnet RPC HTTP ${r.status}`);
  const text=await r.text();if(text.length>4_000_000)throw Error('RPC response too large');
  const d=JSON.parse(text);if(d.error)throw Error(`${method}: RPC ${d.error.code}`);return d.result;

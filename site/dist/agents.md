@@ -3,7 +3,7 @@
 Canonical website: https://usebattery.xyz
 Source: https://github.com/sproutagentai/battery-agent-reserve
 Source kit: https://usebattery.xyz/battery-pilot-kit.zip
-Release: v0.3 developer SDK / unfunded mainnet canary, October 5, 2026.
+Release: v0.3 developer SDK / completed bounded mainnet canary, October5,2026.
 
 ## Thesis
 
@@ -24,7 +24,7 @@ BATTERY's wedge is the seam between **allocated operator budget**, **what the pr
 
 A separate dated mainnet research run:3 tasks,3 calls,0 duplicates,5.938s restart through completion. Actual Qwen/Llama and live mainnet reads; paper inference budget, not provider billing. https://usebattery.xyz/evidence/mainnet-agent.json.
 
-The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM checks with fixture USDC/SOL: identity, cumulative cap, replay, expiry, revoke and principal return. https://usebattery.xyz/evidence/reserve-svm.json. No BATTERY mainnet transaction is confirmed. A fresh-owner3USDC reserve,1USDC worker cap and three0.01USDC test settlements await funding within a$5 total budget. Onchain allowance is separate from trusted-runtime task/day limits. https://usebattery.xyz/mainnet and https://usebattery.xyz/developer/mainnet.md.
+The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM checks with fixture USDC/SOL: identity, cumulative cap, replay, expiry, revoke and principal return. https://usebattery.xyz/evidence/reserve-svm.json. Eight mainnet transactions are finalized: fresh-owner3USDC reserve,1USDC worker cap,three0.01USDC settlements,real exit74/reconciliation,no replay payment,owner revoke and all5USDC returned including2USDC excess. Selected proof: https://usebattery.xyz/evidence/mainnet-canary.json. Three negative mainnet checks are preflight simulations, not broadcast failures. This is not paid-model billing. Onchain allowance is separate from trusted-runtime task/day limits. https://usebattery.xyz/mainnet and https://usebattery.xyz/developer/mainnet.md.
 
 ## Evidence / independently verify
 
@@ -45,7 +45,7 @@ Local inference has zero provider charge; hardware/electricity unmeasured. USD l
 
 ## Open gates / product research
 
-No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, USDC custody/deposits/withdrawals, audited contract, token launch or mainnet payments. No BATTERY custody/token contract exists; the prepared canary uses an existing mainnet delegation program.
+No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, hosted customer USDC custody/deposits/withdrawals, independently audited BATTERY contract, token launch or a production paid-service guarantee. No BATTERY custody/token contract exists; the completed canary used an existing mainnet delegation program.
 
 Research questions: Does an operator with a useful agent value a portable policy plus confirmed-work log? Can a provider adapter reliably bound maximum charges? Does a cheaper model meet task acceptance criteria after takeover? Does reduced lost work justify a service fee? Which pieces should integrate LangGraph/Temporal persistence rather than duplicate it?
 
