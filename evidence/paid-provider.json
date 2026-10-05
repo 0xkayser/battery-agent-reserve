@@ -1,0 +1,191 @@
+{
+  "schema": "battery.paid-provider-proof/1",
+  "body": {
+    "schema": "battery.paid-attempt/1",
+    "status": "result_saved",
+    "policy": {
+      "schema": "battery.paid-policy/1",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "max_requests": 1,
+      "experiment_micro_usd": 100000,
+      "max_request_bytes": 8000,
+      "input_token_assumption": 10048,
+      "max_output_tokens": 512,
+      "input_micro_usd_per_million": 400000,
+      "output_micro_usd_per_million": 1600000,
+      "price_checked": "2026-10-05",
+      "new_dispatch_before": "2026-10-12",
+      "price_source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+      "billing_status": "unverified",
+      "provider_headroom": null
+    },
+    "request_sha256": "8d91ec8c21483632ba59b21aa8304a6edae60aa2d0b6b85a0749854f898a5514",
+    "client_request_id": "d00fbfbd-79af-4236-b75f-81b37f8f9c4e",
+    "provider_response_id": "resp_02e3abc24db7acb0006ac3dc196e6887d18db7fd65a9cffb23",
+    "provider_request_id": "req_75406535d3184ba3acc2afa7d1e2b66d",
+    "usage": {
+      "input_tokens": 336,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      },
+      "output_tokens": 234,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 570
+    },
+    "estimated_micro_usd": 509,
+    "actual_provider_charge": null,
+    "billing_status": "unverified",
+    "provider_headroom": null,
+    "retained_hold_micro_usd": 100000,
+    "generation_requests": 1,
+    "result": {
+      "limits": "Local inference only; settlements occur solely to an owned worker, not to provider invoices. No hosted paid service, independent audit, or proven margin exists. Devnet signed checkpoint remains unconfirmed. This API experiment does not include USDC settlement.",
+      "next_action": "Monitor finality and confirm devnet checkpoint stability before pilot deployment. Validate settlement mechanisms operate as expected in mainnet conditions. Consider additional auditing to ensure security and reliability.",
+      "summary": "As of 2026-10-05, the BATTERY mainnet canary shows 3 finalized USDC settlements with a returned principal of 5.00 USDC and 3 owned agent model calls. Delegation has been revoked, and recovered signatures match original ones. Network fees are 40,000 lamports with 74 forced process exits, indicating potential stability or reliability issues to investigate.",
+      "verified": "Delegation revoked as of the date. Three finalized USDC settlements processed. Returned principal amount of 5.00 USDC recorded. Three owned agent model calls executed. Signature recovery successful on matching signature. Network fee per call at 40,000 lamports. 74 forced process exits observed."
+    },
+    "content_review": {
+      "basis": "trusted operator review; not model authority",
+      "decision": "rejected",
+      "reason": "Output mistakes exit code 74 for 74 crashes and total 40000 lamport fees for per-call fees. One deliberate crash occurred; 40000 lamports covered eight transactions. API execution passed; useful deliverable acceptance failed.",
+      "request_sha256": "8d91ec8c21483632ba59b21aa8304a6edae60aa2d0b6b85a0749854f898a5514",
+      "result_sha256": "f8d15a720da84bc8d173edce4e29da85089861be845c405b7f7dabe9b2823569"
+    },
+    "downstream_authorized": false,
+    "authenticated_readback": {
+      "at": "2026-10-05T17:19:44.000045+00:00",
+      "request_id": "req_5f02615c83bf4585ac76b6502851120b",
+      "response_hash": "d34e401b71c923d3c9e09c56bde2b1bbbbc7d2cc5ab13a623c1a38037eaecafc"
+    },
+    "events": [
+      {
+        "at": "2026-10-05T17:11:52.395310+00:00",
+        "kind": "exact_request_saved"
+      },
+      {
+        "at": "2026-10-05T17:19:19.266079+00:00",
+        "kind": "generation_dispatch_claimed"
+      },
+      {
+        "at": "2026-10-05T17:19:24.103271+00:00",
+        "kind": "provider_receipt_durable"
+      },
+      {
+        "at": "2026-10-05T17:19:42.873035+00:00",
+        "kind": "result_recovered_cost_estimated_billing_pending"
+      },
+      {
+        "at": "2026-10-05T17:19:44.004957+00:00",
+        "kind": "authenticated_response_readback_matched"
+      },
+      {
+        "at": "2026-10-05T17:21:33.192759+00:00",
+        "kind": "operator_content_rejected"
+      }
+    ],
+    "scope": "one operator-owned attempt; no onchain payment or invoice proof",
+    "exact_request": {
+      "input": "{\"financial_artifact_sha256\":\"5c0df019ea343024017e160972e2a8c5b4830b22d6b95087c5e1a29a5e4e8bf3\",\"limits\":[\"local inference; settlements to an owned worker, not provider invoices\",\"no hosted paid service, independent audit or proven margin\",\"devnet signed checkpoint unconfirmed\",\"this separate API experiment has no USDC settlement\"],\"observations\":{\"date\":\"2026-10-05\",\"delegation_revoked\":true,\"each_usdc\":\"0.01\",\"finalized_usdc_settlements\":3,\"forced_process_exit\":74,\"network_fee_lamports\":40000,\"owned_agent_model_calls\":3,\"recovered_same_signature\":true,\"replay_new_calls_and_payments\":0,\"returned_principal_usdc\":\"5.00\"},\"runtime_artifact_sha256\":\"9890dcab9c2396632b844280fea8839ae10666f2f0d990dec7b809d74f003f38\",\"task\":\"Review BATTERY's dated mainnet canary for an operator considering a pilot\"}",
+      "instructions": "Write a concise English operator brief using only the supplied observations. Separate verified observations from limitations. Do not claim production, provider payment or profitability. No trading advice. Each field <=600 characters.",
+      "max_output_tokens": 512,
+      "metadata": {
+        "battery_job": "operator-brief-v1"
+      },
+      "model": "gpt-4.1-mini-2025-04-14",
+      "service_tier": "default",
+      "store": true,
+      "stream": false,
+      "text": {
+        "format": {
+          "name": "battery_operator_brief",
+          "schema": {
+            "additionalProperties": false,
+            "properties": {
+              "limits": {
+                "type": "string"
+              },
+              "next_action": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "verified": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "summary",
+              "verified",
+              "limits",
+              "next_action"
+            ],
+            "type": "object"
+          },
+          "strict": true,
+          "type": "json_schema"
+        }
+      },
+      "truncation": "disabled"
+    },
+    "receipt": {
+      "request_id": "req_75406535d3184ba3acc2afa7d1e2b66d",
+      "response": {
+        "id": "resp_02e3abc24db7acb0006ac3dc196e6887d18db7fd65a9cffb23",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "metadata": {
+          "battery_job": "operator-brief-v1"
+        },
+        "status": "completed",
+        "usage": {
+          "input_tokens": 336,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 234,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 570
+        },
+        "output": [
+          {
+            "content": [
+              {
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"limits\":\"Local inference only; settlements occur solely to an owned worker, not to provider invoices. No hosted paid service, independent audit, or proven margin exists. Devnet signed checkpoint remains unconfirmed. This API experiment does not include USDC settlement.\",\"next_action\":\"Monitor finality and confirm devnet checkpoint stability before pilot deployment. Validate settlement mechanisms operate as expected in mainnet conditions. Consider additional auditing to ensure security and reliability.\",\"summary\":\"As of 2026-10-05, the BATTERY mainnet canary shows 3 finalized USDC settlements with a returned principal of 5.00 USDC and 3 owned agent model calls. Delegation has been revoked, and recovered signatures match original ones. Network fees are 40,000 lamports with 74 forced process exits, indicating potential stability or reliability issues to investigate.\",\"verified\":\"Delegation revoked as of the date. Three finalized USDC settlements processed. Returned principal amount of 5.00 USDC recorded. Three owned agent model calls executed. Signature recovery successful on matching signature. Network fee per call at 40,000 lamports. 74 forced process exits observed.\"}",
+                "type": "output_text"
+              }
+            ],
+            "id": "msg_02e3abc24db7acb0006ac3dc1aaa8c87d1a880baea85d67026",
+            "role": "assistant",
+            "status": "completed",
+            "type": "message"
+          }
+        ],
+        "service_tier": "default",
+        "tools": [],
+        "error": null,
+        "incomplete_details": null
+      }
+    },
+    "runtime_observations": {
+      "exit_code": 75,
+      "receipt_durable_before_exit": true,
+      "recoveries_without_generation": 2,
+      "readback_gets": 1
+    },
+    "limits": [
+      "Operator-published API observations, not provider-signed proof",
+      "No authoritative charge or paid customer",
+      "Model report rejected: exit code misread as crash count and total fees misread as per-call",
+      "No Solana payment for this separate model request"
+    ]
+  },
+  "sha256": "70f2a83641db23555bdcbdf16b8c6ba4948df6ee1d3363c82e92a3aa924352cd"
+}

@@ -9,6 +9,8 @@
 - Optional test signer hard-locks devnet, quotes fees and protects a balance. Never import/fund with mainnet assets. Persisted transaction retries reuse one signature; expiry does not authorize automatic replacement.
 - No custody vault, token mint, withdrawal service, paid provider or distributed lease is deployed.
 
+Optional `paid_provider.py` is local only, fixed OpenAI HTTPS with redirects/proxies/retries disabled. Keys stay in private env. Request/response IDs and usage are API evidence, not signed billing or credit balance. Full allocation stays held; unknown requests are never automatically repeated. Journal is not an account-wide cap; trusted operator can bypass it. [Runbook](paid-provider.md).
+
 Sensitive reports must not include secrets in public issues. No dedicated private disclosure channel is configured yet. Public reproducible bugs can use the repository issue template with redacted logs.
 
 ## Pending mainnet canary

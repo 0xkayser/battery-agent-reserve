@@ -11,5 +11,6 @@ open-source/
 .DS_Store
 preview*
 mainnet-state/
+paid-state/
 reference/
 chain/artifacts/

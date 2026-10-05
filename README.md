@@ -42,7 +42,7 @@ This closes the bounded owned-agent financial canary; hosted customer execution,
 Python 3.10+ and Node 22+; no package dependencies, accounts, models or money required.
 
 ```sh
-python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py
+python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py test_paid_provider.py
 python3 paper_replay.py
 python3 verify_evidence.py
 node --test devnet/anchor.test.mjs
@@ -51,6 +51,10 @@ node --test test-network.mjs
 ```
 
 Offline tests use named fixtures. Evidence verification checks hashes and event/task relationships; it does not authenticate the model or reconstruct an unpublished machine.
+
+## Paid-provider adapter / billing gate remains open
+
+`paid_provider.py` implements one bounded OpenAI operator brief: immutable request, durable API receipt, forced-exit recovery, unknown-outcome holds and authenticated response readback. Sixteen offline fault/content/proof checks pass. Token-price calculation stays an estimate, never an invoice, available credit or Solana payment. One actual API generation survived exit75 and two receipt recoveries; authenticated readback matched. Its operator report was rejected for factual errors. Authoritative billing remains unverified. [Runbook](docs/paid-provider.md) explains local credentials, explicit authorization and remaining billing gates.
 
 ## Run real local inference
 

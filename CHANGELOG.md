@@ -29,3 +29,8 @@
 - Added isolated-state mainnet pre-task authorization, per-result settlement and read-only receipt verification; local model generation interleaves with finalized payment.
 - Added nine offline tests for payment crash recovery, unknown outcomes, input tampering, budget refusal and independent verification. Three actual local model calls now interleaved with three finalized mainnet settlements; same-signature recovery after exit74 and no replay model calls/transfers.
 - Added proposed $9/active-agent/month managed pricing, separate operator compute/gas/principal, a scenario calculator and explicit unavailable-checkout status.
+
+
+## 2026-10-05 / paid-provider recovery and content gate
+
+One-shot OpenAI adapter with durable request/receipt and no automatic generation retry, credential isolation, forced-exit recovery, authenticated stored-response readback and mandatory operator content review. Sixteen offline fault/content/proof checks. One actual request recovered twice; estimate$0.000509, authoritative billing unverified. Report rejected for factual errors; no accepted deliverable or paid-service readiness claimed. Selected scoped proof and reproduction documentation added.

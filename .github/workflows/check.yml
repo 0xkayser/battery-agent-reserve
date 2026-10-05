@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '22'
       - name: Ledger and adapter failure boundaries (offline fixtures)
-        run: python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py
+        run: python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py test_paid_provider.py
       - name: Verify published actual-run record
         run: python3 verify_evidence.py
       - name: Verify mainnet researcher artifact (offline)
@@ -27,6 +27,8 @@ jobs:
           npm test
           node verify-canary.mjs
           node verify-integrated.mjs
+      - name: Published paid-provider record (offline integrity; no API calls)
+        run: python3 verify_paid.py
       - name: Offline logical replay
         run: python3 paper_replay.py
       - name: Devnet memo policy and serialization (no signing broadcast)

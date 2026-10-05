@@ -26,3 +26,5 @@ b.close()
 ```
 
 workers.py is deterministic. live_agent.py runs actual local Ollama with zero provider-charge bookkeeping. Neither authenticates a paid provider balance. run_recovery.py is the bounded reproduction harness.
+
+`paid_provider.py` implements a separate one-shot OpenAI experiment: durable request/response IDs and usage, no repeat POST on uncertainty, full allocation retained while billing is unverified. Estimates never settle the paper ledger as actual charges. See [paid-provider.md](paid-provider.md); fixtures do not close live billing gates.

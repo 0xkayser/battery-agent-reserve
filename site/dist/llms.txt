@@ -6,6 +6,7 @@
 - [Full text](https://usebattery.xyz/llms-full.txt): README, architecture, adapters and security.
 - [Developer docs](https://usebattery.xyz/docs): reproduce actual inference and recovery.
 - [Integrated execution](https://usebattery.xyz/developer/integrated-runtime.md): completed interleaved local/mainnet run;3 actual calls/3 finalized settlements, same-signature recovery and all principal returned.
+- [Paid-provider adapter](https://usebattery.xyz/developer/paid-provider.md): one actual request/recovery/readback; report rejected, authoritative billing unverified.
 - [Pricing](https://usebattery.xyz/pricing): proposed $9/active-agent/month; unavailable for purchase.
 - [Costs and commercial hypothesis](https://usebattery.xyz/developer/pricing.md): free SDK; hosted pricing, paid costs and revenue unvalidated.
 - [OpenAPI](https://usebattery.xyz/openapi.json): fixed read-only devnet API.

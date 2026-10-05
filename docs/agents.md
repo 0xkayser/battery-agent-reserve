@@ -1,5 +1,7 @@
 # BATTERY / Agent research brief
 
+Paid-provider extension: [one-shot adapter contract](https://usebattery.xyz/developer/paid-provider.md). Actual one-request API recovery and readback verified; generated report rejected for factual errors; authoritative billing unverified. Local estimated costs are not invoices.
+
 Canonical website: https://usebattery.xyz
 Source: https://github.com/sproutagentai/battery-agent-reserve
 Source kit: https://usebattery.xyz/battery-pilot-kit.zip
