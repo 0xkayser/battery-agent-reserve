@@ -1,6 +1,6 @@
 {
   "schema": "battery.reserve-svm/1",
-  "observedAt": "2026-10-05T13:30:10.493Z",
+  "observedAt": "2026-10-05T13:48:07.901Z",
   "scope": "Actual downloaded mainnet program executed in local LiteSVM. FixtureUSDC, fixtureSOL; zero mainnet broadcasts.",
   "program": "De1egAFMkMWZSN5rYXRj9CAdheBamobVNubTsi9avR44",
   "programData": "HaYb5J9eXooZuNzN3z6TfuzVDcaTfiDdDPWCFtexFfMg",
@@ -14,14 +14,14 @@
   "boundary": "Chain enforces delegate identity, cumulative allowance, expiry and revoke. Job/day/floor checks outside this allowance remain trusted-runtime checks; owner can change authorization or withdraw funds.",
   "rows": [
     {
-      "name": "Owner creates fixed1USDC delegated cap and receiver ATA",
+      "name": "Owner creates fixed 1 USDC cap, recipient ATA and funds worker gas from 0.008 fixture SOL",
       "expectedSuccess": true,
       "actualSuccess": true,
       "passed": true,
-      "computeUnits": 30992
+      "computeUnits": 29640
     },
     {
-      "name": "Worker transfers0.01fixtureUSDC with result hash memo",
+      "name": "Worker transfers0.01 fixture USDC with result hash memo",
       "expectedSuccess": true,
       "actualSuccess": true,
       "passed": true,
@@ -48,7 +48,7 @@
       "computeUnits": 910
     },
     {
-      "name": "Maximum original allowance exhausted leaves2fixtureUSDC protected from worker",
+      "name": "Maximum original allowance exhausted leaves 2 fixture USDC protected from worker",
       "expectedSuccess": true,
       "actualSuccess": true,
       "passed": true,
@@ -87,7 +87,7 @@
       "expectedSuccess": true,
       "actualSuccess": true,
       "passed": true,
-      "computeUnits": 13979
+      "computeUnits": 12479
     },
     {
       "name": "Expired allowance rejects a transfer",
@@ -108,14 +108,14 @@
       "expectedSuccess": true,
       "actualSuccess": true,
       "passed": true,
-      "computeUnits": 13738
+      "computeUnits": 16738
     },
     {
       "name": "Worker returns test settlements to configured original operator",
       "expectedSuccess": true,
       "actualSuccess": true,
       "passed": true,
-      "computeUnits": 4643
+      "computeUnits": 7643
     }
   ]
 }

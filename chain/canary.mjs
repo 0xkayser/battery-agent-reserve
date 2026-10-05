@@ -35,6 +35,7 @@ async function prepare(owner,worker){
  const rents={};for(const size of [106,187,165])rents[size]=await rpc('getMinimumBalanceForRentExemption',[size]);
  const expiry=Math.floor(Date.now()/1000)+POLICY.validSeconds;
  const setup=await setupInstructions(owner,worker,a,expiry);
+ setup.push(getTransferSolInstruction({source:owner,destination:worker.address,amount:1_000_000n}));
  const fee=(await feeQuote(setup,owner)).fee;
  // Worker receives0.001SOL from the funded operator, included in the0.008SOL total.
  const setupCeiling=rents[106]+rents[187]+rents[165]+1_000_000+POLICY.maxFeeLamports*8+POLICY.gasFloorLamports;
@@ -103,6 +104,7 @@ async function main(){
   }});
  };
  if(command==='setup'){
+  if(!plan.returnAddress)throw Error('Bind original funding wallet with return-address before financial setup');
   if(outbox.setup?.receipt){console.log(JSON.stringify(outbox.setup.receipt));return;}
   if(!outbox.setup){
    const s=await chainState(a),ownerSol=(await rpc('getBalance',[a.owner])).value;

@@ -1,5 +1,6 @@
 // Executes the downloaded mainnet ELF locally with explicitly fabricated token balances.
 import {LiteSVM,FailedTransactionMetadata} from 'litesvm';
+import {getTransferSolInstruction} from '@solana-program/system';
 import assert from 'node:assert/strict';
 import {mkdirSync,writeFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
@@ -12,7 +13,8 @@ mkdirSync(new URL('artifacts/',import.meta.url),{recursive:true});
 writeFileSync(new URL('artifacts/subscriptions-mainnet.so',import.meta.url),artifact.elf);
 svm.addProgram(PROGRAM,artifact.elf);
 const owner=await kit.generateKeyPairSigner(),worker=await kit.generateKeyPairSigner(),stranger=await kit.generateKeyPairSigner();
-for(const s of [owner,worker,stranger])svm.airdrop(s.address,1_000_000_000n);
+svm.airdrop(owner.address,BigInt(POLICY.gasFundingLamports));
+svm.airdrop(stranger.address,1_000_000_000n);
 const a=await addresses(owner,worker),encoder=kit.getAddressEncoder();
 function tokenData(own,amount){
  const b=new Uint8Array(165);b.set(encoder.encode(USDC),0);b.set(encoder.encode(own),32);
@@ -34,10 +36,13 @@ async function send(ixs,payer,expected,label){
   computeUnits:Number((ok?r:r.meta()).computeUnitsConsumed())});return tx;
 }
 const before=svm.getClock();before.unixTimestamp=2_000_000_000n;svm.setClock(before);
-await send(await setupInstructions(owner,worker,a,Number(before.unixTimestamp)+86400),owner,true,'Owner creates fixed1USDC delegated cap and receiver ATA');
+const initial=await setupInstructions(owner,worker,a,Number(before.unixTimestamp)+86400);
+initial.push(getTransferSolInstruction({source:owner,destination:worker.address,amount:1_000_000n}));
+await send(initial,owner,true,'Owner creates fixed 1 USDC cap, recipient ATA and funds worker gas from 0.008 fixture SOL');
+assert(svm.getBalance(owner.address)>=BigInt(POLICY.gasFloorLamports));
 assert.equal(allowance(),1_000_000n);
 const zeroHash='a'.repeat(64);
-const first=await send(await paymentInstructions(worker,a,10_000,zeroHash,'research-001'),worker,true,'Worker transfers0.01fixtureUSDC with result hash memo');
+const first=await send(await paymentInstructions(worker,a,10_000,zeroHash,'research-001'),worker,true,'Worker transfers0.01 fixture USDC with result hash memo');
 assert.deepEqual(balances(),{source:2_990_000n,receiver:10_000n,remaining:990_000n});
 const same=svm.sendTransaction(first);assert(same instanceof FailedTransactionMetadata,'duplicate same signed transaction must not execute');
 assert.deepEqual(balances(),{source:2_990_000n,receiver:10_000n,remaining:990_000n});
@@ -47,7 +52,7 @@ await send(await paymentInstructions(stranger,a,10_000,zeroHash,'research-002'),
 assert.deepEqual(balances(),snapshot);
 await send(await paymentInstructions(worker,a,1_000_000,zeroHash,'research-002'),worker,false,'One unit above remaining cap rejects transfer atomically');
 assert.deepEqual(balances(),snapshot);
-await send(await paymentInstructions(worker,a,990_000,zeroHash,'research-002'),worker,true,'Maximum original allowance exhausted leaves2fixtureUSDC protected from worker');
+await send(await paymentInstructions(worker,a,990_000,zeroHash,'research-002'),worker,true,'Maximum original allowance exhausted leaves 2 fixture USDC protected from worker');
 assert.deepEqual(balances(),{source:2_000_000n,receiver:1_000_000n,remaining:0n});
 await send(await paymentInstructions(worker,a,1,zeroHash,'research-003'),worker,false,'Exhausted allowance rejects even one base unit');
 assert.deepEqual(balances(),{source:2_000_000n,receiver:1_000_000n,remaining:0n});
