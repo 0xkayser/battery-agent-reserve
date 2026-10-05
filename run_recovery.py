@@ -14,13 +14,14 @@ def main():
     p.add_argument("--state-dir", default="live-state")
     p.add_argument("--primary", default="qwen2.5:7b")
     p.add_argument("--fallback", default="llama3.2:3b")
+    p.add_argument("--cluster", choices=("devnet", "mainnet"), default="devnet")
     args = p.parse_args()
     state = Path(args.state_dir)
     if (state / "agent.sqlite").exists():
         raise SystemExit("Use a fresh state directory for a new experiment; existing state will not be reset")
     started = time.time()
     entry = str(Path(__file__).with_name("live_agent.py"))
-    command = [sys.executable, entry, "--state-dir", str(state), "--jobs", "3"]
+    command = [sys.executable, entry, "--state-dir", str(state), "--jobs", "3", "--cluster", args.cluster]
     first = subprocess.run(command + ["--model", args.primary, "--crash-after", "2"], timeout=600)
     if first.returncode != 73:
         raise SystemExit(f"Expected controlled exit73, got{first.returncode}; no recovery claim")

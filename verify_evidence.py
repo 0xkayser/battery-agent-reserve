@@ -3,6 +3,7 @@ from collections import Counter
 import json
 from pathlib import Path
 from core import verify_checkpoint
+from adapters import CLUSTERS
 def verify(report):
     results=verify_checkpoint(report['checkpoint'])['results'];events=report['events'];exp=report['experiment']
     ids=['research-001','research-002','research-003']
@@ -14,9 +15,11 @@ def verify(report):
     assert results[2]['output']['input']['previousCompletedIds']==ids[:2],'State not inherited'
     assert results[2]['output']['model']==exp['approvedFallback'],'Fallback mismatch'
     assert exp['completedTasks']==3 and exp['duplicateModelCalls']==0 and exp['uniqueModelCalls']==3
+    cluster=report.get('cluster','devnet')
+    assert cluster in CLUSTERS
     for r in results:
         output=r['output'];obs=output['input']['observation']
-        assert obs['cluster']=='devnet' and obs['genesisHash']=='EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG'
+        assert obs['cluster']==cluster and obs['genesisHash']==CLUSTERS[cluster][1]
         assert output['billing']['kind']=='local_inference' and output['billing']['providerChargeUsd']==0
     assert report['actualProviderChargeUsd']==0
     assert report['paperLedger']['balance']>=report['paperLedger']['floor']

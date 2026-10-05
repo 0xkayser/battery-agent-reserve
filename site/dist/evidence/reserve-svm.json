@@ -1,0 +1,121 @@
+{
+  "schema": "battery.reserve-svm/1",
+  "observedAt": "2026-10-05T13:30:10.493Z",
+  "scope": "Actual downloaded mainnet program executed in local LiteSVM. FixtureUSDC, fixtureSOL; zero mainnet broadcasts.",
+  "program": "De1egAFMkMWZSN5rYXRj9CAdheBamobVNubTsi9avR44",
+  "programData": "HaYb5J9eXooZuNzN3z6TfuzVDcaTfiDdDPWCFtexFfMg",
+  "programSha256": "af3cefa5947173e03298361b3f461e2a314382a7206c084f77ad9a40c8b18d3a",
+  "deploymentSlot": "438440823",
+  "upgradeAuthority": "DXtFpbPjcn2hxPnw79x1Pfoj35vXh5AsWBkS37YnXMVv",
+  "passed": 15,
+  "failed": 0,
+  "mainnetTransactions": 0,
+  "fixtureBalances": true,
+  "boundary": "Chain enforces delegate identity, cumulative allowance, expiry and revoke. Job/day/floor checks outside this allowance remain trusted-runtime checks; owner can change authorization or withdraw funds.",
+  "rows": [
+    {
+      "name": "Owner creates fixed1USDC delegated cap and receiver ATA",
+      "expectedSuccess": true,
+      "actualSuccess": true,
+      "passed": true,
+      "computeUnits": 30992
+    },
+    {
+      "name": "Worker transfers0.01fixtureUSDC with result hash memo",
+      "expectedSuccess": true,
+      "actualSuccess": true,
+      "passed": true,
+      "computeUnits": 6067
+    },
+    {
+      "name": "Replay of identical signed transaction does not debit twice",
+      "passed": true,
+      "expectedSuccess": false,
+      "actualSuccess": false
+    },
+    {
+      "name": "Unapproved signer cannot pull from delegation",
+      "expectedSuccess": false,
+      "actualSuccess": false,
+      "passed": true,
+      "computeUnits": 726
+    },
+    {
+      "name": "One unit above remaining cap rejects transfer atomically",
+      "expectedSuccess": false,
+      "actualSuccess": false,
+      "passed": true,
+      "computeUnits": 910
+    },
+    {
+      "name": "Maximum original allowance exhausted leaves2fixtureUSDC protected from worker",
+      "expectedSuccess": true,
+      "actualSuccess": true,
+      "passed": true,
+      "computeUnits": 6067
+    },
+    {
+      "name": "Exhausted allowance rejects even one base unit",
+      "expectedSuccess": false,
+      "actualSuccess": false,
+      "passed": true,
+      "computeUnits": 910
+    },
+    {
+      "name": "Other signer cannot revoke owner delegation",
+      "expectedSuccess": false,
+      "actualSuccess": false,
+      "passed": true,
+      "computeUnits": 258
+    },
+    {
+      "name": "Owner revokes allowance and recovers delegation rent",
+      "expectedSuccess": true,
+      "actualSuccess": true,
+      "passed": true,
+      "computeUnits": 306
+    },
+    {
+      "name": "Revoked allowance no longer permits transfer",
+      "expectedSuccess": false,
+      "actualSuccess": false,
+      "passed": true,
+      "computeUnits": 325
+    },
+    {
+      "name": "Owner authorizes a short-lived replacement after revocation",
+      "expectedSuccess": true,
+      "actualSuccess": true,
+      "passed": true,
+      "computeUnits": 13979
+    },
+    {
+      "name": "Expired allowance rejects a transfer",
+      "expectedSuccess": false,
+      "actualSuccess": false,
+      "passed": true,
+      "computeUnits": 907
+    },
+    {
+      "name": "Owner revokes expired replacement before returning funds",
+      "expectedSuccess": true,
+      "actualSuccess": true,
+      "passed": true,
+      "computeUnits": 306
+    },
+    {
+      "name": "Owner returns protected fixtureUSDC to configured original operator",
+      "expectedSuccess": true,
+      "actualSuccess": true,
+      "passed": true,
+      "computeUnits": 13738
+    },
+    {
+      "name": "Worker returns test settlements to configured original operator",
+      "expectedSuccess": true,
+      "actualSuccess": true,
+      "passed": true,
+      "computeUnits": 4643
+    }
+  ]
+}

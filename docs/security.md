@@ -10,3 +10,7 @@
 - No custody vault, token mint, withdrawal service, paid provider or distributed lease is deployed.
 
 Sensitive reports must not include secrets in public issues. No dedicated private disclosure channel is configured yet. Public reproducible bugs can use the repository issue template with redacted logs.
+
+## Pending mainnet canary
+
+Separate fresh local owner/worker keys; program/mint/genesis/bytecode hash pinned. Fixed cumulative USDC allowance and expiry/revoke are onchain; floor applies only under the isolated no-other-delegations assumption. Owner/file access retains authority. Program upgradeability and broad underlying token delegation are material boundaries. No malicious-worker isolation, paid-provider guarantee or hosted custody. Default tests never broadcast; financial CLI requires an explicit budget flag and reviewed funding. Signed bytes remain held on ambiguity/expiry. See mainnet.md for scope, refund path and unpassed live gates.

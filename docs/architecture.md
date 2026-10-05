@@ -1,4 +1,4 @@
-# Architecture / v0.2
+# Architecture / v0.3
 
 ```text
 POLICY -> RESERVE -> DISPATCH -> LOCAL OLLAMA
@@ -21,3 +21,7 @@ The published experiment crashes **after receipt commit, before ledger settlemen
 The public network endpoint is live and read-only. AI evidence is a dated local artifact; visitors cannot start remote inference or read its ledger. Fixed devnet genesis and schema, 30s cache, bounded timeout and explicit failures. No arbitrary RPC method/URL or signing API.
 
 Optional test memo keys live privately in devnet-state. Lamport fee policy is separate from paper microUSD. The published experiment has no confirmed transaction or deployed custody program.
+
+## v0.3 / separate bounded financial canary
+
+An explicit mainnet cluster option pins genesis and immutable ledger cluster. Mainnet research remains local inference with a paper USD ledger. chain/reserve.mjs uses the existing Subscriptions fixed-delegation program for USDC; no new custody program. chain/settlement.mjs persists signed bytes before send and reconciles identical signatures/finalized bytes/token deltas. chain/canary.py supplies a kernel single-operator lock. Mainnet funding/broadcast proof is pending; see mainnet.md. The public /api/mainnet is fixed read-only with an isolated cache, never a signing endpoint.

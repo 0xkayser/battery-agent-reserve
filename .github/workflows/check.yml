@@ -18,6 +18,13 @@ jobs:
         run: python3 -m unittest -v test_battery.py test_live_agent.py
       - name: Verify published actual-run record
         run: python3 verify_evidence.py
+      - name: Verify mainnet researcher artifact (offline)
+        run: python3 verify_evidence.py evidence/mainnet-agent.json
+      - name: Bounded mainnet policies and transaction recovery (no broadcast)
+        working-directory: chain
+        run: |
+          npm ci --ignore-scripts --omit=dev
+          npm test
       - name: Offline logical replay
         run: python3 paper_replay.py
       - name: Devnet memo policy and serialization (no signing broadcast)

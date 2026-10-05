@@ -10,3 +10,6 @@ open-source/
 .vercel/
 .DS_Store
 preview*
+mainnet-state/
+reference/
+chain/artifacts/

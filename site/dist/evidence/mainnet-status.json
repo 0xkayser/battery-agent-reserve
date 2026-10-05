@@ -1,0 +1,38 @@
+{
+  "program": "De1egAFMkMWZSN5rYXRj9CAdheBamobVNubTsi9avR44",
+  "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+  "programSha256": "af3cefa5947173e03298361b3f461e2a314382a7206c084f77ad9a40c8b18d3a",
+  "deploymentSlot": "438440823",
+  "upgradeAuthority": "DXtFpbPjcn2hxPnw79x1Pfoj35vXh5AsWBkS37YnXMVv",
+  "policy": {
+    "budgetUsdc": 5000000,
+    "reserveUsdc": 3000000,
+    "allowanceUsdc": 1000000,
+    "floorUsdc": 2000000,
+    "jobUsdc": 10000,
+    "jobs": 3,
+    "gasFundingLamports": 8000000,
+    "gasFloorLamports": 100000,
+    "maxFeeLamports": 20000,
+    "maxSolPriceUsdc": 200,
+    "validSeconds": 86400
+  },
+  "rentLamports": {
+    "106": 1188720,
+    "165": 1488440,
+    "187": 1600200
+  },
+  "setupFeeQuoteLamports": 5000,
+  "senderLamportAllowance": 1528440,
+  "costAtMaxSolPriceUsdc": 4.905688,
+  "boundary": "Dedicated local operator wallet. Fixed1USDC cumulative worker allowance;2USDC floor on3USDC deposit only if no other delegations.0.01USDC per-result transfers are test settlements to our worker, not model-provider billing. Owner can revoke/change/withdraw. No vault/token launch.",
+  "schema": "battery.mainnet-status/1",
+  "observedAt": "2026-10-05T13:34:27.758573+00:00",
+  "status": "awaiting-funding",
+  "mainnetTransactions": 0,
+  "fundsReceived": false,
+  "localProgramTests": 15,
+  "ownedAgentTasks": 3,
+  "duplicateModelCalls": 0,
+  "fundingAddressPublished": false
+}

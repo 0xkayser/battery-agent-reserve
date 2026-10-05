@@ -41,4 +41,21 @@ class LiveAdapterTests(unittest.TestCase):
             with patch('adapters.read_json',return_value=invalid):
                 with self.assertRaises(Denied):OllamaAdapter('test').research({})
         with patch('adapters.read_json',return_value=good):self.assertEqual(OllamaAdapter('test').research({})['billing']['providerChargeUsd'],0)
+
+class ClusterTests(unittest.TestCase):
+    def test_existing_ledger_cannot_change_cluster(self):
+        with tempfile.TemporaryDirectory() as d:
+            r=AgentRuntime(d,'test','mainnet');r.b.close()
+            with self.assertRaisesRegex(Denied,'different cluster'):AgentRuntime(d,'test','devnet')
+    def test_snapshot_rejects_wrong_genesis_and_unknown_endpoint(self):
+        from adapters import network_snapshot,CLUSTERS
+        rows=[{'id':'genesis','result':CLUSTERS['devnet'][1]},
+              {'id':'epoch','result':{'epoch':1,'absoluteSlot':2,'blockHeight':3}},
+              {'id':'performance','result':[]}]
+        with patch('adapters.read_json',return_value=rows):
+            with self.assertRaisesRegex(Denied,'genesis'):network_snapshot('mainnet')
+        with self.assertRaisesRegex(Denied,'Unsupported'):network_snapshot('https://evil.invalid')
+        rows[0]['result']=CLUSTERS['mainnet'][1]
+        with patch('adapters.read_json',return_value=rows):self.assertEqual(network_snapshot('mainnet')['cluster'],'mainnet')
+
 if __name__=='__main__':unittest.main()

@@ -53,6 +53,9 @@
   "functions": {
     "api/network.js": {
       "maxDuration": 15
+    },
+    "api/mainnet.js": {
+      "maxDuration": 15
     }
   }
 }

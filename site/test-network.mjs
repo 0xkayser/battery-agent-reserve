@@ -17,3 +17,18 @@ test('public endpoint refuses writes and arbitrary RPC parameters before network
  await handler({method,url},res);assert.equal(res.code,status);assert.ok(res.body.error);assert.equal(res.headers['Cache-Control'],'no-store');
  }
 });
+import mainnetHandler from './api/mainnet.js';
+import {CLUSTERS} from './lib/network.mjs';
+test('mainnet read is pinned separately and cannot accept a devnet response',async()=>{
+ const s=sample();s[1].result=CLUSTERS.mainnet.genesis;
+ assert.throws(()=>parseNetwork(sample(),1,12,'mainnet'));assert.throws(()=>parseNetwork(s,1,12,'devnet'));
+ const r=await fetchNetwork(async(url,o)=>{assert.equal(url,CLUSTERS.mainnet.rpc);assert(!JSON.parse(o.body).some(x=>/send|airdrop/i.test(x.method)));return {ok:true,text:async()=>JSON.stringify(s)};},'mainnet');
+ assert.equal(r.cluster,'mainnet');assert.equal(r.genesisHash,CLUSTERS.mainnet.genesis);
+ await assert.rejects(()=>fetchNetwork(()=>{throw Error('must not request');},'custom'));
+});
+test('mainnet endpoint refuses writes and arbitrary parameters before access',async()=>{
+ for(const [method,url,status] of [['POST','/api/mainnet',405],['GET','/api/mainnet?wallet=evil',400]]){
+  const res={setHeader(){},status(n){this.code=n;return this;},json(d){this.body=d;return this;}};
+  await mainnetHandler({method,url},res);assert.equal(res.code,status);assert(res.body.error);
+ }
+});

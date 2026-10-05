@@ -8,20 +8,34 @@ import json
 import os
 from pathlib import Path
 import time
-from adapters import OllamaAdapter, network_snapshot
+from adapters import CLUSTERS, OllamaAdapter, network_snapshot
 from core import Battery, Denied, canonical, digest
 
 
 class AgentRuntime:
-    def __init__(self, state_dir, model):
+    def __init__(self, state_dir, model, cluster="devnet"):
+        if cluster not in CLUSTERS:
+            raise Denied("Unsupported cluster")
+        self.cluster = cluster
         self.path = Path(state_dir)
         self.path.mkdir(parents=True, exist_ok=True)
         self.b = Battery(str(self.path / "agent.sqlite"))
         self.b.db.executescript("""
+        CREATE TABLE IF NOT EXISTS adapter_config (name TEXT PRIMARY KEY, value TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS adapter_inputs (job TEXT PRIMARY KEY, body TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS adapter_receipts (job TEXT PRIMARY KEY, request_hash TEXT NOT NULL, body TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS adapter_events (id INTEGER PRIMARY KEY, at REAL NOT NULL, kind TEXT NOT NULL, body TEXT NOT NULL);
         """)
+        old_cluster = self.b.db.execute("SELECT value FROM adapter_config WHERE name='cluster'").fetchone()
+        # Pre-v0.3 state had only devnet input. Never relabel it as mainnet.
+        if not old_cluster:
+            has_inputs = self.b.db.execute("SELECT 1 FROM adapter_inputs LIMIT 1").fetchone()
+            prior = "devnet" if has_inputs else cluster
+            self.b.db.execute("INSERT INTO adapter_config VALUES('cluster',?)", (prior,))
+            old_cluster = (prior,)
+        if old_cluster[0] != cluster:
+            self.b.close()
+            raise Denied("State belongs to a different cluster")
         if not self.b.db.execute("SELECT 1 FROM account").fetchone():
             self.b.configure(floor=1_000_000, daily=2_000_000, per_job=100_000)
             self.b.credit_paper("paper-setup", 3_000_000)
@@ -38,7 +52,7 @@ class AgentRuntime:
         row = self.b.db.execute("SELECT body FROM adapter_inputs WHERE job=?", (job,)).fetchone()
         if row:
             return json.loads(row[0])
-        payload = {"task": "devnet_operator_brief", "observation": network_snapshot(),
+        payload = {"task": self.cluster + "_operator_brief", "observation": network_snapshot(self.cluster),
                    "previousCompletedIds": [r["id"] for r in self.b.checkpoint()["body"]["results"]]}
         with self.b.tx():
             self.b.db.execute("INSERT INTO adapter_inputs VALUES(?,?)", (job, canonical(payload)))
@@ -98,7 +112,8 @@ class AgentRuntime:
         events = [{"at": r["at"], "kind": r["kind"], **json.loads(r["body"])}
                   for r in self.b.db.execute("SELECT * FROM adapter_events ORDER BY id")]
         return {"schema": "battery.live-agent/1", "publishedAt": int(time.time()),
-                "scope": "Actual local Ollama inference and live Solana devnet reads; paper USD reserve; dated evidence, not a hosted AI service",
+                "cluster": self.cluster,
+                "scope": f"Actual local Ollama inference and live Solana {self.cluster} reads; paper USD reserve; dated evidence, not a hosted AI service",
                 "checkpoint": self.b.checkpoint(), "events": events,
                 "paperLedger": self.b.snapshot(), "actualProviderChargeUsd": 0,
                 "hardwareElectricityCost": "not_measured"}
@@ -110,8 +125,9 @@ def main():
     parser.add_argument("--model", default="qwen2.5:7b")
     parser.add_argument("--jobs", type=int, choices=range(1, 11), default=3)
     parser.add_argument("--crash-after", type=int, choices=range(1, 11))
+    parser.add_argument("--cluster", choices=CLUSTERS, default="devnet")
     args = parser.parse_args()
-    runtime = AgentRuntime(args.state_dir, args.model)
+    runtime = AgentRuntime(args.state_dir, args.model, args.cluster)
     try:
         runtime.run(args.jobs, args.crash_after)
         out = runtime.export()

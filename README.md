@@ -18,6 +18,12 @@ Reserve policy + durable local receipts + controlled recovery for agents whose r
 
 October 5, 2026: **3 tasks / 3 inference calls / 0 duplicate calls**. Receipt survived exit 73; approved fallback inherited both prior results. Restart through completion: **5.641 seconds** in this one local run. Actual model generation and RPC reads; paper USD reserves. Zero provider charge; hardware/electricity not measured. Not an uptime SLA or a hosted AI service.
 
+## Mainnet canary / prepared, not yet funded
+
+Our owned researcher now also reads mainnet:3 real tasks, Qwen-to-Llama forced-exit recovery,0 duplicate calls,5.938s restart through completion. Existing Solana Subscriptions executable downloaded from mainnet passes15 local LiteSVM checks with **fixture balances**. Eight offline price/chain/outbox tests check policies, exact balance evidence and uncertainty. **Zero confirmed BATTERY mainnet payments.**
+
+A reviewed$5-total canary allocates3USDC plus0.008SOL to fresh local owner/worker wallets. Fixed1USDC cumulative worker allowance; expiry/revoke onchain. Three0.01USDC transfers test settlement/recovery; they are not paid-model billing. Follow [the runbook](docs/mainnet.md) and [mainnet console](https://usebattery.xyz/mainnet). No swap or new contract deployment.
+
 ## Offline verification
 
 Python 3.10+ and Node 22+; no package dependencies, accounts, models or money required.
@@ -69,4 +75,4 @@ Read [architecture](docs/architecture.md), [adapter contract](docs/adapters.md),
 
 One working owned-agent adapter, not universal framework/browser migration. Model output is text, never executable commands or financial authority. Local QA server: `cd site && node dev-server.mjs`, loopback only, port 4183.
 
-Open production gates: authenticated paid billing/headroom, customer task-quality acceptance, distributed leases and a reviewed USDC vault. No token or contract address exists. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; uninterrupted 72h uptime is unverified. [BRIEF.md](BRIEF.md) records the original finite research sample and limitations.
+Open production gates: authenticated paid billing/headroom, customer task-quality acceptance, distributed leases and a reviewed USDC vault. No BATTERY custody program or token exists. The pending canary uses the existing Solana Subscriptions program. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; uninterrupted 72h uptime is unverified. [BRIEF.md](BRIEF.md) records the original finite research sample and limitations.
