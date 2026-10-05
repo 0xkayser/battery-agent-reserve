@@ -11,7 +11,8 @@
 - [Actual local AI run](https://usebattery.xyz/evidence/live-agent.json): dated inference, crash and recovery.
 - [Human proof](https://usebattery.xyz/evidence): event trail and browser hash check.
 - [Anchor status](https://usebattery.xyz/evidence/devnet-anchor-status.json): unconfirmed; faucet refused test SOL.
-- [Source](https://github.com/0xkayser/battery-agent-reserve): SDK, tests, website and CI.
+- [GitHub source](https://github.com/sproutagentai/battery-agent-reserve): public SDK repository.
+- [Source kit](https://usebattery.xyz/battery-pilot-kit.zip): SDK, tests and website source.
 
 ## Boundary
 Actual local inference/devnet reads; paper USD/browser simulations. No hosted paid agent, vault, token or mainnet payments.

@@ -1,7 +1,8 @@
 # BATTERY / Agent research brief
 
 Canonical website: https://usebattery.xyz
-Source: https://github.com/0xkayser/battery-agent-reserve
+Source: https://github.com/sproutagentai/battery-agent-reserve
+Source kit: https://usebattery.xyz/battery-pilot-kit.zip
 Release: v0.2 developer SDK, October 5, 2026.
 
 ## Thesis
@@ -28,7 +29,7 @@ BATTERY's wedge is the seam between **allocated operator budget**, **what the pr
 - Actual reproduction: install/start Ollama, install qwen2.5:7b and llama3.2:3b, then python3 run_recovery.py --state-dir live-state/fresh-run. Reads public devnet, runs local models, no paid provider key.
 - API: https://usebattery.xyz/openapi.json
 - Discovery: https://usebattery.xyz/llms.txt
-- CI: https://github.com/0xkayser/battery-agent-reserve/actions
+- Automated checks: 18 Python and 8 Node checks passed for the published SDK release.
 
 ## What the proof establishes
 

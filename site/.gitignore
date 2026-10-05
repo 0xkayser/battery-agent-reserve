@@ -14,5 +14,3 @@ preview*.jpg
 
 __pycache__/
 *.pyc
-
-dist/battery-pilot-kit.zip
