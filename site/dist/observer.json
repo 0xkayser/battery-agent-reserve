@@ -1,0 +1,70 @@
+{
+  "schema": "battery.observer-public/1",
+  "published": 1791182916,
+  "start": 1791033729,
+  "deadline": 1791292929,
+  "updated": 1791181879,
+  "runtime": "node",
+  "missingSlots": 34,
+  "actualCostUsd": 0,
+  "records": [
+    {
+      "slot": 0,
+      "scheduled": 1791033729,
+      "count": 100,
+      "ok": 18,
+      "failed": 82
+    },
+    {
+      "slot": 1,
+      "scheduled": 1791037329,
+      "count": 100,
+      "ok": 18,
+      "failed": 82
+    },
+    {
+      "slot": 2,
+      "scheduled": 1791040929,
+      "count": 100,
+      "ok": 18,
+      "failed": 82
+    },
+    {
+      "slot": 3,
+      "scheduled": 1791044529,
+      "count": 100,
+      "ok": 18,
+      "failed": 82
+    },
+    {
+      "slot": 4,
+      "scheduled": 1791048129,
+      "count": 100,
+      "ok": 18,
+      "failed": 82
+    },
+    {
+      "slot": 5,
+      "scheduled": 1791051729,
+      "count": 100,
+      "ok": 18,
+      "failed": 82
+    },
+    {
+      "slot": 6,
+      "scheduled": 1791055329,
+      "count": 100,
+      "ok": 18,
+      "failed": 82
+    },
+    {
+      "slot": 41,
+      "scheduled": 1791181329,
+      "count": 100,
+      "ok": 42,
+      "failed": 57,
+      "observed": 1791181879
+    }
+  ],
+  "scope": "Published local read-only snapshot, no inference or paid jobs. Past per-job observation timestamps were not retained; scheduled slot times are not observed times."
+}

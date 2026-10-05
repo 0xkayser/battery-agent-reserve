@@ -1,0 +1,12 @@
+.env*
+__pycache__/
+*.pyc
+*.sqlite*
+node_modules/
+live-state/
+devnet-state/
+pilot-state/
+open-source/
+.vercel/
+.DS_Store
+preview*

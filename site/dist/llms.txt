@@ -1,0 +1,17 @@
+# BATTERY
+> Reserve policy and controlled recovery for owned agents. Developer SDK v0.2.
+
+## Documentation
+- [Research brief](https://usebattery.xyz/agents.md): hypothesis, evidence and limits.
+- [Full text](https://usebattery.xyz/llms-full.txt): README, architecture, adapters and security.
+- [Developer docs](https://usebattery.xyz/docs): reproduce actual inference and recovery.
+- [OpenAPI](https://usebattery.xyz/openapi.json): fixed read-only devnet API.
+
+## Evidence
+- [Actual local AI run](https://usebattery.xyz/evidence/live-agent.json): dated inference, crash and recovery.
+- [Human proof](https://usebattery.xyz/evidence): event trail and browser hash check.
+- [Anchor status](https://usebattery.xyz/evidence/devnet-anchor-status.json): unconfirmed; faucet refused test SOL.
+- [Source](https://github.com/0xkayser/battery-agent-reserve): SDK, tests, website and CI.
+
+## Boundary
+Actual local inference/devnet reads; paper USD/browser simulations. No hosted paid agent, vault, token or mainnet payments.

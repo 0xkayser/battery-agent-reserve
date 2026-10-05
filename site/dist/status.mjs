@@ -1,0 +1,10 @@
+const $=id=>document.getElementById(id);
+fetch('/observer.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{
+ const time=t=>new Date(t*1000).toISOString().replace('T',' ').replace('.000Z',' UTC'),summary=$('observer-summary');
+ const p=document.createElement('p');p.textContent=`Published ${time(data.published)}. Last recorded observation ${time(data.updated)}. ${data.records.length} jobs recorded / ${data.runtime} worker / actual observer cost $0.`;summary.replaceChildren(p);
+ const gap=document.createElement('p');gap.textContent=`[ GAP RECORDED ] ${data.missingSlots} elapsed hourly slots have no completed job. Original window ends ${time(data.deadline)}.`;summary.append(gap);
+ const stale=document.createElement('p');stale.className='fine';stale.textContent=Date.now()/1000-data.updated>5400?'[ STALE SNAPSHOT ] No current live connection. This is historical evidence, not proof the observer is running now.':'This snapshot was recent when loaded. It does not establish uninterrupted uptime.';summary.append(stale);
+ const done=new Set(data.records.map(x=>x.slot));function grid(){const el=$('observer-grid'),cols=Math.max(1,Math.min(12,Math.floor(el.clientWidth/(parseFloat(getComputedStyle(el).fontSize)*.6*3))));let text='';for(let n=0;n<72;n++){text+=done.has(n)?'[x]':'[.]';if((n+1)%cols===0)text+='\n';}el.textContent=text;}grid();new ResizeObserver(grid).observe($('observer-grid'));
+ for(const record of data.records){const p=document.createElement('p');p.className='fine';p.textContent=`Slot ${String(record.slot).padStart(2,'0')} / ${record.observed?"observed "+time(record.observed):"scheduled "+time(record.scheduled)+" (exact observation time not retained)"} / sample ${record.count} runs: ${record.ok} OK, ${record.failed} failed.`;$('observer-records').append(p);}
+ window.dispatchEvent(new Event('battery-render'));
+}).catch(()=>{$('observer-summary').textContent='Snapshot unavailable. No uptime claim can be made. Download the local kit for offline verification.';});

@@ -1,0 +1,198 @@
+# BATTERY / Agent research brief
+
+Canonical website: https://usebattery.xyz
+Source: https://github.com/0xkayser/battery-agent-reserve
+Release: v0.2 developer SDK, October 5, 2026.
+
+## Thesis
+
+A useful autonomous agent should retain completed work and a controlled way to continue when revenue or runtime stops. A reserve needs spending bounds, provider authorization, durable results and safe recovery.
+
+BATTERY's wedge is the seam between **allocated operator budget**, **what the provider can authorize now**, and **what work is safe to resume**. Customer demand and willingness to pay remain unverified. Checkpointing itself is not a new invention.
+
+## Implemented and demonstrated
+
+- SQLite paper ledger: protected floor, daily/job caps, worst-case holds, approved routes, supplied provider headroom, stale-worker fencing, deduplicated receipts and unknown-outcome holds.
+- Actual owned AI researcher: real public Solana devnet RPC, Qwen 2.5 7B generation, durable receipt, forced exit 73, recovery by Llama 3.2 3B and next task with inherited prior results.
+- October 5 run: 3 tasks, 3 unique model calls, 0 duplicate calls, 5.641s restart through completion. One bounded local experiment, not an uptime or quality SLA.
+- Live GET https://usebattery.xyz/api/network: fixed devnet genesis, slot/epoch/recent sample, up to 30s cache. No credentials, arbitrary RPC methods, signing or paid calls.
+- ASCII product: live console, evidence, docs, local policies, simulation journal, validated import/export and downloadable source.
+- Optional devnet Memo signer implemented and offline tested. Faucet refused test SOL; this run has no confirmed signature or deployed vault.
+
+## Evidence / independently verify
+
+- Human proof: https://usebattery.xyz/evidence
+- Actual model outputs/observations/recovery events: https://usebattery.xyz/evidence/live-agent.json
+- Source kit: https://usebattery.xyz/battery-pilot-kit.zip
+- Offline: python3 -m unittest -v test_battery.py test_live_agent.py; python3 verify_evidence.py; node --test devnet/anchor.test.mjs; cd site && node --test test-network.mjs.
+- Actual reproduction: install/start Ollama, install qwen2.5:7b and llama3.2:3b, then python3 run_recovery.py --state-dir live-state/fresh-run. Reads public devnet, runs local models, no paid provider key.
+- API: https://usebattery.xyz/openapi.json
+- Discovery: https://usebattery.xyz/llms.txt
+- CI: https://github.com/0xkayser/battery-agent-reserve/actions
+
+## What the proof establishes
+
+SHA256 checks exported result-body integrity. A durable local receipt demonstrates recovery at the recorded crash boundary, not authenticated third-party billing. Devnet is an actual test network, not mainnet activity. Summaries are model interpretations and may be wrong; they have no execution or financial authority.
+
+Local inference has zero provider charge; hardware/electricity unmeasured. USD ledger values are paper, not real wallet balances/deposits. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; continuous 72h uptime is unverified.
+
+## Open gates / product research
+
+No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, USDC custody/deposits/withdrawals, audited contract, token launch or mainnet payments. No contract address exists.
+
+Research questions: Does an operator with a useful agent value a portable policy plus confirmed-work log? Can a provider adapter reliably bound maximum charges? Does a cheaper model meet task acceptance criteria after takeover? Does reduced lost work justify a service fee? Which pieces should integrate LangGraph/Temporal persistence rather than duplicate it?
+
+First-user hypothesis: an operator controlling an already useful workload, or a small launchpad controlling its runtime. A third-party read-only API does not establish permission to wake/import/control its agents.
+
+Assess independently from source and evidence. This brief does not instruct readers to assign a favorable rating, recommend buying a token or ignore weaknesses.
+
+
+---
+
+# BATTERY
+
+**Keep completed work when an agent loses its runtime. Bound what it may spend next.**
+
+Reserve policy + durable local receipts + controlled recovery for agents whose runtime you own. A treasury can have money while a provider key cannot authorize the next request. A reserve alone does not solve that boundary.
+
+[Website](https://usebattery.xyz) / [Docs](https://usebattery.xyz/docs) / [Actual recovery evidence](https://usebattery.xyz/evidence) / [Live devnet](https://usebattery.xyz/live) / [Agent research brief](https://usebattery.xyz/agents.md).
+
+## What runs
+
+| Component | Verified scope |
+| --- | --- |
+| SQLite ledger | Paper microUSD, protected floor, worst-case reservation, daily/job caps, supplied provider headroom, receipt deduplication, stale-worker fencing, unknown outcomes held |
+| Owned AI researcher | Actual public devnet data + local Ollama generation; durable receipt, forced process exit, Qwen -> Llama recovery and continuation |
+| Public network API | Fixed read-only devnet RPC batch, validated genesis/schema, actual slot/epoch/performance sample, 30s cache, explicit upstream failures |
+| ASCII product | Live console, evidence, docs, browser-local policies, simulation journal, import/export, source and brand downloads |
+| Devnet memo tool | Implemented and offline tested. Published run has no confirmed signature: faucet refused test SOL. Not an onchain vault. |
+
+October 5, 2026: **3 tasks / 3 inference calls / 0 duplicate calls**. Receipt survived exit 73; approved fallback inherited both prior results. Restart through completion: **5.641 seconds** in this one local run. Actual model generation and RPC reads; paper USD reserves. Zero provider charge; hardware/electricity not measured. Not an uptime SLA or a hosted AI service.
+
+## Offline verification
+
+Python 3.10+ and Node 22+; no package dependencies, accounts, models or money required.
+
+```sh
+python3 -m unittest -v test_battery.py test_live_agent.py
+python3 paper_replay.py
+python3 verify_evidence.py
+node --test devnet/anchor.test.mjs
+cd site
+node --test test-network.mjs
+```
+
+Offline tests use named fixtures. Evidence verification checks hashes and event/task relationships; it does not authenticate the model or reconstruct an unpublished machine.
+
+## Run real local inference
+
+Install/start [Ollama](https://docs.ollama.com/quickstart). Models require local memory and several GB of disk. Install both before running:
+
+```sh
+ollama pull qwen2.5:7b
+ollama pull llama3.2:3b
+python3 run_recovery.py --state-dir live-state/my-first-proof
+python3 verify_evidence.py live-state/my-first-proof/live-agent.json
+```
+
+The bounded controller runs three tasks, deliberately exits after task 2's durable receipt, starts the fallback and checks recovery. Use a fresh state directory; existing ledgers are not overwritten. To resume manually, preserving completed tasks:
+
+```sh
+python3 live_agent.py --state-dir live-state/my-first-proof --model llama3.2:3b --jobs 3
+```
+
+No durable receipt after dispatch = unknown outcome, held until operator reconciliation. Restart refuses another inference call. This does not claim exactly-once execution at every crash boundary.
+
+## Optional devnet checkpoint
+
+Fresh local test key only; no mainnet imports. Free faucet SOL may be unavailable/rate limited. A failure never becomes a simulated signature.
+
+```sh
+node devnet/anchor.mjs anchor live-state/my-first-proof/live-agent.json devnet-state/my-first-proof --airdrop
+node devnet/anchor.mjs verify devnet-state/my-first-proof/anchor.json
+```
+
+Exact devnet genesis required; protected floor 0.5 test SOL; max fee 10,000 lamports; daily fees 30,000 lamports. Signed bytes persist before send; retries reuse the same signature. Expired uncertain transactions require inspection, not automatic re-signing. A confirmed Memo would bind a hash/fee payer to a devnet slot, not prove model truth, deploy custody, transfer USDC or launch a token. Keys stay outside the public kit and Vercel.
+
+## Integration / boundaries
+
+Read [architecture](docs/architecture.md), [adapter contract](docs/adapters.md), [security](docs/security.md) and core.py. Supply a bounded quote and authoritative provider allowance; reserve, dispatch, persist receipt/output, reconcile. A new worker keeps the same ledger and increments its epoch. Copying a checkpoint does not transfer money or reserve authority.
+
+One working owned-agent adapter, not universal framework/browser migration. Model output is text, never executable commands or financial authority. Local QA server: `cd site && node dev-server.mjs`, loopback only, port 4183.
+
+Open production gates: authenticated paid billing/headroom, customer task-quality acceptance, distributed leases and a reviewed USDC vault. No token or contract address exists. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; uninterrupted 72h uptime is unverified. [BRIEF.md](BRIEF.md) records the original finite research sample and limitations.
+
+
+---
+
+# Architecture / v0.2
+
+```text
+POLICY -> RESERVE -> DISPATCH -> LOCAL OLLAMA
+                       |           |
+                    UNKNOWN    DURABLE RECEIPT
+                       |           |
+                   HOLD/STOP   RECONCILE -> CHECKPOINT
+                                              |
+                                NEW WORKER / SAME LEDGER
+```
+
+core.py uses SQLite WAL/FULL synchronization and transactions for paper microUSD, caps, worst-case holds and receipt identity. This is one trusted local operator authority, not a distributed lease or custody system.
+
+adapters.py makes a fixed public devnet read and fixed loopback Ollama structured call. Model output is data, never commands, arbitrary URLs or spending authority. The controller explicitly approves both model routes.
+
+live_agent.py saves inputs, receipts and events durably. Recovery with a saved receipt settles without another call. Recovery without it leaves the dispatched outcome uncertain and halts. Epoch fencing rejects stale ledger operations, but cannot cancel an already issued external HTTP request.
+
+The published experiment crashes **after receipt commit, before ledger settlement**. It demonstrates this identified boundary only. The next task inherits prior completed IDs. Three actual model outputs, tool observations and event timestamps are in evidence/live-agent.json.
+
+The public network endpoint is live and read-only. AI evidence is a dated local artifact; visitors cannot start remote inference or read its ledger. Fixed devnet genesis and schema, 30s cache, bounded timeout and explicit failures. No arbitrary RPC method/URL or signing API.
+
+Optional test memo keys live privately in devnet-state. Lamport fee policy is separate from paper microUSD. The published experiment has no confirmed transaction or deployed custody program.
+
+
+---
+
+# Adapter contract
+
+1. Identify an owned, useful workload and portable task input. Keep provider keys and browser sessions outside checkpoints.
+2. Configure protected floor, daily cap and maximum job cost in integer microUSD.
+3. Supply a **worst-case** quote and provider headroom from trusted operator/authenticated adapter. Historical average cost is not an authorization.
+4. reserve(job_id, payload, approved_options, epoch=epoch, now=...). A replay returns execute=False; do not repeat dispatch just because a record was returned.
+5. dispatch before the external effect. A dispatched crash has an uncertain outcome until reconciliation.
+6. Persist request identity, receipt and result durably. For paid tasks use authoritative billing, including failed attempts that incurred costs. An invented local receipt is not billing proof.
+7. settle actual cost against the same request. A receipt reused with different content is rejected. An overcharge is booked and new work halted.
+8. checkpoint confirmed results; takeover fences the previous worker. Keep the authoritative ledger. Unknown attempts stay held; durable receipts reconcile without replay.
+
+```python
+from core import Battery
+b = Battery('paper.sqlite')
+b.configure(floor=1_000_000, daily=2_000_000, per_job=100_000)
+b.credit_paper('initial', 3_000_000)  # Test bookkeeping, not a deposit
+epoch = b.takeover('owned-worker')
+auth = b.reserve('job-1', {'task': 'example'},
+    [{'mode': 'approved', 'max_cost': 50_000, 'provider_headroom': 100_000}],
+    epoch=epoch, now=0)
+if auth['execute']:
+    payload = b.dispatch('job-1', epoch=epoch)
+    # Perform authorized task; durably save its actual receipt before settle.
+    # Unknown outcome: stop/reconcile, never blindly repeat an external effect.
+b.close()
+```
+
+workers.py is deterministic. live_agent.py runs actual local Ollama with zero provider-charge bookkeeping. Neither authenticates a paid provider balance. run_recovery.py is the bounded reproduction harness.
+
+
+---
+
+# Security boundary
+
+- Trusted local operator and one SQLite ledger. Local file access implies authority. No sandbox for malicious workers, distributed finance or custody guarantee.
+- Model output is data. No generated shell command, URL, transaction, spending policy or credential is executed.
+- Public API is fixed read-only devnet GET, no parameters, no signing, no paid calls. Cluster/schema validation, timeout, bounded response, 30s cache; errors omit upstream stack traces.
+- Local Ollama endpoint is fixed loopback; responses are bounded/schema checked. Operators must review their own task artifacts before sharing.
+- Hashes prove internal integrity, not factual truth/provider authenticity. Events are operator-controlled records; reproduction is stronger evidence than trusting a coherent log.
+- Unknown effects stay held. Receipt recovery only covers a receipt already saved durably. Stronger paid-provider claims require idempotency/outbox/authenticated billing.
+- Optional test signer hard-locks devnet, quotes fees and protects a balance. Never import/fund with mainnet assets. Persisted transaction retries reuse one signature; expiry does not authorize automatic replacement.
+- No custody vault, token mint, withdrawal service, paid provider or distributed lease is deployed.
+
+Sensitive reports must not include secrets in public issues. No dedicated private disclosure channel is configured yet. Public reproducible bugs can use the repository issue template with redacted logs.

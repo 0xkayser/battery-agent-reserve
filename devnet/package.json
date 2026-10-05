@@ -1,0 +1,14 @@
+{
+  "name": "battery-devnet-checkpoint",
+  "version": "1.0.0",
+  "description": "Test-only signed Solana memo checkpoint with fee and floor guards",
+  "scripts": {
+    "test": "node --test anchor.test.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {"node": ">=22"}
+}

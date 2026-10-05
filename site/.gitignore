@@ -1,0 +1,15 @@
+preview*.png
+card-test.png
+kit-test.zip
+.DS_Store
+card-*-test.png
+.vercel/
+.vercel
+.env*
+workspace-export-test.json
+workspace-import-invalid-test.json
+preview-kit-test/
+kit-fixed-test.zip
+preview*.jpg
+
+dist/battery-pilot-kit.zip

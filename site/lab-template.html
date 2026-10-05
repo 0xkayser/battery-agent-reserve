@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BATTERY — The blackout bench</title>
+<meta name="description" content="Cut the fees. Test a spending reserve, a protected balance and a permitted recovery route for your agent.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="BATTERY — The blackout bench"><meta property="og:description" content="A reserve. A blackout. How much work survives?"><meta property="og:type" content="website"><meta property="og:url" content="https://battery-agent-reserve.kaysersozer.chatgpt.site"><meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://battery-agent-reserve.kaysersozer.chatgpt.site">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/brand/logo-180.png">
+<link rel="stylesheet" href="style.css"><script type="module" src="app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#scenario">Skip to budget controls</a>
+<div class="page">
+<header class="masthead"><a class="wordmark" href="#" aria-label="BATTERY home"><pre id="brand-symbol" aria-hidden="true"></pre><pre id="brand-art" aria-hidden="true">BATTERY</pre></a><div class="mast-note">A reserve for agents<br>with work left to do.</div><div class="mast-actions"><span class="edition">PROTOTYPE / 03 OCT 2026</span><button id="open-guide" class="text-button">[ BUILDER NOTES ]</button></div></header>
+<main>
+<section id="blackout" aria-labelledby="bench-title">
+<div class="bench-head"><div><span class="serial">THE BLACKOUT BENCH / 001</span><h1 id="bench-title">CUT THE FEES.</h1></div><p>Set the limits. Kill the income.<br>See exactly when work must pause.</p><span class="simulation">SIMULATION<br>NO LIVE FUNDS</span></div>
+<div class="console">
+<form id="scenario" class="controls" aria-label="Budget policy"><div class="panel-top"><span>01 / BUDGET POLICY</span><span>USD</span></div>
+<div class="control"><label for="reserve">Starting reserve <output id="reserve-label" for="reserve">$100.00</output></label><div class="range-input"><input id="reserve" type="range" min="5" max="500" step="5" value="100"><pre id="reserve-track" class="ascii-track" aria-hidden="true"></pre></div><div class="range-ends"><span>$5</span><span>$500</span></div></div>
+<div class="control"><label for="rate">Cost per task <output id="rate-label" for="rate">$1.00</output></label><div class="range-input"><input id="rate" type="range" min="0.1" max="5" step="0.1" value="1"><pre id="rate-track" class="ascii-track" aria-hidden="true"></pre></div><div class="range-ends"><span>$0.10</span><span>$5</span></div></div>
+<div class="small-controls"><label for="floor">Protected balance<span class="number-box"><span aria-hidden="true">[ </span><input id="floor" type="number" min="0" max="100" step="1" value="10"><span aria-hidden="true"> ]</span></span></label><label for="provider">Provider allowance<span class="number-box"><span aria-hidden="true">[ </span><input id="provider" type="number" min="0" max="500" step="1" value="24"><span aria-hidden="true"> ]</span></span></label></div>
+<label class="check"><input id="fallback" type="checkbox" checked><span>Permit the cheaper route<small>40% of task cost / pre-approved</small></span></label>
+<label class="check"><input id="crash" type="checkbox" checked><span>Crash the worker at hour 24<small>Restore a confirmed result</small></span></label>
+<div class="fees-row"><span>Creator-fee income</span><button id="fees-toggle" type="button" role="switch" aria-checked="false" aria-label="Creator-fee income"><span aria-hidden="true">[ </span><strong id="fees-label">OFF</strong><span aria-hidden="true"> ]</span></button></div>
+<button class="run button" type="submit">[ RUN BLACKOUT ]</button><p id="input-error" class="error" role="alert" hidden></p>
+<p class="fine">One task/hour. Daily cap $30. Alternate allowance $500. Fees ON assumes $2/hour. Illustrative costs; this is not a forecast.</p>
+</form>
+<div class="result" aria-live="polite" aria-atomic="false"><div class="panel-top"><span>02 / RESERVE UNDER LOAD</span><span id="result-state">TEST SURVIVED</span></div>
+<div class="device"><button id="portrait-motion" class="portrait-motion text-button" type="button" aria-label="Pause portrait animation" aria-pressed="false" hidden>[ PAUSE ]</button><pre class="ascii-face" id="agent-face" aria-hidden="true"></pre><div class="device-readout"><pre class="runway-number" id="runway-hours" role="img" aria-label="72 hours of permitted work">72</pre><span class="runway-unit">HOURS OF WORK</span></div><span class="device-serial">AGENT 01 / STATE RETAINED</span></div>
+<div class="result-body"><div class="result-stats"><div><dt>Reserve left</dt><dd id="reserve-left">$56.80</dd></div><div><dt>Protected</dt><dd id="protected">$10.00</dd></div><div><dt>Repeated charges*</dt><dd id="duplicates">0</dd></div></div>
+<div class="chart-title"><span>RESERVE OVER TIME</span><span id="tasks-count">72 completed tasks</span></div><pre id="charge-chart" class="charge-chart" role="img" aria-label="Simulated reserve over the 72-hour test"></pre><div class="chart-scale"><span>00H</span><span>36H</span><span>72H</span></div>
+<p id="result-description" class="result-description">Your reserve covers the full test. Each permitted task stays within the configured limits.</p><details class="log" open><summary>Execution log</summary><ul id="events" class="events"></ul></details>
+<div class="share-row"><button id="share-scenario" type="button" class="share-button">[ COPY TEST ]</button><button id="download-card" type="button" class="text-button">[ SAVE CARD ]</button></div><p class="fine" id="share-status" role="status">Share a scenario, not a claim about a live agent. *Simulated receipts only.</p></div></div>
+</div></section>
+<section id="proof" class="evidence" aria-labelledby="evidence-title"><div class="evidence-heading"><span class="serial">03 / WHAT WE ACTUALLY CHECKED</span><h2 id="evidence-title">THE PAPER TRAIL.</h2><a href="proof.json" class="text-button" target="_blank" rel="noopener">[ EVIDENCE ]</a></div><div class="evidence-body"><dl class="paper-stats"><div><dt>Ledger checks</dt><dd>13/13</dd></div><div><dt>Offline replay jobs</dt><dd>72</dd></div><div><dt>Repeated paper charges</dt><dd>0</dd></div></dl><div class="paper-note"><p>One crash. A worker change. A protected balance left intact.</p><p>These are offline checks. Real model migration, onchain funds and 72 hours of measured uptime remain unverified.</p><a class="text-button" href="battery-pilot-kit.zip" download>[ LOCAL KIT ]</a></div></div></section>
+<section class="notes" aria-label="Limitations"><details><summary>A reserve is only one of the limits.</summary><p>A public www compute snapshot reported funds available while a provider rejected a run for its credit limit. BATTERY must check both budgets. This is a dated observation, not the agent's current status.</p><a href="https://worldwideweb.stream/api/v1/symbients/GAwhcphCqCv5bKHmCiN4VDdNWfbXJL4npmkc8L3Q9S9H/compute" target="_blank" rel="noopener">[ SOURCE: COMPUTE API ]</a></details><details><summary>The real-time observer has just started.</summary><p>A free read-only observer recorded its first real job on 3 October. It reads public run records hourly and uses deterministic workers, without inference or payments. This page is not connected to that observer and does not show live uptime.</p></details><details><summary>What the prototype cannot do yet.</summary><p>No authenticated billing adapter, distributed custody or framework migration. Unknown paid outcomes stay held for reconciliation. A saved JSON result cannot rescue a third-party agent without control over its runtime. No token or onchain vault has been launched.</p></details></section>
+</main>
+<footer><span>BATTERY / BLACKOUT BENCH 01</span><a href="assets/brand/battery-brand-kit.zip" download>[ LOGO + BANNER ]</a><a href="#scenario">[ BACK TO BENCH ]</a></footer>
+</div>
+<dialog id="guide"><div class="guide-top"><span class="serial">BUILDER NOTES / 01</span><button id="close-guide" aria-label="Close builder notes">[x]</button></div><div class="guide-scroll"><h2>ONE AGENT.<br>EXPLICIT LIMITS.</h2><p>Start with an agent you own. Its reserve ledger and its portable application state serve different jobs.</p><ol><li><strong>Set a policy.</strong> Protect a balance. Bound each task and the day's expense.</li><li><strong>Reserve before dispatch.</strong> Supply a trusted worst-case quote and provider allowance.</li><li><strong>Record the receipt.</strong> Reconcile paid failures too. Unknown outcomes remain held.</li><li><strong>Fence the old worker.</strong> Restore confirmed progress on the same authoritative ledger.</li></ol><p class="fine">The kit has no model client, distributed custody or provider authentication. Paid-agent integration requires an actual billing adapter.</p><a class="button run" href="battery-pilot-kit.zip" download>[ LOCAL KIT ]</a></div></dialog>
+</body></html>

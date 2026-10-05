@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {createStore,DEFAULT,parseWorkspace,resultOf} from './dist/store.mjs';
+const values=new Map(),storage={getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,v)};
+const a=createStore(storage);const first=a.savePolicy('Main agent',DEFAULT);assert.equal(createStore(storage).read().policies[0].name,'Main agent');
+const changed={...DEFAULT,fallback:false};a.savePolicy('Strict agent',changed,first.id);assert.equal(a.read().policies.length,1);assert.equal(a.read().policies[0].scenario.fallback,false);
+const r=a.saveRun('Blackout',changed);assert.equal(resultOf(r).hours,24);assert.equal(createStore(storage).read().runs[0].id,r.id);
+const exportFile=a.export(),bValues=new Map(),b=createStore({getItem:k=>bValues.get(k)??null,setItem:(k,v)=>bValues.set(k,v)});b.import(exportFile);b.import(exportFile);assert.equal(b.read().policies.length,1);assert.equal(b.read().runs.length,1);
+const bad=JSON.parse(exportFile);bad.policies[0].scenario.floor=501;assert.throws(()=>b.import(JSON.stringify(bad)));assert.equal(b.export(),exportFile);
+assert.throws(()=>parseWorkspace('x'.repeat(250001)));assert.throws(()=>a.savePolicy('Invalid',{...DEFAULT,floor:101}));assert.equal(a.read().policies.length,1);
+const hostile={...DEFAULT,__proto__:null,secret:'ignored'};assert.equal('secret' in a.savePolicy('Clean',hostile).scenario,false);
+a.removePolicy(first.id);assert.equal(a.read().runs.length,1);
+const fail=createStore({getItem:()=>null,setItem:()=>{throw Error('disk full')}});assert.throws(()=>fail.savePolicy('X',DEFAULT),/Could not save/);
+values.set('battery.workspace.v1','corrupt');assert.throws(()=>a.savePolicy('X',DEFAULT));assert.equal(values.get('battery.workspace.v1'),'corrupt');
+console.log('Workspace checks PASS: durable policy edits, test replay, portable merge, hostile/oversized import rejection, atomic validation, storage failure and corruption protection.');

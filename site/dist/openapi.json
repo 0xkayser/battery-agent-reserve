@@ -1,0 +1,170 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "BATTERY live devnet API",
+    "version": "0.2.0",
+    "description": "Fixed read-only devnet, 30s cache. No auth, parameters, signing, spending or model calls."
+  },
+  "servers": [
+    {
+      "url": "https://usebattery.xyz"
+    }
+  ],
+  "paths": {
+    "/api/network": {
+      "get": {
+        "operationId": "getDevnetObservation",
+        "summary": "Read validated public devnet observation",
+        "responses": {
+          "200": {
+            "description": "Actual observation, observedAt UNIX UTC. Sample slot may differ from finalized slot.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "schema",
+                    "cluster",
+                    "rpc",
+                    "genesisHash",
+                    "observedAt",
+                    "slot",
+                    "epoch",
+                    "blockHeight",
+                    "latencyMs",
+                    "performance"
+                  ],
+                  "properties": {
+                    "schema": {
+                      "const": "battery.network/1"
+                    },
+                    "cluster": {
+                      "const": "devnet"
+                    },
+                    "rpc": {
+                      "const": "https://api.devnet.solana.com"
+                    },
+                    "genesisHash": {
+                      "const": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG"
+                    },
+                    "observedAt": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "slot": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "epoch": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "blockHeight": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "latencyMs": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "performance": {
+                      "type": "object",
+                      "required": [
+                        "slot",
+                        "numTransactions",
+                        "samplePeriodSecs",
+                        "transactionsPerSecond"
+                      ],
+                      "properties": {
+                        "slot": {
+                          "type": "integer"
+                        },
+                        "numTransactions": {
+                          "type": "integer"
+                        },
+                        "samplePeriodSecs": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "transactionsPerSecond": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Structured error; no synthetic observation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Structured error; no synthetic observation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Structured error; no synthetic observation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

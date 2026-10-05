@@ -1,0 +1,1 @@
+{"name":"battery-ascii","private":true,"type":"module","engines":{"node":"22.x"},"scripts":{"test":"node --test test-network.mjs","dev":"node dev-server.mjs"}}

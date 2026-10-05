@@ -1,0 +1,46 @@
+{
+  "project": "BATTERY",
+  "checked_date": "2026-10-05",
+  "core_checks": {
+    "passed": 13,
+    "total": 13,
+    "scope": "local trusted-operator paper ledger"
+  },
+  "replay": {
+    "mode": "counterfactual recorded-cost replay",
+    "logical_hours": 72,
+    "jobs_completed": 72,
+    "injected_crashes": 1,
+    "duplicate_fake_charges": 0,
+    "runtime_change": "Python to Node",
+    "wall_clock_72h_uptime_measured": false,
+    "initial_paper_usd": 2.865832,
+    "recorded_costs_usd": 1.865832,
+    "protected_final_paper_usd": 1
+  },
+  "observer": {
+    "mode": "public API read-only; no inference or funds",
+    "start_unix": 1791033729,
+    "deadline_unix": 1791292929,
+    "published_snapshot": "/observer.json",
+    "live_connection": false,
+    "interrupted": true,
+    "past_exact_job_timestamps_retained": false
+  },
+  "sources": {
+    "api_sample_generated_at": "2026-10-03T09:13:01.837Z",
+    "selected_run_count": 100,
+    "selected_failed_count": 82,
+    "selected_ok_count": 18,
+    "url": "https://worldwideweb.stream/api/v1/symbients/GAwhcphCqCv5bKHmCiN4VDdNWfbXJL4npmkc8L3Q9S9H/runs?limit=100"
+  },
+  "unverified": [
+    "paid model-agent failover",
+    "third-party agent migration",
+    "real 72h uptime",
+    "onchain reserve or custody",
+    "paid customer demand",
+    "virality"
+  ],
+  "site_demo": "Illustrative scenario; separate from the Python ledger and observer. No wallet, deposit or real provider request."
+}

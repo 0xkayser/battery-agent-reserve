@@ -1,0 +1,9 @@
+{
+  "schema": "battery.devnet-anchor-status/1",
+  "status": "not_confirmed",
+  "cluster": "devnet",
+  "checkpointSha256": "eafa7f65fd308faa585e4af58b8e1f567f73a8cbc7d768502f58bb82bd0f5baf",
+  "reason": "Public RPC faucet returned internal error, then HTTP 429. No test SOL received; no signed transaction broadcast.",
+  "tool": "devnet/anchor.mjs",
+  "scope": "Implemented and offline tested; not a custody vault or token"
+}

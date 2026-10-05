@@ -1,0 +1,26 @@
+{
+  "mode": "counterfactual-paper-replay",
+  "wall_clock_72h_uptime": false,
+  "evidence_generated_at": "2026-10-03T09:13:01.837Z",
+  "evidence_sample": 100,
+  "logical_hours": 72,
+  "creator_fee_topups": 0,
+  "reserve_initial_micro_usd": 2865832,
+  "recorded_costs_micro_usd": 1865832,
+  "reserve_final_micro_usd": 1000000,
+  "protected_floor_micro_usd": 1000000,
+  "completed_paper_jobs": 72,
+  "duplicate_paper_charges": 0,
+  "simulated_crashes": 1,
+  "runtimes": [
+    "python",
+    "node"
+  ],
+  "floor_guard": true,
+  "checkpoint_sha256": "e375074227f5e841c39250f5000a1776cc0686f32fb9805da5284a1e092a942b",
+  "limitations": [
+    "Synthetic workload/reserve/cadence; sampled charges do not forecast runway",
+    "Recorded costs include failed provider runs; aggregation jobs here are deterministic",
+    "No LangGraph/Temporal/Agency/www migration, model calls or onchain funds"
+  ]
+}

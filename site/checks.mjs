@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {simulate,validate} from './dist/engine.mjs';
+const base={reserve:100,rate:1,floor:10,provider:24,fallback:true,crash:true,fees:false};
+let r=simulate(base);
+assert.equal(r.hours,72);assert.equal(r.balance,56.8);assert.equal(r.events.filter(x=>x.text.includes('Worker lost')).length,1);
+r=simulate({...base,fallback:false});assert.equal(r.hours,24);assert.equal(r.balance,76);
+r=simulate({...base,provider:0,fallback:false});assert.equal(r.hours,0);
+r=simulate({...base,reserve:10,floor:10});assert.equal(r.hours,0);assert.equal(r.balance,10);
+r=simulate({...base,reserve:5,floor:1,provider:0});assert.equal(r.hours,10);assert.equal(r.balance,1);
+r=simulate({...base,rate:5,provider:500});assert.equal(r.hours,6);assert.equal(r.balance,70);
+r=simulate({...base,fees:true});assert.equal(r.hours,72);assert.equal(r.balance,200.8);
+assert.throws(()=>validate({...base,floor:101}));assert.throws(()=>validate({...base,reserve:5,floor:10}));assert.throws(()=>validate({...base,rate:NaN}));assert.throws(()=>validate({...base,fees:'false'}));
+assert.deepEqual(validate(JSON.parse(JSON.stringify(base))),base);
+console.log('Scenario checks PASS: floor, provider, day cap, fallback, fees, receipt restore, invalid inputs and serialization.');
