@@ -5,7 +5,7 @@ Paid-provider extension: [one-shot adapter contract](https://usebattery.xyz/deve
 Canonical website: https://usebattery.xyz
 Source: https://github.com/sproutagentai/battery-agent-reserve
 Source kit: https://usebattery.xyz/battery-pilot-kit.zip
-Release: v0.3 developer SDK / completed bounded mainnet canary, October5,2026.
+Release: v0.4 prepared direct-paid-resource SDK; live purchases pending / v0.3 demonstrated developer SDK / completed bounded mainnet canary, October5,2026.
 
 ## Thesis
 
@@ -37,7 +37,7 @@ The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM ch
 - Actual reproduction: install/start Ollama, install qwen2.5:7b and llama3.2:3b, then python3 run_recovery.py --state-dir live-state/fresh-run. Reads public devnet, runs local models, no paid provider key.
 - API: https://usebattery.xyz/openapi.json
 - Discovery: https://usebattery.xyz/llms.txt
-- Automated checks: 45 Python and 21 offline Node checks plus 15 local program checks passed for the published SDK release.
+- Automated checks: 53 Python and 28 offline Node checks plus 15 local program checks passed for the published SDK release.
 
 ## What the proof establishes
 
@@ -62,9 +62,42 @@ Self-hosted MIT SDK licence:$0; hardware/electricity/provider/network costs rema
 The new local controller checks live mainnet budget/gas/expiry before each inference, persists its result, verifies finalized USDC settlement and only then advances. Nine offline failure/recovery checks pass; a separate funded mainnet run completed three actual model calls/three finalized 0.01USDC settlements, same-signature recovery after exit74 and zero replay calls/transfers. Historical receipts are separate from this new flow. Runbook: https://usebattery.xyz/developer/integrated-runtime.md. Published selected events: https://usebattery.xyz/evidence/integrated-runtime/integrated.json. Financial proof: https://usebattery.xyz/evidence/integrated-financial.json. `node chain/verify-integrated.mjs --live` rechecks actual finalized payments and final accounts.
 
 
+## Direct paid resource extension / live execution pending
+
+A finite three-search agent now uses direct Exa x402 Solana USDC purchases, finalized
+signed-message and token-delta verification, deterministic primary-source gating,
+integer vendor-expense accounting, saved-response crash recovery and principal return.
+Dated live unsigned offer:0.007USDC/search; zero new purchases yet. New funding gate
+remains. Software wallet floor trusts the local operator; this is not a hosted or
+adversarial-worker reserve. https://usebattery.xyz/power and
+https://usebattery.xyz/developer/paid-resource.md. Primary contract:
+https://usebattery.xyz/developer/data-contract.md. Readiness JSON is an unpaid402
+quote, never a completed paid proof. Missing delivery stays held without repurchase.
+
+
 ---
 
 # BATTERY
+
+## Direct USDC-paid researcher / v0.4 preparation
+
+New finite controller: reserve -> buy Exa search via Solana x402 -> verify actual
+payment and primary-source result -> book USDC expense -> recover -> return capital.
+Actual unpaid HTTP402/0.007USDC offer checked. New purchases are **not yet executed**;
+separate funding required.15 new fault/message checks pass (8 Python,7 Node).
+
+- [Runbook and monetary boundaries](docs/paid-resource.md)
+- [Data contract](docs/data-contract.md)
+- `python3 paid_resource.py prepare`: private dedicated wallet, no signing/payment.
+- `python3 paid_resource.py probe`: unsigned provider quote, no purchase.
+- `python3 run_paid_resource.py --approve-max-0.03-usdc`: finite funded run, deliberate
+  saved-response exit, restart, finality/result checks and remaining-principal return.
+- `node chain/verify-resource.mjs evidence/paid-resource.json --live`: independently
+  re-read the completed run. No completed proof is claimed before actual execution.
+
+Hosted multiuser service, paid model inference and adversarial-worker reserve controls
+are not provided by this trusted local x402 route. See the runbook before funding.
+
 
 **Keep completed work when an agent loses its runtime. Bound what it may spend next.**
 
@@ -195,6 +228,17 @@ Optional test memo keys live privately in devnet-state. Lamport fee policy is se
 An explicit mainnet cluster option pins genesis and immutable ledger cluster. Mainnet research remains local inference with a paper USD ledger. chain/reserve.mjs uses the existing Subscriptions fixed-delegation program for USDC; no new custody program. chain/settlement.mjs persists signed bytes before send and reconciles identical signatures/finalized bytes/token deltas. chain/canary.py supplies a kernel single-operator lock. The bounded mainnet canary finalized8 transactions, including3 saved-result settlements,financial exit74 recovery,revoke and full5USDC return; see mainnet.md. Local inference ran before settlement, not paid-model billing. The public /api/mainnet is fixed read-only with an isolated cache, never a signing endpoint.
 
 
+## Direct paid resource controller / prepared v0.4
+`paid_resource.py` authoritative SQLite ledger and kernel lock; `chain/resource.mjs`
+private signed payment outbox plus raw response journal; `run_paid_resource.py` finite
+planned-crash supervisor. Exact USDC purchases use the vendor's x402 SVM scheme;
+message guards run before wallet signatures. Finalized RPC bytes/signatures/deltas
+prove actual vendor expense. Source-list gate is deterministic and separate from
+payment. Known charged failures book expense then halt; unknown outcomes remain held.
+No hidden free-model substitution or OpenAI fiat billing estimate is used. See
+`docs/paid-resource.md`. Hosted multiuser execution remains unavailable.
+
+
 ---
 
 # Adapter contract
@@ -250,6 +294,17 @@ Sensitive reports must not include secrets in public issues. No dedicated privat
 
 Separate fresh local owner/worker keys; program/mint/genesis/bytecode hash pinned. Fixed cumulative USDC allowance and expiry/revoke are onchain; floor applies only under the isolated no-other-delegations assumption. Owner/file access retains authority. Program upgradeability and broad underlying token delegation are material boundaries. No malicious-worker isolation, paid-provider guarantee or hosted custody. Default tests never broadcast; financial CLI requires an explicit budget flag and reviewed funding. Signed bytes remain held on ambiguity/expiry. See mainnet.md for confirmed canary scope, refund path and still-unpassed hosted paid-service gates.
 
+## Direct x402 resource security
+
+Dedicated local operator wallet; software floor is not an onchain constraint against
+its own compromised signing key. Search output never sets destinations or policy.
+Pin endpoint/mint/genesis/seller; validate the offered isolated sponsor. Validate exact signed instructions and the
+original wallet signature in finalized bytes; sponsor cannot change the message.
+No public key files or live spend authorizations. Persist dispatch intent before POST;
+unknown HTTP outcome never authorizes another purchase. Missing delivery can remain
+held even after money moves: provider has no documented result retrieval API.
+Public site shows sanitized dated reports, never a browser custody wallet or keys.
+
 
 ---
 
@@ -300,6 +355,15 @@ The website's [operating calculator](https://usebattery.xyz/pricing#calculator) 
 4. Have an external operator accept the deliverable and pay the fee; publish actual scoped results with their permission.
 
 Today, use the free SDK. The local interleaved controller is implemented, offline tested and has completed a funded bounded mainnet run. Neither that implementation nor this pricing page establishes a hosted production service.
+
+## Direct vendor expense
+
+Actual unsigned offer2026-10-05: Exa auto search0.007USDC/request; three planned
+purchases0.021USDC. Dedicated1USDC reserve,0.97protected floor,0.03cumulative cap.
+This is vendor expense, not BATTERY revenue. Sponsor pays purchase gas; funding and
+refund gas are separate. Free SDK takes no fee. Proposed managed9USD/month remains
+unavailable and unvalidated. Verified direct payment establishes vendor charge, not
+BATTERY profit/customer demand or a fiat OpenAI invoice.
 
 
 ---
@@ -456,3 +520,149 @@ Current boundary: one trusted operator, three bounded jobs, 0.01 USDC per result
 3. UNVERIFIED: Node devnet RPC returned429 before signing; official PoW faucet discovery found the recommended faucet empty and initial requestAirdrop was rejected as rate-limited. No signed devnet proof is claimed.
 4. PASS for clarity: free MIT SDK; proposed $9/active-agent/month operations fee; operator compute/gas/principal separated. Pricing willingness to pay and operating margin remain unvalidated; no checkout.
 5. Release gate: exact public source kit, CI, production pages, mobile layout and hashes must match the selected dated artifacts. Verify after deployment; offline checks alone cannot establish it.
+
+## Direct paid resource cycle — 2026-10-05
+
+One trusted operator owns a dedicated1USDC reserve and runs a three-task researcher.
+BATTERY obtains an Exa x402 quote, validates canonical mainnet USDC, pinned recipient
+and an isolated sponsor, available balance/protected0.97USDC floor/0.03USDC cumulative cap,
+signs that payment, buys real search, verifies finalized money movement, accepts a
+primary-source list, persists the actual charge and continues. Exit after the second
+saved response must recover that same response; full replay makes no new purchase.
+Sponsor pays purchase gas: this is not a swap or OpenAI credit refill. Old experiments
+stay immutable and closed. No BATTERY fee/customer revenue is fabricated.
+
+Acceptance criteria:
+1. Three actual provider purchases, three accepted usable source lists and independently
+   re-read finalized direct-to-provider USDC deltas.
+2. Integer reserve floor/cumulative cap checked before purchase; wrong mint/network/
+   recipient/sponsor/price and malformed result fail closed.
+3. Actual exit after durable response, restart and replay cause zero extra purchases.
+   Missing response stays uncertain rather than being repurchased.
+4. Authoritative private journal, kernel exclusion, immutable policy/inputs, durable
+   intent before dispatch and distinct provider/chain/result states.
+5. Public source/runbook/dated proof accurately report actual vendor expense and
+   boundaries, with no multiuser/atomic delivery/production claims.
+
+New capital/API spending require a fresh explicitly bounded budget. Implement/probe/
+test before money. Returned canary funds are not reusable. Hosted multiuser runtime
+and adversarial-worker custody remain separate launch gates.
+
+
+---
+
+# Direct paid resource researcher
+
+Version0.4, prepared2026-10-05. Live unsigned Exa Solana offer checked; the new
+paid run is awaiting separate funding/approval. Historical canary capital was returned.
+
+## What runs
+
+A finite agent buys three primary-source web searches directly from Exa with Solana
+USDC via x402 V2. It verifies the signed message and actual finalized token deltas,
+accepts bounded source lists, books real integer USDC expense and returns remaining
+principal. A supervisor deliberately exits after the second response has been saved,
+restarts the same retained journal and verifies a closed replay makes no new purchase.
+No paid model/OpenAI key is needed for these purchases. Search is a paid agent tool,
+not paid inference. It produces source lists, not an invented model interpretation.
+
+## Monetary contract
+
+- Fresh dedicated reserve:1USDC. Software protected floor0.97USDC.
+- Exactly0.007USDC per query; three queries0.021USDC; maximum authorized vendor
+  expense0.03USDC. Vendor recipient is pinned in source/policy.
+- The advertised distinct funded facilitator pays purchase gas. Its address can rotate.
+  The chosen address must match the actual signed and finalized transaction.
+- Owner needs0.00002SOL to return USDC; maximum refund transaction fee0.00001SOL.
+  Sender funding fees/possible ATA rent are extra and belong to the sender.
+- Normal successful return:0.979USDC to the explicitly bound owner address.
+  Remaining SOL/source-ATA rent stay locally operator-owned. No silent sweep/closure.
+- No BATTERY markup/revenue;9USD/month managed plan is still a pricing hypothesis.
+
+The trusted local wallet owner can bypass a software floor. This route does not
+promise adversarial-worker delegation or hosted noncustodial vault enforcement.
+
+## Install and unsigned check
+
+Python3.10+, Node22+, npm. From the extracted kit root:
+
+```
+cd chain
+npm ci
+npm test
+cd ..
+python3 -m unittest -v test_paid_resource.py
+python3 paid_resource.py prepare
+python3 paid_resource.py probe
+python3 paid_resource.py status
+```
+
+Preparation creates a local private wallet and immutable plan. Probe buys nothing.
+Never delete state to repeat a purchase. Never share private keys or API credentials.
+The public website cannot collect deposits, sign or run customer tasks.
+
+## One authorized finite run
+
+After approving that specific wallet/budget and verifying its funding:
+
+```
+python3 run_paid_resource.py --approve-max-0.03-usdc
+python3 paid_resource.py status
+python3 paid_resource.py export > evidence/paid-resource.json
+node chain/verify-resource.mjs evidence/paid-resource.json --live
+```
+
+The execution flag is an operator confirmation, not a substitute for human funding
+approval. Do not use it against a previously closed budget. Supervisor restarts only
+for the deliberate exit76 after a saved response, never for arbitrary failures.
+
+## Recovery / cancellation
+
+`authorized -> dispatching -> response_saved -> paid -> complete`
+
+Before the paid POST, exact partially signed bytes and dispatch intent are on disk.
+After response, raw body/payment header commit before further validation. Restart
+uses the saved response, re-reads finality and never repurchases a completed task.
+Missing response remains held: Exa has no documented bought-result retrieval API.
+If the provider charged but the result fails its gate, expense is still booked and
+later purchases stop. Known completed/rejected or unattempted jobs may be cancelled
+and remaining principal returned with `paid_resource.py cancel` plus the budget flag.
+Unknown/unfinished payment prevents automatic refund until reconciled.
+
+This is a single trusted local operator/journal, not a multiuser Vercel runtime,
+provider failover, a custody contract, a 72-hour uptime guarantee or an atomic
+pay-only-if-useful delivery protocol. The provider may be paid for a rejected result.
+
+## Evidence boundaries
+
+`resource-readiness.json` is dated live HTTP402 offer evidence with zero purchases.
+Offline fault fixtures test actual subprocess exit/restart and cryptographic message
+checks, but fixture vendor/chain values are not mainnet BATTERY payment evidence.
+A completed proof must contain the original provider response, three matching
+finalized payments, selected results, retained runtime events and principal return.
+Offline hash/byte checks establish consistency; `--live` independently reads RPC.
+
+
+---
+
+# Paid resource data contract — 2026-10-05
+
+Source: direct https://api.exa.ai/search, x402 V2 Solana exact USDC.
+Reference: https://exa.ai/docs/integrations/payments/x402/quickstart
+Actual unsigned discovery returned HTTP402, 7000 USDC base units, recipient
+12Ec2cJmfR1C9uwejzxcuMhUgEC7wDrLgm1wBvvR5w9E, sponsored fee payer
+BENrLoUbndxoNMUS5JXApGMtNykLjFXXixMtpDwDR9SP. A price offer is not a purchase.
+Pinned SDK core/svm2.28.0 and Kit7.1.1; inspected SDK constructs TransferChecked,
+compute-budget instructions and a random memo. No automatic wrapper/retry is used.
+
+Money authority: finalized transaction, original signed message and wallet signature,
+exact source/destination token balance changes. HTTP payment headers alone cannot
+prove payment. Three immutable requests, primary-domain allowlist, bounded response.
+Result gate: at least two unique HTTPS source URLs with nonempty titles on approved
+primary domains. This proves a usable source list, not truth of every source claim.
+Discovery limits require no polling. Persist quote/payment/dispatch intent/raw response
+before next stage. Missing paid response stays held: Exa has no documented purchased
+result retrieval endpoint. Recovery from a saved response makes no new paid request.
+No OpenAI key, account credit or estimated fiat invoice participates in this route.
+
+A later actual quote returned sponsor BFK9TLC3edb13K6v4YyH3DwPb5DSUpkWvb7XnqCL9b4F. Sponsor rotates. The fixed HTTPS offer chooses a funded system account distinct from the payer/source/destination; the same sponsor must appear in signed/finalized bytes. Vendor and amount stay pinned.

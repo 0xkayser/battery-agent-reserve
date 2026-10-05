@@ -25,3 +25,14 @@ Optional test memo keys live privately in devnet-state. Lamport fee policy is se
 ## v0.3 / separate bounded financial canary
 
 An explicit mainnet cluster option pins genesis and immutable ledger cluster. Mainnet research remains local inference with a paper USD ledger. chain/reserve.mjs uses the existing Subscriptions fixed-delegation program for USDC; no new custody program. chain/settlement.mjs persists signed bytes before send and reconciles identical signatures/finalized bytes/token deltas. chain/canary.py supplies a kernel single-operator lock. The bounded mainnet canary finalized8 transactions, including3 saved-result settlements,financial exit74 recovery,revoke and full5USDC return; see mainnet.md. Local inference ran before settlement, not paid-model billing. The public /api/mainnet is fixed read-only with an isolated cache, never a signing endpoint.
+
+
+## Direct paid resource controller / prepared v0.4
+`paid_resource.py` authoritative SQLite ledger and kernel lock; `chain/resource.mjs`
+private signed payment outbox plus raw response journal; `run_paid_resource.py` finite
+planned-crash supervisor. Exact USDC purchases use the vendor's x402 SVM scheme;
+message guards run before wallet signatures. Finalized RPC bytes/signatures/deltas
+prove actual vendor expense. Source-list gate is deterministic and separate from
+payment. Known charged failures book expense then halt; unknown outcomes remain held.
+No hidden free-model substitution or OpenAI fiat billing estimate is used. See
+`docs/paid-resource.md`. Hosted multiuser execution remains unavailable.

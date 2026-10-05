@@ -1,5 +1,25 @@
 # BATTERY
 
+## Direct USDC-paid researcher / v0.4 preparation
+
+New finite controller: reserve -> buy Exa search via Solana x402 -> verify actual
+payment and primary-source result -> book USDC expense -> recover -> return capital.
+Actual unpaid HTTP402/0.007USDC offer checked. New purchases are **not yet executed**;
+separate funding required.15 new fault/message checks pass (8 Python,7 Node).
+
+- [Runbook and monetary boundaries](docs/paid-resource.md)
+- [Data contract](docs/data-contract.md)
+- `python3 paid_resource.py prepare`: private dedicated wallet, no signing/payment.
+- `python3 paid_resource.py probe`: unsigned provider quote, no purchase.
+- `python3 run_paid_resource.py --approve-max-0.03-usdc`: finite funded run, deliberate
+  saved-response exit, restart, finality/result checks and remaining-principal return.
+- `node chain/verify-resource.mjs evidence/paid-resource.json --live`: independently
+  re-read the completed run. No completed proof is claimed before actual execution.
+
+Hosted multiuser service, paid model inference and adversarial-worker reserve controls
+are not provided by this trusted local x402 route. See the runbook before funding.
+
+
 **Keep completed work when an agent loses its runtime. Bound what it may spend next.**
 
 Reserve policy + durable local receipts + controlled recovery for agents whose runtime you own. A treasury can have money while a provider key cannot authorize the next request. A reserve alone does not solve that boundary.

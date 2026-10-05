@@ -34,3 +34,5 @@ __pycache__/
 *.pyc
 
 WORKING-QA.json
+
+resource_page.py

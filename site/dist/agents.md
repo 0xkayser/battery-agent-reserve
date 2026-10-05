@@ -5,7 +5,7 @@ Paid-provider extension: [one-shot adapter contract](https://usebattery.xyz/deve
 Canonical website: https://usebattery.xyz
 Source: https://github.com/sproutagentai/battery-agent-reserve
 Source kit: https://usebattery.xyz/battery-pilot-kit.zip
-Release: v0.3 developer SDK / completed bounded mainnet canary, October5,2026.
+Release: v0.4 prepared direct-paid-resource SDK; live purchases pending / v0.3 demonstrated developer SDK / completed bounded mainnet canary, October5,2026.
 
 ## Thesis
 
@@ -37,7 +37,7 @@ The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM ch
 - Actual reproduction: install/start Ollama, install qwen2.5:7b and llama3.2:3b, then python3 run_recovery.py --state-dir live-state/fresh-run. Reads public devnet, runs local models, no paid provider key.
 - API: https://usebattery.xyz/openapi.json
 - Discovery: https://usebattery.xyz/llms.txt
-- Automated checks: 45 Python and 21 offline Node checks plus 15 local program checks passed for the published SDK release.
+- Automated checks: 53 Python and 28 offline Node checks plus 15 local program checks passed for the published SDK release.
 
 ## What the proof establishes
 
@@ -60,3 +60,16 @@ Self-hosted MIT SDK licence:$0; hardware/electricity/provider/network costs rema
 
 ## Interleaved execution / completed bounded mainnet run
 The new local controller checks live mainnet budget/gas/expiry before each inference, persists its result, verifies finalized USDC settlement and only then advances. Nine offline failure/recovery checks pass; a separate funded mainnet run completed three actual model calls/three finalized 0.01USDC settlements, same-signature recovery after exit74 and zero replay calls/transfers. Historical receipts are separate from this new flow. Runbook: https://usebattery.xyz/developer/integrated-runtime.md. Published selected events: https://usebattery.xyz/evidence/integrated-runtime/integrated.json. Financial proof: https://usebattery.xyz/evidence/integrated-financial.json. `node chain/verify-integrated.mjs --live` rechecks actual finalized payments and final accounts.
+
+
+## Direct paid resource extension / live execution pending
+
+A finite three-search agent now uses direct Exa x402 Solana USDC purchases, finalized
+signed-message and token-delta verification, deterministic primary-source gating,
+integer vendor-expense accounting, saved-response crash recovery and principal return.
+Dated live unsigned offer:0.007USDC/search; zero new purchases yet. New funding gate
+remains. Software wallet floor trusts the local operator; this is not a hosted or
+adversarial-worker reserve. https://usebattery.xyz/power and
+https://usebattery.xyz/developer/paid-resource.md. Primary contract:
+https://usebattery.xyz/developer/data-contract.md. Readiness JSON is an unpaid402
+quote, never a completed paid proof. Missing delivery stays held without repurchase.

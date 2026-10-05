@@ -1,0 +1,44 @@
+{
+  "body": {
+    "schema": "battery.resource-readiness/1",
+    "observedAt": "2026-10-05T18:47:10.197Z",
+    "endpoint": "https://api.exa.ai/search",
+    "requestHash": "110d3f64754db944b2b77e515c9759ad2bac39664c608aca38706d3fea3d62e5",
+    "offer": {
+      "scheme": "exact",
+      "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "amount": "7000",
+      "payTo": "12Ec2cJmfR1C9uwejzxcuMhUgEC7wDrLgm1wBvvR5w9E",
+      "maxTimeoutSeconds": 60,
+      "asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "extra": {
+        "feePayer": "Hc3sdEAsCGQcpgfivywog9uwtk8gUBUZgsxdME1EJy88",
+        "name": "USD Coin",
+        "version": "2",
+        "breakdown": {
+          "search": 0.006999999999999999
+        },
+        "totalUsd": 0.006999999999999999,
+        "acceptId": "solana-usdc-mainnet"
+      }
+    },
+    "probeStatus": 402,
+    "mainnetSigning": false,
+    "purchases": 0,
+    "actualExpenseUsdcUnits": 0,
+    "state": "awaiting-new-bounded-funding",
+    "policy": {
+      "reserveUsdcUnits": 1000000,
+      "floorUsdcUnits": 970000,
+      "capUsdcUnits": 30000,
+      "plannedVendorUsdcUnits": 21000
+    },
+    "limitations": [
+      "unsigned discovery is not a purchase",
+      "no hosted multiuser runtime",
+      "network-response loss is held without repurchase",
+      "software floor trusts the operator signing key"
+    ]
+  },
+  "sha256": "0d3b0fd107e9d0797e70f186d683efe4d2ff777e4e24c7a5c37d8faaba04a7bc"
+}

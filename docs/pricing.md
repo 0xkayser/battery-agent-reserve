@@ -45,3 +45,12 @@ The website's [operating calculator](https://usebattery.xyz/pricing#calculator) 
 4. Have an external operator accept the deliverable and pay the fee; publish actual scoped results with their permission.
 
 Today, use the free SDK. The local interleaved controller is implemented, offline tested and has completed a funded bounded mainnet run. Neither that implementation nor this pricing page establishes a hosted production service.
+
+## Direct vendor expense
+
+Actual unsigned offer2026-10-05: Exa auto search0.007USDC/request; three planned
+purchases0.021USDC. Dedicated1USDC reserve,0.97protected floor,0.03cumulative cap.
+This is vendor expense, not BATTERY revenue. Sponsor pays purchase gas; funding and
+refund gas are separate. Free SDK takes no fee. Proposed managed9USD/month remains
+unavailable and unvalidated. Verified direct payment establishes vendor charge, not
+BATTERY profit/customer demand or a fiat OpenAI invoice.

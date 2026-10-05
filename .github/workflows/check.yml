@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '22'
       - name: Ledger and adapter failure boundaries (offline fixtures)
-        run: python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py test_paid_provider.py
+        run: python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py test_paid_provider.py test_paid_resource.py
       - name: Verify published actual-run record
         run: python3 verify_evidence.py
       - name: Verify mainnet researcher artifact (offline)

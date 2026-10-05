@@ -23,3 +23,30 @@ Current boundary: one trusted operator, three bounded jobs, 0.01 USDC per result
 3. UNVERIFIED: Node devnet RPC returned429 before signing; official PoW faucet discovery found the recommended faucet empty and initial requestAirdrop was rejected as rate-limited. No signed devnet proof is claimed.
 4. PASS for clarity: free MIT SDK; proposed $9/active-agent/month operations fee; operator compute/gas/principal separated. Pricing willingness to pay and operating margin remain unvalidated; no checkout.
 5. Release gate: exact public source kit, CI, production pages, mobile layout and hashes must match the selected dated artifacts. Verify after deployment; offline checks alone cannot establish it.
+
+## Direct paid resource cycle — 2026-10-05
+
+One trusted operator owns a dedicated1USDC reserve and runs a three-task researcher.
+BATTERY obtains an Exa x402 quote, validates canonical mainnet USDC, pinned recipient
+and an isolated sponsor, available balance/protected0.97USDC floor/0.03USDC cumulative cap,
+signs that payment, buys real search, verifies finalized money movement, accepts a
+primary-source list, persists the actual charge and continues. Exit after the second
+saved response must recover that same response; full replay makes no new purchase.
+Sponsor pays purchase gas: this is not a swap or OpenAI credit refill. Old experiments
+stay immutable and closed. No BATTERY fee/customer revenue is fabricated.
+
+Acceptance criteria:
+1. Three actual provider purchases, three accepted usable source lists and independently
+   re-read finalized direct-to-provider USDC deltas.
+2. Integer reserve floor/cumulative cap checked before purchase; wrong mint/network/
+   recipient/sponsor/price and malformed result fail closed.
+3. Actual exit after durable response, restart and replay cause zero extra purchases.
+   Missing response stays uncertain rather than being repurchased.
+4. Authoritative private journal, kernel exclusion, immutable policy/inputs, durable
+   intent before dispatch and distinct provider/chain/result states.
+5. Public source/runbook/dated proof accurately report actual vendor expense and
+   boundaries, with no multiuser/atomic delivery/production claims.
+
+New capital/API spending require a fresh explicitly bounded budget. Implement/probe/
+test before money. Returned canary funds are not reusable. Hosted multiuser runtime
+and adversarial-worker custody remain separate launch gates.

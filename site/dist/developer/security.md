@@ -16,3 +16,14 @@ Sensitive reports must not include secrets in public issues. No dedicated privat
 ## Pending mainnet canary
 
 Separate fresh local owner/worker keys; program/mint/genesis/bytecode hash pinned. Fixed cumulative USDC allowance and expiry/revoke are onchain; floor applies only under the isolated no-other-delegations assumption. Owner/file access retains authority. Program upgradeability and broad underlying token delegation are material boundaries. No malicious-worker isolation, paid-provider guarantee or hosted custody. Default tests never broadcast; financial CLI requires an explicit budget flag and reviewed funding. Signed bytes remain held on ambiguity/expiry. See mainnet.md for confirmed canary scope, refund path and still-unpassed hosted paid-service gates.
+
+## Direct x402 resource security
+
+Dedicated local operator wallet; software floor is not an onchain constraint against
+its own compromised signing key. Search output never sets destinations or policy.
+Pin endpoint/mint/genesis/seller; validate the offered isolated sponsor. Validate exact signed instructions and the
+original wallet signature in finalized bytes; sponsor cannot change the message.
+No public key files or live spend authorizations. Persist dispatch intent before POST;
+unknown HTTP outcome never authorizes another purchase. Missing delivery can remain
+held even after money moves: provider has no documented result retrieval API.
+Public site shows sanitized dated reports, never a browser custody wallet or keys.
