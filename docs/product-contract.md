@@ -50,3 +50,8 @@ Acceptance criteria:
 New capital/API spending require a fresh explicitly bounded budget. Implement/probe/
 test before money. Returned canary funds are not reusable. Hosted multiuser runtime
 and adversarial-worker custody remain separate launch gates.
+
+
+## Public power check / 2026-10-06
+A Solana agent operator pastes a public wallet, receives actual finalized SOL and spendable canonical USDC, optionally supplies daily USDC spend and a protected floor, then exports a PNG/JSON report or a fragment share link. No wallet connection, keys, signing, transfer, provider calls or account required. An absent account is a valid empty observation; program-owned accounts are identified. The source is fixed public mainnet RPC. Browser estimates are deterministic arithmetic, not authoritative balances or measured burn. Reports persist as explicit downloads; links re-read the chain rather than pretending to preserve the observation. No backend balance ledger or customer financial obligation is created. Share links disclose the public wallet and user estimates. Public RPC request metadata may be processed by hosting/RPC.
+Acceptance: exact cluster/mint/owner checks; unavailable/malformed input fails clearly; real UI observation and exported estimate; responsive identity; CA absent from all public files. See REDESIGN-REVIEW.md. Virality and demand remain hypotheses.

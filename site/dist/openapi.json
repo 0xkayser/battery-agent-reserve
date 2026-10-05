@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "BATTERY read-only Solana API",
-    "version": "0.3.0",
-    "description": "Fixed devnet/mainnet endpoints, independent 30s caches. No auth, parameters, signing, spending or model calls."
+    "title": "UNHALT read-only Solana API",
+    "version": "0.5.0",
+    "description": "Fixed mainnet/devnet observations and public wallet power checks. No signing, spending or model calls."
   },
   "servers": [
     {
@@ -246,6 +246,168 @@
                           "minimum": 0
                         }
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Structured error; no synthetic observation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Structured error; no synthetic observation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Structured error; no synthetic observation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet": {
+      "get": {
+        "operationId": "getWalletPower",
+        "summary": "Finalized mainnet SOL/canonical USDC observation",
+        "parameters": [
+          {
+            "name": "wallet",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 32,
+              "maxLength": 44
+            },
+            "description": "Canonical base58 32-byte public address; sole allowed parameter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "battery.wallet/1. ISO observedAt; per-response slots may differ. USDC units exact strings. Not provider headroom or agent liveness. Full contract /developer/wallet-power.md",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "schema",
+                    "wallet",
+                    "cluster",
+                    "observedAt",
+                    "lamports",
+                    "usdc",
+                    "slots",
+                    "account"
+                  ],
+                  "properties": {
+                    "schema": {
+                      "const": "battery.wallet/1"
+                    },
+                    "wallet": {
+                      "type": "string"
+                    },
+                    "cluster": {
+                      "const": "mainnet"
+                    },
+                    "observedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "lamports": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "usdc": {
+                      "type": "object",
+                      "required": [
+                        "mint",
+                        "decimals",
+                        "spendableUnits",
+                        "frozenUnits",
+                        "delegatedAllowanceUnits"
+                      ],
+                      "properties": {
+                        "mint": {
+                          "const": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+                        },
+                        "decimals": {
+                          "const": 6
+                        },
+                        "spendableUnits": {
+                          "type": "string",
+                          "pattern": "^[0-9]+$"
+                        },
+                        "frozenUnits": {
+                          "type": "string",
+                          "pattern": "^[0-9]+$"
+                        },
+                        "delegatedAllowanceUnits": {
+                          "type": "string",
+                          "pattern": "^[0-9]+$"
+                        }
+                      }
+                    },
+                    "slots": {
+                      "type": "object"
+                    },
+                    "account": {
+                      "type": "object"
                     }
                   }
                 }

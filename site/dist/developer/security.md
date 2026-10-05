@@ -27,3 +27,7 @@ No public key files or live spend authorizations. Persist dispatch intent before
 unknown HTTP outcome never authorizes another purchase. Missing delivery can remain
 held even after money moves: provider has no documented result retrieval API.
 Public site shows sanitized dated reports, never a browser custody wallet or keys.
+
+
+## Read-only public power check
+GET /api/wallet accepts only one canonical 32-byte base58 wallet. Fixed methods/RPC/asset/genesis, no external URL inputs or secrets. Response stream bounded to 256 KiB, 10s timeout, redirects disallowed. Bounded cache and in-flight coalescing reduce repeat traffic; no per-user signing or payments. Public RPC/provider and CDN remain trusted availability/data boundaries; validation does not prove RPC honesty. Malformed/duplicate RPC IDs, wrong network/mint/program/account owner/decimals or unsafe amounts fail closed. Frozen tokens do not fund estimates. Reports use escaped text and fixed keys; copy/share requires explicit user action. No unbounded wallet history or durable server storage. Report links expose wallet/estimates to recipients; do not use confidential wallets. This is not an agent-health attestation.

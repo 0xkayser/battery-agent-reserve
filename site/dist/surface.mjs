@@ -3,14 +3,7 @@ import {mark} from './brand.mjs';
 import {animatePortrait} from './portrait-motion.mjs';
 const $=id=>document.getElementById(id);let portrait=null;
 const motion=$('agent-face')?animatePortrait($('agent-face'),$('portrait-motion')):null;
-$('brand-art').textContent=lettering('BATTERY');
-$('brand-symbol').textContent=mark;
 const frames=[];
-for(const el of document.querySelectorAll('.controls,.device,.result-body,.evidence,.panel,dialog')){
- el.classList.add('ascii-framed');
- const edges=['top','bottom','left','right'].map(side=>{const p=document.createElement('pre');p.className=`ascii-edge edge-${side}`;p.setAttribute('aria-hidden','true');el.append(p);return p;});frames.push({el,edges});
-}
-for(const el of document.querySelectorAll('.masthead,footer,.notes details,.log,.result-stats')){const p=document.createElement('pre');p.className='ascii-rule';p.setAttribute('aria-hidden','true');el.prepend(p);}
 export function refreshTracks(){for(const id of ['reserve','rate']){const input=$(id),out=$(id+'-track');if(!input||!out)continue;out.textContent=track(Number(input.value),Number(input.min),Number(input.max),out.parentElement.clientWidth,parseFloat(getComputedStyle(out).fontSize)*.6);}}
 function drawSurface(){
  for(const {el,edges:[top,bottom,left,right]} of frames){
@@ -20,12 +13,11 @@ function drawSurface(){
   left.textContent=right.textContent=Array(rows).fill('|').join('\n');el.style.setProperty('--edge-gap',`${Math.max(0,w-columns*char)}px`);
  }
  for(const p of document.querySelectorAll('.ascii-rule'))p.textContent='-'.repeat(Math.max(0,Math.floor(p.parentElement.clientWidth/(parseFloat(getComputedStyle(p).fontSize)*.6))));
- const brand=$('brand-art');brand.style.fontSize=Math.min(12,(brand.parentElement.clientWidth-$('brand-symbol').getBoundingClientRect().width-14)/(47*.6))+'px';
  if(portrait&&motion){const data=innerWidth<=760?portrait.mobile:portrait.desktop,face=$('agent-face'),box=face.parentElement;motion.set(data);face.style.fontSize=Math.min(box.clientWidth*(innerWidth<=760?.98:.79)/(data.columns*.6),(box.clientHeight-36)/(data.rows*1.05))+'px';}
  refreshTracks();
 }
 let frame;function schedule(){cancelAnimationFrame(frame);frame=requestAnimationFrame(drawSurface);}
-const resize=new ResizeObserver(schedule);for(const item of frames)resize.observe(item.el);resize.observe($('brand-art').parentElement);window.addEventListener('resize',schedule);window.addEventListener('battery-render',schedule);
+const resize=new ResizeObserver(schedule);for(const item of frames)resize.observe(item.el);window.addEventListener('resize',schedule);window.addEventListener('battery-render',schedule);
 if(motion)fetch('/assets/agent-ascii.json').then(r=>{if(!r.ok)throw Error('Portrait unavailable');return r.json();}).then(data=>{portrait=data;drawSurface();}).catch(()=>{$('agent-face').textContent='[ AGENT 01 ]\n[ PORTRAIT UNAVAILABLE ]';});
 schedule();
 export function portraitData(){return portrait?.mobile??null;}

@@ -19,3 +19,7 @@ result retrieval endpoint. Recovery from a saved response makes no new paid requ
 No OpenAI key, account credit or estimated fiat invoice participates in this route.
 
 A later actual quote returned sponsor BFK9TLC3edb13K6v4YyH3DwPb5DSUpkWvb7XnqCL9b4F. Sponsor rotates. The fixed HTTPS offer chooses a funded system account distinct from the payer/source/destination; the same sponsor must appear in signed/finalized bytes. Vendor and amount stay pinned.
+
+
+## Power check source
+Fixed https://api.mainnet-beta.solana.com, finalized getGenesisHash/getBalance/getAccountInfo/getTokenAccountsByOwner. Mainnet genesis 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d; USDC EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v, legacy token program, 6 decimals. SOL reported as integer lamports; USDC as decimal integer strings. Frozen USDC excluded from spendable; delegated balance flagged. Each response slot retained; batch is not an atomic same-slot snapshot. ObservedAt is server read completion; 15s bounded cache, no stale fallback. HTTP timeout/size limits and validation failures produce unavailable. Free public RPC has no SLA and may throttle; wallet observation is not wallet ownership, oracle price, agent liveness, provider headroom or guarantee. Daily spend and floor are supplied explicitly by operator and never estimated from transfers. Links refresh data; downloaded reports are dated observations. Official schemas: https://solana.com/docs/rpc/http/getbalance and https://solana.com/docs/rpc/http/gettokenaccountsbyowner.

@@ -1,3 +1,9 @@
+# UNHALT / formerly BATTERY
+
+**Paused isn’t lost.** Check Solana wallet runway, protect a reserve, resume an owned agent from durable receipts.
+
+[Try the read-only tool](https://usebattery.xyz/check) · [Wallet API and boundaries](docs/wallet-power.md) · [New brand](site/dist/assets/unhalt/README.md). Existing SDK modules, evidence and schemas keep BATTERY names for compatibility. No new token is issued or sold by this rebrand.
+
 # BATTERY
 
 ## Direct USDC-paid researcher / v0.4 preparation

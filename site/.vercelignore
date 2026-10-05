@@ -39,3 +39,6 @@ resource_page.py
 
 token_page.py
 token-config.json
+
+runway_page.py
+test-wallet.mjs

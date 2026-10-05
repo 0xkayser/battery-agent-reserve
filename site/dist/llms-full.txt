@@ -1,3 +1,28 @@
+# UNHALT / public wallet power check
+
+UNHALT is the new public identity of BATTERY. The SDK, evidence filenames and schema names retain BATTERY for compatibility. Existing proof is historical, not a new UNHALT experiment.
+
+Open [/check](https://usebattery.xyz/check), paste a public Solana wallet, and check its actual finalized SOL and spendable canonical USDC. No wallet connection, signature, payment or API key. Add your expected daily USDC spend and protected floor to estimate runway. Export JSON or a dated PNG card. Copying a share link includes the public address and calculated assumptions; opening it performs a new read.
+
+`GET /api/wallet?wallet=<canonical public address>` returns `battery.wallet/1`: wallet, mainnet identity, RPC, observedAt (ISO UTC), commitment, per-response slots, integer lamports, USDC mint/6 decimals/spendableUnits/frozenUnits/delegatedAllowanceUnits/account count and wallet owner classification. USDC units are strings to avoid floating-point loss. Result schema is not an agent-health attestation.
+
+Only one wallet parameter is permitted. POST:405; invalid/extra/duplicate params:400; throttled, timed-out or malformed RPC:502. A failure never becomes a zero balance. Observations may be cached for15seconds; HTTP response is no-store. Maximum128cached wallets and32in-flight reads per warm instance; this is not a global rate limit or production SLA.
+
+Data comes from the fixed Solana public mainnet RPC. Four methods: genesis, balance, account info, token accounts by canonical USDC mint. All account reads are finalized; different slots may occur within a batch. Frozen USDC is excluded. Delegations are flagged. A program-owned account may require a different fee payer. A zero-SOL wallet may still use a sponsored transaction.
+
+Estimate: `max(spendableUSDC - protectedFloor, 0) / expectedDailySpend`, rounded down to0.1day. Rates/floors accept six decimals, up to1,000,000USDC. Daily spend must be positive. More than365days is capped in the presentation, not returned as a precise projection. Estimate covers USDC spending only: SOL fees, account rent, gas purchases, provider credit, other assets, future income and changes in burn are outside it. A card cannot authorize work or transfers. Meters show the first seven estimated days, not a measured health score.
+
+No visitor balance/estimate history is stored on the server. Hosting/RPC can process wallet/query metadata. The wallet/assumptions live in the link fragment and are readable by recipients. JSON/PNG downloads preserve a dated snapshot. No private keys, personal wallets or secrets should be pasted. Do not publish an address whose association you want to keep private.
+
+The wallet tool is an entry into the existing recovery SDK. It does not replace durable provider receipts, paid-job acceptance or settlement verification. Actual hosted customer demand, virality, paid vendor canary and hosted recovery operations remain unverified. [Recovery evidence](https://usebattery.xyz/evidence), [SDK](https://usebattery.xyz/docs).
+
+
+---
+
+# UNHALT / formerly BATTERY
+
+Paused isn’t lost. Agent runway checks, protected reserves and durable recovery for runtimes an operator owns. Public entry: https://usebattery.xyz/check — actual finalized SOL/USDC; optional operator-provided daily spend/floor; dated card or JSON export. No signatures/payments. API and limits: https://usebattery.xyz/developer/wallet-power.md. Virality and paid demand are unvalidated; a wallet balance is not provider credit or agent liveness. Existing BATTERY evidence and schema names are intentionally retained, not relabelled as new experiments.
+
 # BATTERY / Agent research brief
 
 Paid-provider extension: [one-shot adapter contract](https://usebattery.xyz/developer/paid-provider.md). Actual one-request API recovery and readback verified; generated report rejected for factual errors; authoritative billing unverified. Local estimated costs are not invoices.
@@ -84,6 +109,12 @@ Agent reserves and vendor expenses remain separate from the project token.
 
 
 ---
+
+# UNHALT / formerly BATTERY
+
+**Paused isn’t lost.** Check Solana wallet runway, protect a reserve, resume an owned agent from durable receipts.
+
+[Try the read-only tool](https://usebattery.xyz/check) · [Wallet API and boundaries](docs/wallet-power.md) · [New brand](site/dist/assets/unhalt/README.md). Existing SDK modules, evidence and schemas keep BATTERY names for compatibility. No new token is issued or sold by this rebrand.
 
 # BATTERY
 
@@ -312,6 +343,10 @@ No public key files or live spend authorizations. Persist dispatch intent before
 unknown HTTP outcome never authorizes another purchase. Missing delivery can remain
 held even after money moves: provider has no documented result retrieval API.
 Public site shows sanitized dated reports, never a browser custody wallet or keys.
+
+
+## Read-only public power check
+GET /api/wallet accepts only one canonical 32-byte base58 wallet. Fixed methods/RPC/asset/genesis, no external URL inputs or secrets. Response stream bounded to 256 KiB, 10s timeout, redirects disallowed. Bounded cache and in-flight coalescing reduce repeat traffic; no per-user signing or payments. Public RPC/provider and CDN remain trusted availability/data boundaries; validation does not prove RPC honesty. Malformed/duplicate RPC IDs, wrong network/mint/program/account owner/decimals or unsafe amounts fail closed. Frozen tokens do not fund estimates. Reports use escaped text and fixed keys; copy/share requires explicit user action. No unbounded wallet history or durable server storage. Report links expose wallet/estimates to recipients; do not use confidential wallets. This is not an agent-health attestation.
 
 
 ---
@@ -557,6 +592,11 @@ test before money. Returned canary funds are not reusable. Hosted multiuser runt
 and adversarial-worker custody remain separate launch gates.
 
 
+## Public power check / 2026-10-06
+A Solana agent operator pastes a public wallet, receives actual finalized SOL and spendable canonical USDC, optionally supplies daily USDC spend and a protected floor, then exports a PNG/JSON report or a fragment share link. No wallet connection, keys, signing, transfer, provider calls or account required. An absent account is a valid empty observation; program-owned accounts are identified. The source is fixed public mainnet RPC. Browser estimates are deterministic arithmetic, not authoritative balances or measured burn. Reports persist as explicit downloads; links re-read the chain rather than pretending to preserve the observation. No backend balance ledger or customer financial obligation is created. Share links disclose the public wallet and user estimates. Public RPC request metadata may be processed by hosting/RPC.
+Acceptance: exact cluster/mint/owner checks; unavailable/malformed input fails clearly; real UI observation and exported estimate; responsive identity; CA absent from all public files. See REDESIGN-REVIEW.md. Virality and demand remain hypotheses.
+
+
 ---
 
 # Direct paid resource researcher
@@ -674,3 +714,7 @@ result retrieval endpoint. Recovery from a saved response makes no new paid requ
 No OpenAI key, account credit or estimated fiat invoice participates in this route.
 
 A later actual quote returned sponsor BFK9TLC3edb13K6v4YyH3DwPb5DSUpkWvb7XnqCL9b4F. Sponsor rotates. The fixed HTTPS offer chooses a funded system account distinct from the payer/source/destination; the same sponsor must appear in signed/finalized bytes. Vendor and amount stay pinned.
+
+
+## Power check source
+Fixed https://api.mainnet-beta.solana.com, finalized getGenesisHash/getBalance/getAccountInfo/getTokenAccountsByOwner. Mainnet genesis 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d; USDC EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v, legacy token program, 6 decimals. SOL reported as integer lamports; USDC as decimal integer strings. Frozen USDC excluded from spendable; delegated balance flagged. Each response slot retained; batch is not an atomic same-slot snapshot. ObservedAt is server read completion; 15s bounded cache, no stale fallback. HTTP timeout/size limits and validation failures produce unavailable. Free public RPC has no SLA and may throttle; wallet observation is not wallet ownership, oracle price, agent liveness, provider headroom or guarantee. Daily spend and floor are supplied explicitly by operator and never estimated from transfers. Links refresh data; downloaded reports are dated observations. Official schemas: https://solana.com/docs/rpc/http/getbalance and https://solana.com/docs/rpc/http/gettokenaccountsbyowner.

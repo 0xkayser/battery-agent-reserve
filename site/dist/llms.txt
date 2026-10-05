@@ -1,7 +1,9 @@
-# BATTERY
-> Reserve policy and controlled recovery for owned agents. Developer SDK v0.4 preparation; completed bounded mainnet canary.
+# UNHALT / formerly BATTERY
+>  Reserve policy and controlled recovery for owned agents. Developer SDK v0.4 preparation; completed bounded mainnet canary.
 
 ## Documentation
+- [Wallet power check](https://usebattery.xyz/check): actual finalized SOL/USDC plus your spending assumptions; no signing.
+- [Power check contract](https://usebattery.xyz/developer/wallet-power.md): sources, arithmetic, privacy and limits.
 - [Token status](https://usebattery.xyz/token): token details are under review; no CA or purchase links are displayed.
 - [Direct paid work](https://usebattery.xyz/power): Exa x402 controller; live unpaid offer; paid canary awaits separate funding.
 - [Paid resource runbook](https://usebattery.xyz/developer/paid-resource.md): exact vendor expense, floor, cap and recovery boundaries.

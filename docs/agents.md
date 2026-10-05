@@ -1,3 +1,7 @@
+# UNHALT / formerly BATTERY
+
+Paused isn’t lost. Agent runway checks, protected reserves and durable recovery for runtimes an operator owns. Public entry: https://usebattery.xyz/check — actual finalized SOL/USDC; optional operator-provided daily spend/floor; dated card or JSON export. No signatures/payments. API and limits: https://usebattery.xyz/developer/wallet-power.md. Virality and paid demand are unvalidated; a wallet balance is not provider credit or agent liveness. Existing BATTERY evidence and schema names are intentionally retained, not relabelled as new experiments.
+
 # BATTERY / Agent research brief
 
 Paid-provider extension: [one-shot adapter contract](https://usebattery.xyz/developer/paid-provider.md). Actual one-request API recovery and readback verified; generated report rejected for factual errors; authoritative billing unverified. Local estimated costs are not invoices.

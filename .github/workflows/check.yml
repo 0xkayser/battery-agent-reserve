@@ -36,7 +36,7 @@ jobs:
       - name: Website API boundaries and simulation regressions
         working-directory: site
         run: |
-          node --test test-network.mjs
+          node --test test-network.mjs test-wallet.mjs
           node checks.mjs
           node store-checks.mjs
       - name: Regenerate pages and source kit
