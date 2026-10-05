@@ -1,0 +1,21 @@
+{
+  "schema": "battery.token-status/1",
+  "observedAt": "2026-10-05T21:24:32.370Z",
+  "source": "https://api.mainnet-beta.solana.com",
+  "commitment": "finalized",
+  "slot": "453698979",
+  "genesis": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+  "mint": "C71Lk8KoZTm4UTjEg5qUTQ7Eu39pYY31wVQfmPrrpump",
+  "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+  "name": "Battery Protocol",
+  "symbol": "BATTERY",
+  "decimals": 6,
+  "supplyBaseUnits": "984734722973814",
+  "mintAuthority": null,
+  "freezeAuthority": null,
+  "metadataUpdateAuthority": null,
+  "metadataUri": "https://ipfs.io/ipfs/bafkreieg4wynu2wfofq2zinasmqn324fmwnqnsmzb7ensqcqd7gup3v3te",
+  "purchaseUrl": "https://pump.fun/coin/C71Lk8KoZTm4UTjEg5qUTQ7Eu39pYY31wVQfmPrrpump",
+  "announcementUrl": "https://x.com/usebatteryxyz/status/2107219741383459069",
+  "scope": "User-designated mint identity and public announcement verified; no token purchase, distribution audit, holder entitlement, reserve backing or liquidity guarantee."
+}

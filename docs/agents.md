@@ -47,7 +47,7 @@ Local inference has zero provider charge; hardware/electricity unmeasured. USD l
 
 ## Open gates / product research
 
-No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, hosted customer USDC custody/deposits/withdrawals, independently audited BATTERY contract, token launch or a production paid-service guarantee. No BATTERY custody/token contract exists; the completed canary used an existing mainnet delegation program.
+No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, hosted customer USDC custody/deposits/withdrawals, independently audited BATTERY custody contract or a production paid-service guarantee. A project token mint is published below; no BATTERY custody program exists; the completed canary used an existing mainnet delegation program.
 
 Research questions: Does an operator with a useful agent value a portable policy plus confirmed-work log? Can a provider adapter reliably bound maximum charges? Does a cheaper model meet task acceptance criteria after takeover? Does reduced lost work justify a service fee? Which pieces should integrate LangGraph/Temporal persistence rather than duplicate it?
 
@@ -75,11 +75,17 @@ https://usebattery.xyz/developer/data-contract.md. Readiness JSON is an unpaid40
 quote, never a completed paid proof. Missing delivery stays held without repurchase.
 
 
-## Upcoming project token / 2026-10-05
+## Published project token / 2026-10-06
 
-$BATTERY is the upcoming BATTERY community token on Solana.
-https://usebattery.xyz/token is the official project token status page.
-No official mint or purchase destination is published; launch terms, distribution
-and holder benefits are unannounced. The free SDK does not require buying a token.
-Agent reserves remain USDC; product fees and vendor expenses are separate.
-A token-status page is not evidence of issuance, paid demand or token utility.
+$BATTERY / Battery Protocol is the user-designated project token on Solana mainnet.
+Official CA: C71Lk8KoZTm4UTjEg5qUTQ7Eu39pYY31wVQfmPrrpump
+Token status: https://usebattery.xyz/token
+Purchase: https://pump.fun/coin/C71Lk8KoZTm4UTjEg5qUTQ7Eu39pYY31wVQfmPrrpump
+Dated finalized mint identity: https://usebattery.xyz/evidence/token-status.json
+Announcement: https://x.com/usebatteryxyz/status/2107219741383459069
+
+Finalized RPC matched Battery Protocol/BATTERY, Token2022, six decimals;
+mint/freeze/metadata-update authorities were null at observation. This does not
+audit distribution, liquidity, token economics or create holder benefits.
+Free SDK needs no token purchase. Agent reserves remain USDC; vendor expenses
+and product fees are separate. Hosted paid service remains unavailable.

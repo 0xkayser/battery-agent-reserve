@@ -37,3 +37,5 @@ dialog{overflow:hidden}.guide-scroll{max-height:calc(90vh - 160px);overflow:auto
 .token-launch-info{min-width:0}.token-launch-info .fine{margin:12px 0}.text-button.token-pending:disabled{color:#777;cursor:default;text-decoration:none}
 footer{flex-wrap:wrap}footer .text-button{font-size:.75rem;min-height:32px}
 @media(max-width:760px){.token-launch{grid-template-columns:minmax(0,1fr);gap:22px}.token-launch-title h2{font-size:1.75rem}}
+
+.token-ca{display:block;font-size:.875rem;overflow-wrap:anywhere;user-select:all}.copy-status:empty{display:none}

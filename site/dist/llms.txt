@@ -2,7 +2,7 @@
 > Reserve policy and controlled recovery for owned agents. Developer SDK v0.4 preparation; completed bounded mainnet canary.
 
 ## Documentation
-- [Token status](https://usebattery.xyz/token): upcoming $BATTERY on Solana; CA and purchase links unannounced.
+- [Token status](https://usebattery.xyz/token): official $BATTERY mint on Solana; CA and Pump purchase link published.
 - [Direct paid work](https://usebattery.xyz/power): Exa x402 controller; live unpaid offer; paid canary awaits separate funding.
 - [Paid resource runbook](https://usebattery.xyz/developer/paid-resource.md): exact vendor expense, floor, cap and recovery boundaries.
 - [Research brief](https://usebattery.xyz/agents.md): hypothesis, evidence and limits.
@@ -25,4 +25,4 @@
 - [Source kit](https://usebattery.xyz/battery-pilot-kit.zip): SDK, tests and website source.
 
 ## Boundary
-Actual local inference/devnet reads; paper USD/browser simulations. Eight mainnet canary transactions are finalized; test transfers bind saved results, not paid-model billing. Three negative mainnet checks in each run were preflight simulations. New integrated proof: https://usebattery.xyz/evidence/integrated-financial.json; model/event trail: https://usebattery.xyz/evidence/integrated-runtime/integrated.json. No hosted paid agent,vault,token or independent BATTERY audit.
+Actual local inference/devnet reads; paper USD/browser simulations. Eight mainnet canary transactions are finalized; test transfers bind saved results, not paid-model billing. Three negative mainnet checks in each run were preflight simulations. New integrated proof: https://usebattery.xyz/evidence/integrated-financial.json; model/event trail: https://usebattery.xyz/evidence/integrated-runtime/integrated.json. No hosted paid agent,vault or independent BATTERY audit. Project token status: https://usebattery.xyz/token.
