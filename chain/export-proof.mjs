@@ -3,8 +3,12 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {hash,rpc,chainState,POLICY,GENESIS,PROGRAM,USDC} from './reserve.mjs';
 import {verifyMainnet} from './verify-canary.mjs';
-const root=fileURLToPath(new URL('..',import.meta.url)),state=root+'/mainnet-state/canary';
+const root=fileURLToPath(new URL('..',import.meta.url)),name=process.env.BATTERY_CANARY_NAME??'canary';
+if(!/^[a-z][a-z0-9-]{0,47}$/.test(name))throw Error('Invalid isolated canary name');
+const state=root+'/mainnet-state/'+name;
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
+const researchPath=process.argv[2]??root+'/evidence/mainnet-agent.json',outputPath=process.argv[3]??root+'/evidence/mainnet-canary.json';
+const research=read(researchPath),integrated=research.schema==='battery.integrated-runtime/1';
 const plan=read(state+'/plan.json'),outbox=read(state+'/outbox.json'),after=read(state+'/proof.json');
 const current=await chainState(plan.addresses);
 const receipts=Object.fromEntries(Object.entries(outbox).map(([id,row])=>{
@@ -23,8 +27,9 @@ const body={observedAt:new Date().toISOString(),cluster:'mainnet',genesisHash:GE
  recovery:read(state+'/crash-observation.json'),replay:read(state+'/replay-observation.json'),
  negativeSimulations:[read(state+'/guards-active.json'),read(state+'/guards-revoked.json')],
  boundary:plan.boundary,
- limits:'Dated owned-agent canary. Research inference was local and separate; settlements bind saved results, not paid provider bills. Negative checks are mainnet preflight simulations, not broadcast failures. Small SOL and account rents remain locally operator-owned. No hosted customer service, token, custody deployment or independent BATTERY audit.'};
+ limits:(integrated?'Dated interleaved owned-agent canary. Pre-task onchain checks, local inference and finalized result settlement execute in one loop. ':'Dated owned-agent canary. Research inference was local and separate; ')+
+ 'Settlements bind saved results, not paid provider bills. Negative checks are mainnet preflight simulations, not broadcast failures. Small SOL and account rents remain locally operator-owned. No hosted customer service, token, custody deployment or independent BATTERY audit.'};
 const proof={schema:'battery.mainnet-financial-proof/1',body,sha256:hash(Buffer.from(JSON.stringify(body)))};
-const check=await verifyMainnet(proof,read(root+'/evidence/mainnet-agent.json'));
-writeFileSync(root+'/evidence/mainnet-canary.json',JSON.stringify(proof,null,2)+'\n');
-console.log(JSON.stringify({...check,sha256:proof.sha256,publicFile:'evidence/mainnet-canary.json'},null,2));
+const check=await verifyMainnet(proof,research);
+writeFileSync(outputPath,JSON.stringify(proof,null,2)+'\n');
+console.log(JSON.stringify({...check,sha256:proof.sha256,publicFile:outputPath},null,2));

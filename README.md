@@ -33,12 +33,16 @@ node chain/verify-canary.mjs --live   # finalized RPC bytes, USDC deltas and fin
 
 This closes the bounded owned-agent financial canary; hosted customer execution, authenticated paid-provider billing and a BATTERY custody/token deployment are still absent.
 
+## Interleaved controller / actual mainnet run
+
+`integrated_runtime.py` now checks real mainnet reserve/allowance/expiry/gas before each local-model task, persists its result, then verifies the finalized USDC settlement before the next task. Saved outputs and signed payment bytes are reused after a crash; unknown outcomes remain held. Nine offline failure checks passed. A separate funded live run completed three actual model calls and three finalized USDC settlements, with exit74 after the second send, same-signature recovery and zero replay calls/transfers. The historical eight transactions above remain a separate, closed canary. [Execution runbook](docs/integrated-runtime.md), [independent public verifier](chain/verify-integrated.mjs), [product contract](docs/product-contract.md).
+
 ## Offline verification
 
 Python 3.10+ and Node 22+; no package dependencies, accounts, models or money required.
 
 ```sh
-python3 -m unittest -v test_battery.py test_live_agent.py
+python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py
 python3 paper_replay.py
 python3 verify_evidence.py
 node --test devnet/anchor.test.mjs
@@ -87,4 +91,4 @@ One working owned-agent adapter, not universal framework/browser migration. Mode
 Open production gates: authenticated paid billing/headroom, customer task-quality acceptance, distributed leases and a reviewed USDC vault. No BATTERY custody program or token exists. The completed canary used the existing Solana Subscriptions program. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; uninterrupted 72h uptime is unverified. [BRIEF.md](BRIEF.md) records the original finite research sample and limitations.
 
 ## Costs and revenue status
-Free MIT self-hosted SDK. Hosted managed-service pricing is a hypothesis and no plan is available for purchase. Local experiment provider charge0 does not include hardware/electricity and is not a service tariff. Operator total cost separates provider bills, network fees and a proposed fixed monthly service fee. No paid-provider unit economics, BATTERY revenue or paying customer is demonstrated. [Costs and commercial hypothesis](docs/pricing.md).
+Free MIT self-hosted SDK. Proposed managed operations: **$9 per active agent per month**, for budget checks, durable receipts, recovery reconciliation and alerts. This is an unvalidated reference price; no plan or checkout is available for purchase. Local experiment provider charge0 does not include hardware/electricity and is not a service tariff. Operator total cost separates provider bills, network fees and a proposed fixed monthly service fee. No paid-provider unit economics, BATTERY revenue or paying customer is demonstrated. [Costs and commercial hypothesis](docs/pricing.md).

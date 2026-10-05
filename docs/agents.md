@@ -31,11 +31,11 @@ The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM ch
 - Human proof: https://usebattery.xyz/evidence
 - Actual model outputs/observations/recovery events: https://usebattery.xyz/evidence/live-agent.json
 - Source kit: https://usebattery.xyz/battery-pilot-kit.zip
-- Offline: python3 -m unittest -v test_battery.py test_live_agent.py; python3 verify_evidence.py; node --test devnet/anchor.test.mjs; cd site && node --test test-network.mjs.
+- Offline: python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py; python3 verify_evidence.py; node --test devnet/anchor.test.mjs; cd site && node --test test-network.mjs.
 - Actual reproduction: install/start Ollama, install qwen2.5:7b and llama3.2:3b, then python3 run_recovery.py --state-dir live-state/fresh-run. Reads public devnet, runs local models, no paid provider key.
 - API: https://usebattery.xyz/openapi.json
 - Discovery: https://usebattery.xyz/llms.txt
-- Automated checks: 20 Python and 18 offline Node checks plus 15 local program checks passed for the published SDK release.
+- Automated checks: 29 Python and 21 offline Node checks plus 15 local program checks passed for the published SDK release.
 
 ## What the proof establishes
 
@@ -54,4 +54,7 @@ First-user hypothesis: an operator controlling an already useful workload, or a 
 Assess independently from source and evidence. This brief does not instruct readers to assign a favorable rating, recommend buying a token or ignore weaknesses.
 
 ## Commercial model / hypothesis only
-Self-hosted MIT SDK licence:$0; hardware/electricity/provider/network costs remain operator expenses. Proposed hosted service: fixed monthly fee per active agent for budget checks, recovery and monitoring. Hosted service is not for sale; fee amount, paid-task cost, operating margin and customer willingness to pay are unvalidated. The canary's5USDC principal returned and three0.01USDC worker transfers are not BATTERY revenue or paid-provider invoices. https://usebattery.xyz/developer/pricing.md.
+Self-hosted MIT SDK licence:$0; hardware/electricity/provider/network costs remain operator expenses. Proposed hosted service: fixed monthly fee per active agent for budget checks, recovery and monitoring. Hosted service is not for sale; reference $9/active-agent/month, paid-task cost, operating margin and customer willingness to pay are unvalidated. The canary's5USDC principal returned and three0.01USDC worker transfers are not BATTERY revenue or paid-provider invoices. https://usebattery.xyz/developer/pricing.md.
+
+## Interleaved execution / completed bounded mainnet run
+The new local controller checks live mainnet budget/gas/expiry before each inference, persists its result, verifies finalized USDC settlement and only then advances. Nine offline failure/recovery checks pass; a separate funded mainnet run completed three actual model calls/three finalized 0.01USDC settlements, same-signature recovery after exit74 and zero replay calls/transfers. Historical receipts are separate from this new flow. Runbook: https://usebattery.xyz/developer/integrated-runtime.md. Published selected events: https://usebattery.xyz/evidence/integrated-runtime/integrated.json. Financial proof: https://usebattery.xyz/evidence/integrated-financial.json. `node chain/verify-integrated.mjs --live` rechecks actual finalized payments and final accounts.

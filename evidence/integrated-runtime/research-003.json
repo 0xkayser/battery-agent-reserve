@@ -1,0 +1,61 @@
+{
+  "schema": "battery.runtime-job/1",
+  "cluster": "mainnet",
+  "job": "research-003",
+  "checkpoint": {
+    "body": {
+      "schema": "battery.checkpoint/1",
+      "results": [
+        {
+          "id": "research-003",
+          "receipt": "local:research-003",
+          "output": {
+            "billing": {
+              "hardwareElectricityCost": "not_measured",
+              "kind": "local_inference",
+              "providerChargeUsd": 0
+            },
+            "createdAt": "2026-10-05T16:27:49.483985Z",
+            "durationNs": 9902555084,
+            "evalCount": 46,
+            "input": {
+              "observation": {
+                "blockHeight": 431670693,
+                "cluster": "mainnet",
+                "epoch": 1050,
+                "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+                "latencyMs": 462,
+                "observedAt": 1791217658,
+                "performance": {
+                  "numTransactions": 282174,
+                  "samplePeriodSecs": 60,
+                  "slot": 453632678,
+                  "transactionsPerSecond": 4702.9
+                },
+                "rpc": "https://api.mainnet-beta.solana.com",
+                "schema": "battery.network/1",
+                "slot": 453632715
+              },
+              "previousCompletedIds": [
+                "research-001",
+                "research-002"
+              ],
+              "task": "mainnet_operator_brief"
+            },
+            "interpretation": {
+              "summary": "mainnet cluster performance: 4702.9 tps, 282174 transactions, 462 latencyMs",
+              "watch": [
+                "numTransactions",
+                "transactionsPerSecond",
+                "latencyMs"
+              ]
+            },
+            "model": "llama3.2:3b",
+            "promptEvalCount": 289
+          }
+        }
+      ]
+    },
+    "sha256": "880465cc5fd29d6081076da5bd5ce7ad76fa36411c2f75e0ac62a1f792a70e2f"
+  }
+}

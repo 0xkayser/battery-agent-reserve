@@ -1,33 +1,47 @@
-# BATTERY / costs and commercial hypothesis
+# BATTERY / pricing and operating economics
 
-Status, October 5, 2026: **free self-hosted MIT SDK; no hosted paid plan or checkout**. No paying customer, BATTERY service revenue, validated tariff or measured paid-provider unit economics is published.
+October 5, 2026. **Self-hosted MIT SDK is available. Managed service is not available for purchase.** The proposed managed plan below is a product hypothesis, not a billed subscription or proven margin.
 
-## What is available today
+## Buyer and product
 
-| Item | Current price / cost | Who pays |
+Buyer: an operator who already controls a useful agent and its runtime. BATTERY manages the spending authorization and recovery boundary: pre-task reserve/gas checks, durable results, settlement reconciliation and alerts when work must stop. It does not sell model tokens or use reserve principal as revenue.
+
+| Item | Price / status | Payer |
 | --- | --- | --- |
-| Self-hosted BATTERY SDK | $0 software licence under MIT | Operator provides its machine/runtime |
-| Local model experiment | $0 external provider charge | Operator still bears hardware/electricity; unmeasured |
-| Mainnet canary | 0.00004 SOL transaction fees for 8 BATTERY transactions | Operator; sender funding fees/rent were separate |
-| User reserve principal | 5 USDC received and5 USDC returned | Operator-owned capital, not BATTERY revenue |
-| Hosted managed runtime | Not available for purchase | No tariff, subscription or customer billing active |
+| Self-hosted SDK | $0 MIT software licence | Operator runs and maintains it |
+| Managed operations | **Proposed $9 / active agent / month**; unavailable for purchase | Operator, if this plan is eventually launched |
+| Model inference | Actual model-provider bill, separately authorized | Operator's own provider account |
+| Solana transactions | Actual network fees and account rent | Operator's wallet |
+| USDC reserve | Operator-owned principal | Never booked as BATTERY revenue |
 
-Neither a 0.01 USDC transfer to our own worker nor a 0.000005 SOL transaction fee is a BATTERY service price. The inference completed before the settlements and used local models. The canary does not establish paid-inference cost or business margin.
+The proposed $9 covers managed budget checks, retained execution receipts, recovery reconciliation and operational alerts for one registered agent. It does **not** include model compute, a hosting machine for the agent, gas refill, unlimited recovery work or a custody guarantee. No usage entitlement, retention period or SLA is currently offered. Do not pay or fund a wallet to subscribe: there is no checkout.
 
-## Proposed revenue model / unvalidated
+Why $9: an explicit starting point for validating willingness to pay for operational continuity. It is a chosen reference price, not derived from measured costs or customer demand. Change it when actual usage and paid operator feedback justify a price.
 
-Target buyer: an operator of an already useful agent, with control over its runtime. Proposed paid product: hosted budget checks, durable receipts, recovery and operational monitoring. Hypothesis: a **fixed monthly service fee per active agent**. The fee amount and willingness to pay are not established; this is not a live offer.
-
-Provider costs and Solana fees remain separate operator expenses. A provider account's credit/headroom must authorize a request; holding USDC alone does not create provider credit or SOL gas. No automatic gas conversion is currently implemented.
+## Cost and contribution model
 
 ```text
-OPERATOR TOTAL COST = provider bill + network fees + BATTERY service fee
-BATTERY REVENUE     = service fee
-BATTERY CONTRIBUTION= service fee - hosting/RPC/storage/support/recovery costs
+OPERATOR MONTHLY COST = BATTERY fee + provider bill + gas/rent + own runtime
+BATTERY REVENUE       = $9 x active agents, IF the proposed plan is sold
+CONTRIBUTION          = revenue - hosting/RPC/storage/support/recovery costs
 ```
 
-SDK-only users pay no BATTERY service fee. The proposed hosted fee is not a percentage of reserve principal or speculative trading volume. No inference markup, profitable margin, token demand or buyback-funded revenue is demonstrated.
+Provider bills and gas do not inflate BATTERY revenue. Deposits, withdrawals and transfers to an owned worker do not count as sales. No reserve percentage, token-volume fee or unproven inference markup is part of this model.
 
-## Evidence required before setting a paid tariff
+The website's [operating calculator](https://usebattery.xyz/pricing#calculator) requires the operator to enter estimated monthly infrastructure and support costs. It displays scenario arithmetic, **not measured project margin**. Costs have no preset zero value. Taxes, customer acquisition and general overhead are excluded unless included in the input. For one proposed $9 agent, operating costs must be below $9 merely to produce positive contribution; that alone does not establish a viable company.
 
-One useful paid-provider task must have an authoritative charge tied to its request ID, bounded reserve/gas authorization and an accepted result. Recovery must reconcile billed failures and unknown outcomes; it must not silently repeat a potentially charged request. Measure actual runtime/RPC/storage costs per active agent and have one external operator pay for this service. Until then, pricing and margin remain hypotheses.
+## What has actually been measured
+
+- Historical mainnet canary: 8 finalized BATTERY transactions; 40,000 lamports total network fees. Funding transfer fees and account rent are separate.
+- Three 0.01 USDC test settlements went to an owned worker; all 5 USDC principal returned. These were neither provider invoices nor BATTERY revenue.
+- Local inference: no external model-provider charge. Hardware/electricity and managed operating costs were not measured. `$0 external charge` is an experiment property, not the service price.
+- Paying customers: none demonstrated. Service revenue: none demonstrated. Paid provider billing and margin: unverified.
+
+## Gates before charging a customer
+
+1. Completed bounded interleaved local-model/mainnet cycle: crash recovery and no duplicate payment. This closes the technical canary gate; hosted production remains absent.
+2. Tie an accepted useful paid-provider task to an authoritative charge/request ID; hold unknown billed outcomes instead of repeating them.
+3. Measure infrastructure and support costs for the managed scope, including failure handling.
+4. Have an external operator accept the deliverable and pay the fee; publish actual scoped results with their permission.
+
+Today, use the free SDK. The local interleaved controller is implemented, offline tested and has completed a funded bounded mainnet run. Neither that implementation nor this pricing page establishes a hosted production service.

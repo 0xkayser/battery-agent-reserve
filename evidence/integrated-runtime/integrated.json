@@ -1,0 +1,401 @@
+{
+  "schema": "battery.integrated-runtime/1",
+  "cluster": "mainnet",
+  "startedAt": 1791217516.0663218,
+  "events": [
+    {
+      "at": 1791217524.0184991,
+      "kind": "chain_budget_authorized",
+      "job": "research-001",
+      "authorization": {
+        "schema": "battery.job-authorization/1",
+        "cluster": "mainnet",
+        "job": "research-001",
+        "amountUsdc": 10000,
+        "reserveUsdc": 3000000,
+        "remainingUsdc": 1000000,
+        "gasLamports": 1000000,
+        "feeQuoteLamports": 5000,
+        "observedAt": "2026-10-05T16:25:23.997Z",
+        "mainnetSigning": false,
+        "meaning": "Dated pre-task check; payment checks balances and policy again"
+      }
+    },
+    {
+      "at": 1791217545.974551,
+      "kind": "result_durable",
+      "job": "research-001",
+      "checkpointSha256": "ddeee99afeed663a9f224545f84b8bce29a3236937b7a6ffbb562d1f768fa170"
+    },
+    {
+      "at": 1791217570.819057,
+      "kind": "payment_finalized",
+      "job": "research-001",
+      "signature": "2Ruv6FUyocq7vmpaknNsS5263cyQ2U761ZRh4dEvCNHaJoDj457YpfVEdi9mLdU4gMHmsVktoNrwxwr5RcSwbd57"
+    },
+    {
+      "at": 1791217579.15452,
+      "kind": "chain_budget_authorized",
+      "job": "research-002",
+      "authorization": {
+        "schema": "battery.job-authorization/1",
+        "cluster": "mainnet",
+        "job": "research-002",
+        "amountUsdc": 10000,
+        "reserveUsdc": 2990000,
+        "remainingUsdc": 990000,
+        "gasLamports": 995000,
+        "feeQuoteLamports": 5000,
+        "observedAt": "2026-10-05T16:26:19.101Z",
+        "mainnetSigning": false,
+        "meaning": "Dated pre-task check; payment checks balances and policy again"
+      }
+    },
+    {
+      "at": 1791217585.771453,
+      "kind": "result_durable",
+      "job": "research-002",
+      "checkpointSha256": "a999cee30ae1dda363ed2ef42a458fc6da3025df6f44f1f5511853aacf54f90b"
+    },
+    {
+      "at": 1791217642.626755,
+      "kind": "completed_payment_skipped",
+      "job": "research-001"
+    },
+    {
+      "at": 1791217650.474236,
+      "kind": "payment_finalized",
+      "job": "research-002",
+      "signature": "3rPQBrCmCi7k4V7YMZwbdUPYn3ZhPqX3Cc3syUrpyqQ95nQVSSYByYPFQK8vmB5YPE3TrDGsyxxSNDoQUL6JUF79"
+    },
+    {
+      "at": 1791217658.466794,
+      "kind": "chain_budget_authorized",
+      "job": "research-003",
+      "authorization": {
+        "schema": "battery.job-authorization/1",
+        "cluster": "mainnet",
+        "job": "research-003",
+        "amountUsdc": 10000,
+        "reserveUsdc": 2980000,
+        "remainingUsdc": 980000,
+        "gasLamports": 990000,
+        "feeQuoteLamports": 5000,
+        "observedAt": "2026-10-05T16:27:38.427Z",
+        "mainnetSigning": false,
+        "meaning": "Dated pre-task check; payment checks balances and policy again"
+      }
+    },
+    {
+      "at": 1791217669.641278,
+      "kind": "result_durable",
+      "job": "research-003",
+      "checkpointSha256": "880465cc5fd29d6081076da5bd5ce7ad76fa36411c2f75e0ac62a1f792a70e2f"
+    },
+    {
+      "at": 1791217692.555537,
+      "kind": "payment_finalized",
+      "job": "research-003",
+      "signature": "2bEPj5XvdZsrjVS4hc66D9btF1hFwFWsTvd16C1MRcneyGb6yh3gdka51vrxutAsrgFEFhDjTdYU8GiNWbgid2iB"
+    },
+    {
+      "at": 1791218030.224791,
+      "kind": "completed_payment_skipped",
+      "job": "research-001"
+    },
+    {
+      "at": 1791218030.2363992,
+      "kind": "completed_payment_skipped",
+      "job": "research-002"
+    },
+    {
+      "at": 1791218030.2418602,
+      "kind": "completed_payment_skipped",
+      "job": "research-003"
+    }
+  ],
+  "payments": {
+    "research-001": {
+      "signature": "2Ruv6FUyocq7vmpaknNsS5263cyQ2U761ZRh4dEvCNHaJoDj457YpfVEdi9mLdU4gMHmsVktoNrwxwr5RcSwbd57",
+      "slot": 453632375,
+      "feeLamports": 5000,
+      "amountUsdc": 10000
+    },
+    "research-002": {
+      "signature": "3rPQBrCmCi7k4V7YMZwbdUPYn3ZhPqX3Cc3syUrpyqQ95nQVSSYByYPFQK8vmB5YPE3TrDGsyxxSNDoQUL6JUF79",
+      "slot": 453632523,
+      "feeLamports": 5000,
+      "amountUsdc": 10000
+    },
+    "research-003": {
+      "signature": "2bEPj5XvdZsrjVS4hc66D9btF1hFwFWsTvd16C1MRcneyGb6yh3gdka51vrxutAsrgFEFhDjTdYU8GiNWbgid2iB",
+      "slot": 453632832,
+      "feeLamports": 5000,
+      "amountUsdc": 10000
+    }
+  },
+  "checkpoint": {
+    "body": {
+      "schema": "battery.checkpoint/1",
+      "results": [
+        {
+          "id": "research-001",
+          "receipt": "local:research-001",
+          "output": {
+            "billing": {
+              "hardwareElectricityCost": "not_measured",
+              "kind": "local_inference",
+              "providerChargeUsd": 0
+            },
+            "createdAt": "2026-10-05T16:25:45.893959Z",
+            "durationNs": 21434954500,
+            "evalCount": 80,
+            "input": {
+              "observation": {
+                "blockHeight": 431670202,
+                "cluster": "mainnet",
+                "epoch": 1050,
+                "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+                "latencyMs": 433,
+                "observedAt": 1791217524,
+                "performance": {
+                  "numTransactions": 297584,
+                  "samplePeriodSecs": 60,
+                  "slot": 453632134,
+                  "transactionsPerSecond": 4959.73
+                },
+                "rpc": "https://api.mainnet-beta.solana.com",
+                "schema": "battery.network/1",
+                "slot": 453632212
+              },
+              "previousCompletedIds": [],
+              "task": "mainnet_operator_brief"
+            },
+            "interpretation": {
+              "summary": "Mainnet cluster at blockHeight 431,670,202, with 297,584 transactions in 60 seconds (4,959.73 tx/s). Latency 433ms.",
+              "watch": [
+                "Transaction volume",
+                "Latency stability"
+              ]
+            },
+            "model": "qwen2.5:7b",
+            "promptEvalCount": 323
+          }
+        },
+        {
+          "id": "research-002",
+          "receipt": "local:research-002",
+          "output": {
+            "billing": {
+              "hardwareElectricityCost": "not_measured",
+              "kind": "local_inference",
+              "providerChargeUsd": 0
+            },
+            "createdAt": "2026-10-05T16:26:25.699666Z",
+            "durationNs": 5987023000,
+            "evalCount": 77,
+            "input": {
+              "observation": {
+                "blockHeight": 431670404,
+                "cluster": "mainnet",
+                "epoch": 1050,
+                "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+                "latencyMs": 480,
+                "observedAt": 1791217579,
+                "performance": {
+                  "numTransactions": 279544,
+                  "samplePeriodSecs": 60,
+                  "slot": 453632229,
+                  "transactionsPerSecond": 4659.07
+                },
+                "rpc": "https://api.mainnet-beta.solana.com",
+                "schema": "battery.network/1",
+                "slot": 453632418
+              },
+              "previousCompletedIds": [
+                "research-001"
+              ],
+              "task": "mainnet_operator_brief"
+            },
+            "interpretation": {
+              "summary": "Mainnet cluster at blockHeight 431,670,404, with 279,544 transactions in 60 seconds (4,659 TPS). Latency 480ms.",
+              "watch": [
+                "Transaction volume",
+                "Latency stability"
+              ]
+            },
+            "model": "qwen2.5:7b",
+            "promptEvalCount": 329
+          }
+        },
+        {
+          "id": "research-003",
+          "receipt": "local:research-003",
+          "output": {
+            "billing": {
+              "hardwareElectricityCost": "not_measured",
+              "kind": "local_inference",
+              "providerChargeUsd": 0
+            },
+            "createdAt": "2026-10-05T16:27:49.483985Z",
+            "durationNs": 9902555084,
+            "evalCount": 46,
+            "input": {
+              "observation": {
+                "blockHeight": 431670693,
+                "cluster": "mainnet",
+                "epoch": 1050,
+                "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+                "latencyMs": 462,
+                "observedAt": 1791217658,
+                "performance": {
+                  "numTransactions": 282174,
+                  "samplePeriodSecs": 60,
+                  "slot": 453632678,
+                  "transactionsPerSecond": 4702.9
+                },
+                "rpc": "https://api.mainnet-beta.solana.com",
+                "schema": "battery.network/1",
+                "slot": 453632715
+              },
+              "previousCompletedIds": [
+                "research-001",
+                "research-002"
+              ],
+              "task": "mainnet_operator_brief"
+            },
+            "interpretation": {
+              "summary": "mainnet cluster performance: 4702.9 tps, 282174 transactions, 462 latencyMs",
+              "watch": [
+                "numTransactions",
+                "transactionsPerSecond",
+                "latencyMs"
+              ]
+            },
+            "model": "llama3.2:3b",
+            "promptEvalCount": 289
+          }
+        }
+      ]
+    },
+    "sha256": "50d0092c15472d8b7724c7613234902476606ee57ea18aa9fe7f0a843533a045"
+  },
+  "modelEvents": [
+    {
+      "at": 1791217516.065959,
+      "kind": "worker_started",
+      "epoch": 1,
+      "model": "qwen2.5:7b"
+    },
+    {
+      "at": 1791217524.455922,
+      "kind": "tool_observation_saved",
+      "job": "research-001",
+      "slot": 453632212
+    },
+    {
+      "at": 1791217524.456733,
+      "kind": "model_call_started",
+      "job": "research-001",
+      "model": "qwen2.5:7b"
+    },
+    {
+      "at": 1791217545.967225,
+      "kind": "adapter_receipt_saved",
+      "job": "research-001",
+      "model": "qwen2.5:7b"
+    },
+    {
+      "at": 1791217545.971348,
+      "kind": "ledger_settled",
+      "epoch": 1,
+      "job": "research-001"
+    },
+    {
+      "at": 1791217579.1568651,
+      "kind": "completed_task_skipped",
+      "job": "research-001"
+    },
+    {
+      "at": 1791217579.637664,
+      "kind": "tool_observation_saved",
+      "job": "research-002",
+      "slot": 453632418
+    },
+    {
+      "at": 1791217579.6382341,
+      "kind": "model_call_started",
+      "job": "research-002",
+      "model": "qwen2.5:7b"
+    },
+    {
+      "at": 1791217585.769581,
+      "kind": "adapter_receipt_saved",
+      "job": "research-002",
+      "model": "qwen2.5:7b"
+    },
+    {
+      "at": 1791217585.770206,
+      "kind": "ledger_settled",
+      "epoch": 1,
+      "job": "research-002"
+    },
+    {
+      "at": 1791217642.623945,
+      "kind": "worker_started",
+      "epoch": 2,
+      "model": "llama3.2:3b"
+    },
+    {
+      "at": 1791217642.632323,
+      "kind": "completed_task_skipped",
+      "job": "research-001"
+    },
+    {
+      "at": 1791217642.632622,
+      "kind": "completed_task_skipped",
+      "job": "research-002"
+    },
+    {
+      "at": 1791217658.4722528,
+      "kind": "completed_task_skipped",
+      "job": "research-001"
+    },
+    {
+      "at": 1791217658.475232,
+      "kind": "completed_task_skipped",
+      "job": "research-002"
+    },
+    {
+      "at": 1791217658.943247,
+      "kind": "tool_observation_saved",
+      "job": "research-003",
+      "slot": 453632715
+    },
+    {
+      "at": 1791217658.943968,
+      "kind": "model_call_started",
+      "job": "research-003",
+      "model": "llama3.2:3b"
+    },
+    {
+      "at": 1791217669.63727,
+      "kind": "adapter_receipt_saved",
+      "job": "research-003",
+      "model": "llama3.2:3b"
+    },
+    {
+      "at": 1791217669.6392121,
+      "kind": "ledger_settled",
+      "epoch": 2,
+      "job": "research-003"
+    },
+    {
+      "at": 1791218030.222539,
+      "kind": "worker_started",
+      "epoch": 3,
+      "model": "llama3.2:3b"
+    }
+  ],
+  "scope": "Local inference and mainnet USDC result settlement, not paid-provider billing or hosted service"
+}

@@ -1,0 +1,216 @@
+{
+  "schema": "battery.mainnet-financial-proof/1",
+  "body": {
+    "observedAt": "2026-10-05T16:39:15.919Z",
+    "cluster": "mainnet",
+    "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+    "program": "De1egAFMkMWZSN5rYXRj9CAdheBamobVNubTsi9avR44",
+    "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "programSha256": "af3cefa5947173e03298361b3f461e2a314382a7206c084f77ad9a40c8b18d3a",
+    "owner": "J2n93YFxdJfKFX61TixU2QLfjQnfp5tWg3JJjp3ubaij",
+    "worker": "4RtnTU7jKqpFBW5Jf6M5c29G6TkF44f4W874vs2q9nQ5",
+    "sourceAta": "FCYMhn9u7gSpu4L4bs1PKmMHDWUTZVE4YCVnLzy6FmQa",
+    "receiverAta": "4o1ZCq5fbFvSx737LiyimM8ckRdqAyCDc85VNkajRs2D",
+    "authority": "AgT4qspBZ5XMmDVH7Zzcxr2StBiHFTQSbcaaonTiAaeX",
+    "delegation": "73SCtkkjLPwumyCcJ3EF33pTVHsqwAujRsSCcZQXAaan",
+    "nonce": "1",
+    "returnAddress": "JPqh2zfYGtixYKsz9TddcLXjZq5L7wcDtRQTQg7MuPY",
+    "policy": {
+      "budgetUsdc": 5000000,
+      "reserveUsdc": 3000000,
+      "allowanceUsdc": 1000000,
+      "floorUsdc": 2000000,
+      "jobUsdc": 10000,
+      "jobs": 3,
+      "gasFundingLamports": 8000000,
+      "gasFloorLamports": 100000,
+      "maxFeeLamports": 20000,
+      "maxSolPriceUsdc": 200,
+      "validSeconds": 86400
+    },
+    "checkpointSha256": "50d0092c15472d8b7724c7613234902476606ee57ea18aa9fe7f0a843533a045",
+    "receipts": {
+      "refund-extra": {
+        "signature": "4eaJRGZT2yxQkyUQht8MXoKePEyer2zaSzJYMNTR851wqQW642y7sQPj7s7UHnurxTj2e4RS4vcFZaHtgyf7CnwT",
+        "slot": 453631871,
+        "feeLamports": 5000,
+        "amountUsdc": 2000000,
+        "owner": "J2n93YFxdJfKFX61TixU2QLfjQnfp5tWg3JJjp3ubaij",
+        "worker": "JPqh2zfYGtixYKsz9TddcLXjZq5L7wcDtRQTQg7MuPY",
+        "resultHash": "9da1d5f071cd8123064f4536688933b01a6ba536c497e3bfec9c822a29f5cc27",
+        "wireSha256": "c5eb3b9604003ec960cbbde9192807cfe2f1767c76f390ecff310e841220b73f",
+        "dispatchAttempts": 1
+      },
+      "setup": {
+        "signature": "2GrrRo5UhpPhEBWTUYf6Ea9USzt1n644YWZJiJzZEvCL3ZkLWtyqVcJyM8GGP8H51ofFPRY1G2RTStR2jnCcGATz",
+        "slot": 453632097,
+        "feeLamports": 5000,
+        "amountUsdc": 0,
+        "owner": "J2n93YFxdJfKFX61TixU2QLfjQnfp5tWg3JJjp3ubaij",
+        "worker": "4RtnTU7jKqpFBW5Jf6M5c29G6TkF44f4W874vs2q9nQ5",
+        "resultHash": null,
+        "wireSha256": "6907ebf8b3050c01daaed338acc87dad1cb7f509a489f00529a00fc498140615",
+        "dispatchAttempts": 1
+      },
+      "research-001": {
+        "signature": "2Ruv6FUyocq7vmpaknNsS5263cyQ2U761ZRh4dEvCNHaJoDj457YpfVEdi9mLdU4gMHmsVktoNrwxwr5RcSwbd57",
+        "slot": 453632375,
+        "feeLamports": 5000,
+        "amountUsdc": 10000,
+        "owner": "J2n93YFxdJfKFX61TixU2QLfjQnfp5tWg3JJjp3ubaij",
+        "worker": "4RtnTU7jKqpFBW5Jf6M5c29G6TkF44f4W874vs2q9nQ5",
+        "resultHash": "d443774671c5f9011557a1718d4d8c2b00b059ff62ef4e7398106042f960b644",
+        "wireSha256": "d148a1337dd536c3ae5a2de4aee6b1394af4e2395f3385c2b003820d06ec36cc",
+        "dispatchAttempts": 1
+      },
+      "research-002": {
+        "signature": "3rPQBrCmCi7k4V7YMZwbdUPYn3ZhPqX3Cc3syUrpyqQ95nQVSSYByYPFQK8vmB5YPE3TrDGsyxxSNDoQUL6JUF79",
+        "slot": 453632523,
+        "feeLamports": 5000,
+        "amountUsdc": 10000,
+        "owner": "J2n93YFxdJfKFX61TixU2QLfjQnfp5tWg3JJjp3ubaij",
+        "worker": "4RtnTU7jKqpFBW5Jf6M5c29G6TkF44f4W874vs2q9nQ5",
+        "resultHash": "8e5ecb6e6ce98d13d16dbf56f7ef3078a7488ae7d4253f46a0933d72cc289c74",
+        "wireSha256": "8b27a9607d63ef5cea755b5a34aaac0b2ba2a08a69e4660e32a18f8fdc3b21c7",
+        "dispatchAttempts": 1
+      },
+      "research-003": {
+        "signature": "2bEPj5XvdZsrjVS4hc66D9btF1hFwFWsTvd16C1MRcneyGb6yh3gdka51vrxutAsrgFEFhDjTdYU8GiNWbgid2iB",
+        "slot": 453632832,
+        "feeLamports": 5000,
+        "amountUsdc": 10000,
+        "owner": "J2n93YFxdJfKFX61TixU2QLfjQnfp5tWg3JJjp3ubaij",
+        "worker": "4RtnTU7jKqpFBW5Jf6M5c29G6TkF44f4W874vs2q9nQ5",
+        "resultHash": "e52202df530bf82ba4eee90b36b3b2f29d3f87d6d69718faec5f455f5138f8a5",
+        "wireSha256": "a713f94476a8c3efe9d5a3eefc514bf70d149a16f84d712b5f1fd38d39ca3e18",
+        "dispatchAttempts": 1
+      },
+      "revoke": {
+        "signature": "2VUgLGzjU7ZqNHC26h5XRazL4ymfqcGpfyeEcBqgL7s6naZtwwZ6S12iKJo7R88M353z6upLscth7MeBvpUKY6dH",
+        "slot": 453634700,
+        "feeLamports": 5000,
+        "amountUsdc": 0,
+        "owner": "J2n93YFxdJfKFX61TixU2QLfjQnfp5tWg3JJjp3ubaij",
+        "worker": "4RtnTU7jKqpFBW5Jf6M5c29G6TkF44f4W874vs2q9nQ5",
+        "resultHash": null,
+        "wireSha256": "4b90cded5ecbbb97ef1544b17d0ce2cf9ae1467f66cc6039416b850ac077789c",
+        "dispatchAttempts": 1
+      },
+      "return-owner": {
+        "signature": "3evxnrPHZTgEakNRcJUBNmGKT4zvDo3xyoL9jucZPF7HAXxZNYcBwaffsL43tAFraqax4PUCsBqVeqyBWExceWXM",
+        "slot": 453635139,
+        "feeLamports": 5000,
+        "amountUsdc": 2970000,
+        "owner": "J2n93YFxdJfKFX61TixU2QLfjQnfp5tWg3JJjp3ubaij",
+        "worker": "JPqh2zfYGtixYKsz9TddcLXjZq5L7wcDtRQTQg7MuPY",
+        "resultHash": "9da1d5f071cd8123064f4536688933b01a6ba536c497e3bfec9c822a29f5cc27",
+        "wireSha256": "b4aa00e3056b25b54e8f76781b6a4f65809f4e14eaae6cb62ba96bd8b549770b",
+        "dispatchAttempts": 1
+      },
+      "return-worker": {
+        "signature": "2jxf9tEPzJy1sJGCdKm9Pyngy3kDkRm5vMH7jk5WtE9yt6hCtZw6uSPcvVnvPzsxZZyetLytrDmyZMskTmdH8LHY",
+        "slot": 453635216,
+        "feeLamports": 5000,
+        "amountUsdc": 30000,
+        "owner": "4RtnTU7jKqpFBW5Jf6M5c29G6TkF44f4W874vs2q9nQ5",
+        "worker": "JPqh2zfYGtixYKsz9TddcLXjZq5L7wcDtRQTQg7MuPY",
+        "resultHash": "9da1d5f071cd8123064f4536688933b01a6ba536c497e3bfec9c822a29f5cc27",
+        "wireSha256": "c0753f878fd2779e1fb021cbfda4dbff92fc39bad2fe31df12362c9a0371a8ab",
+        "dispatchAttempts": 1
+      }
+    },
+    "mainnetTransactions": 8,
+    "settlementPayments": 3,
+    "transactionFeesLamports": 40000,
+    "afterSettlement": {
+      "reserveUsdc": 2970000,
+      "workerUsdc": 30000,
+      "remainingUsdc": 970000
+    },
+    "final": {
+      "reserveUsdc": 0,
+      "workerUsdc": 0,
+      "delegationClosed": true,
+      "ownerSolLamports": 4302840,
+      "workerSolLamports": 980000
+    },
+    "returnedUsdc": 5000000,
+    "recovery": {
+      "exitCode": 74,
+      "observedAt": 1791217642.167779,
+      "signature": "3rPQBrCmCi7k4V7YMZwbdUPYn3ZhPqX3Cc3syUrpyqQ95nQVSSYByYPFQK8vmB5YPE3TrDGsyxxSNDoQUL6JUF79",
+      "wireSha256": "8b27a9607d63ef5cea755b5a34aaac0b2ba2a08a69e4660e32a18f8fdc3b21c7",
+      "receiptPersistedAtExit": false,
+      "modelCallsAtExit": 2
+    },
+    "replay": {
+      "outboxUnchanged": true,
+      "newSignatures": 0,
+      "newTransfers": 0,
+      "observedAt": 1791218030.279051
+    },
+    "negativeSimulations": [
+      {
+        "schema": "battery.mainnet-guard-simulations/1",
+        "observedAt": "2026-10-05T16:35:17.805Z",
+        "cluster": "mainnet",
+        "stage": "active",
+        "checks": [
+          {
+            "id": "over-remaining-cap",
+            "amountUsdc": 970001,
+            "error": {
+              "InstructionError": [
+                0,
+                {
+                  "Custom": 300
+                }
+              ]
+            },
+            "slot": 453634433,
+            "broadcast": false
+          },
+          {
+            "id": "wrong-delegate",
+            "amountUsdc": 1,
+            "error": {
+              "InstructionError": [
+                0,
+                {
+                  "Custom": 130
+                }
+              ]
+            },
+            "slot": 453634444,
+            "broadcast": false
+          }
+        ],
+        "boundary": "Signed preflight simulations on actual mainnet accounts; not broadcast failed transactions."
+      },
+      {
+        "schema": "battery.mainnet-guard-simulations/1",
+        "observedAt": "2026-10-05T16:37:02.314Z",
+        "cluster": "mainnet",
+        "stage": "revoked",
+        "checks": [
+          {
+            "id": "revoked-worker",
+            "amountUsdc": 1,
+            "error": {
+              "InstructionError": [
+                0,
+                "InvalidAccountOwner"
+              ]
+            },
+            "slot": 453634831,
+            "broadcast": false
+          }
+        ],
+        "boundary": "Signed preflight simulations on actual mainnet accounts; not broadcast failed transactions."
+      }
+    ],
+    "boundary": "Dedicated local operator wallet. Fixed1USDC cumulative worker allowance;2USDC floor on3USDC deposit only if no other delegations.0.01USDC per-result transfers are test settlements to our worker, not model-provider billing. Owner can revoke/change/withdraw. No vault/token launch.",
+    "limits": "Dated interleaved owned-agent canary. Pre-task onchain checks, local inference and finalized result settlement execute in one loop. Settlements bind saved results, not paid provider bills. Negative checks are mainnet preflight simulations, not broadcast failures. Small SOL and account rents remain locally operator-owned. No hosted customer service, token, custody deployment or independent BATTERY audit."
+  },
+  "sha256": "f039dea250cc26dc3c35cab5dbf8633fc73943ebd5ddd26908a8327b309723c2"
+}

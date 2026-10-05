@@ -5,6 +5,8 @@
 - [Research brief](https://usebattery.xyz/agents.md): hypothesis, evidence and limits.
 - [Full text](https://usebattery.xyz/llms-full.txt): README, architecture, adapters and security.
 - [Developer docs](https://usebattery.xyz/docs): reproduce actual inference and recovery.
+- [Integrated execution](https://usebattery.xyz/developer/integrated-runtime.md): completed interleaved local/mainnet run;3 actual calls/3 finalized settlements, same-signature recovery and all principal returned.
+- [Pricing](https://usebattery.xyz/pricing): proposed $9/active-agent/month; unavailable for purchase.
 - [Costs and commercial hypothesis](https://usebattery.xyz/developer/pricing.md): free SDK; hosted pricing, paid costs and revenue unvalidated.
 - [OpenAPI](https://usebattery.xyz/openapi.json): fixed read-only devnet API.
 
@@ -19,4 +21,4 @@
 - [Source kit](https://usebattery.xyz/battery-pilot-kit.zip): SDK, tests and website source.
 
 ## Boundary
-Actual local inference/devnet reads; paper USD/browser simulations. Eight mainnet canary transactions are finalized; test transfers bind saved results, not paid-model billing. Three negative mainnet checks were preflight simulations. No hosted paid agent,vault,token or independent BATTERY audit.
+Actual local inference/devnet reads; paper USD/browser simulations. Eight mainnet canary transactions are finalized; test transfers bind saved results, not paid-model billing. Three negative mainnet checks in each run were preflight simulations. New integrated proof: https://usebattery.xyz/evidence/integrated-financial.json; model/event trail: https://usebattery.xyz/evidence/integrated-runtime/integrated.json. No hosted paid agent,vault,token or independent BATTERY audit.

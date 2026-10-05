@@ -1,0 +1,57 @@
+{
+  "schema": "battery.runtime-job/1",
+  "cluster": "mainnet",
+  "job": "research-001",
+  "checkpoint": {
+    "body": {
+      "schema": "battery.checkpoint/1",
+      "results": [
+        {
+          "id": "research-001",
+          "receipt": "local:research-001",
+          "output": {
+            "billing": {
+              "hardwareElectricityCost": "not_measured",
+              "kind": "local_inference",
+              "providerChargeUsd": 0
+            },
+            "createdAt": "2026-10-05T16:25:45.893959Z",
+            "durationNs": 21434954500,
+            "evalCount": 80,
+            "input": {
+              "observation": {
+                "blockHeight": 431670202,
+                "cluster": "mainnet",
+                "epoch": 1050,
+                "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+                "latencyMs": 433,
+                "observedAt": 1791217524,
+                "performance": {
+                  "numTransactions": 297584,
+                  "samplePeriodSecs": 60,
+                  "slot": 453632134,
+                  "transactionsPerSecond": 4959.73
+                },
+                "rpc": "https://api.mainnet-beta.solana.com",
+                "schema": "battery.network/1",
+                "slot": 453632212
+              },
+              "previousCompletedIds": [],
+              "task": "mainnet_operator_brief"
+            },
+            "interpretation": {
+              "summary": "Mainnet cluster at blockHeight 431,670,202, with 297,584 transactions in 60 seconds (4,959.73 tx/s). Latency 433ms.",
+              "watch": [
+                "Transaction volume",
+                "Latency stability"
+              ]
+            },
+            "model": "qwen2.5:7b",
+            "promptEvalCount": 323
+          }
+        }
+      ]
+    },
+    "sha256": "ddeee99afeed663a9f224545f84b8bce29a3236937b7a6ffbb562d1f768fa170"
+  }
+}

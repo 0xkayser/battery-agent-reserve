@@ -6,11 +6,23 @@ import {execFileSync} from 'node:child_process';
 import {getTransferSolInstruction} from '@solana-program/system';
 import {kit,token,subscriptions,RPC,GENESIS,PROGRAM,USDC,POLICY,hash,rpc,account,bytes,
  requireMainnet,addresses,setupInstructions,paymentInstructions,revokeInstruction,signedTransaction,
- chainState,programArtifact,guardPolicy,withdrawalInstructions,decodeToken,excessRefundAmount} from './reserve.mjs';
+ chainState,programArtifact,guardPolicy,withdrawalInstructions,decodeToken,decodeDelegation,excessRefundAmount} from './reserve.mjs';
 import {budgetPrice} from './budget.mjs';
-import {durableJson,driveTransaction} from './settlement.mjs';
-const root=fileURLToPath(new URL('..',import.meta.url)),state=join(root,'mainnet-state/canary');
+import {durableJson,driveTransaction,verifyConfirmation} from './settlement.mjs';
+const root=fileURLToPath(new URL('..',import.meta.url)),name=process.env.BATTERY_CANARY_NAME??'canary';
+if(!/^[a-z][a-z0-9-]{0,47}$/.test(name))throw Error('Invalid isolated canary name');
+const state=join(root,'mainnet-state',name);
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
+function runtimeResult(file,job){
+ const report=read(file);
+ if(report.schema!=='battery.runtime-job/1'||report.cluster!=='mainnet'||report.job!==job||report.checkpoint?.body?.results?.length!==1)
+  throw Error('Invalid integrated runtime result');
+ execFileSync('python3',['-c','import json,sys;from core import verify_checkpoint;verify_checkpoint(json.load(open(sys.argv[1]))["checkpoint"])',file],{cwd:root,stdio:'pipe'});
+ const r=report.checkpoint.body.results[0];
+ if(r.id!==job||r.receipt!=='local:'+job||r.output?.input?.observation?.genesisHash!==GENESIS||r.output?.input?.observation?.cluster!=='mainnet')
+  throw Error('Result/job/cluster identity mismatch');
+ return hash(Buffer.from(JSON.stringify(r)));
+}
 async function signer(name){
  const path=join(state,name+'-key.json');
  if(!existsSync(path))await kit.writeKeyPairSigner(await kit.generateKeyPairSigner(true),path);
@@ -59,8 +71,8 @@ async function prepare(owner,worker){
 async function main(){
  if(process.env.BATTERY_CANARY_LOCK!=='1')throw Error('Use python3 chain/canary.py for kernel single-operator lock');
  const [command,...flags]=process.argv.slice(2);
- if(!['prepare','status','setup','run','revoke','return-address','refund-extra','verify-guards','withdraw'].includes(command))throw Error('Commands: prepare | status | setup | run | revoke | return-address WALLET | refund-extra | verify-guards | withdraw');
- if(['setup','run','revoke','refund-extra','verify-guards','withdraw'].includes(command)&&!flags.includes('--execute-budget-5-usdc'))throw Error('Financial command disabled: explicit --execute-budget-5-usdc required after funding');
+ if(!['prepare','status','setup','run','revoke','return-address','refund-extra','verify-guards','withdraw','authorize-job','pay-job','verify-job'].includes(command))throw Error('Unsupported canary command');
+ if(['setup','run','revoke','refund-extra','verify-guards','withdraw','pay-job'].includes(command)&&!flags.includes('--execute-budget-5-usdc'))throw Error('Financial command disabled: explicit --execute-budget-5-usdc required after funding');
  mkdirSync(state,{recursive:true,mode:0o700});chmodSync(state,0o700);
  if(command!=='prepare'&&!existsSync(join(state,'plan.json')))throw Error('Prepare and review the canary plan first');
  const owner=await signer('owner'),worker=await signer('worker');
@@ -79,8 +91,36 @@ async function main(){
   console.log(JSON.stringify({owner:a.owner,worker:a.worker,ownerSolLamports:(await rpc('getBalance',[a.owner])).value,
    sourceExists:!!await account(a.sourceAta),delegationExists:!!await account(a.delegation),mainnetSigning:false},null,2));return;
  }
+ if(command==='authorize-job'){
+  await budgetPrice();
+  const job=flags[0];if(!/^research-00[123]$/.test(job))throw Error('Bounded job required');
+  const existing=existsSync(join(state,'outbox.json'))?read(join(state,'outbox.json')):{};
+  if(!existing.setup?.receipt)throw Error('Confirmed setup required before model generation');
+  if(existing.revoke||existing['return-owner']||existing['return-worker'])throw Error('Canary closed; no new model task authorized');
+  for(const [id,row] of Object.entries(existing))if(!row.receipt)throw Error('Reconcile uncertain payment before another model call');
+  const s=await chainState(a);if(!s.delegation)throw Error('No active onchain allowance');
+  const d=decodeDelegation(s.delegation,a);
+  if(d.expiryTs!==0n&&d.expiryTs<=BigInt(Math.floor(Date.now()/1000)))throw Error('Onchain allowance expired');
+  const fee=(await feeQuote(await paymentInstructions(worker,a,POLICY.jobUsdc,'0'.repeat(64),job),worker)).fee;
+  guardPolicy({balanceUsdc:s.reserveUsdc,remainingUsdc:s.remainingUsdc,amountUsdc:POLICY.jobUsdc,gasLamports:s.gasLamports,feeLamports:fee});
+  console.log(JSON.stringify({schema:'battery.job-authorization/1',cluster:'mainnet',job,
+   amountUsdc:POLICY.jobUsdc,reserveUsdc:s.reserveUsdc,remainingUsdc:s.remainingUsdc,
+   gasLamports:s.gasLamports,feeQuoteLamports:fee,observedAt:new Date().toISOString(),
+   mainnetSigning:false,meaning:'Dated pre-task check; payment checks balances and policy again'}));return;
+ }
+ if(command==='verify-job'){
+  const job=flags[0];if(!/^research-00[123]$/.test(job))throw Error('Bounded job required');
+  const rows=read(join(state,'outbox.json')),row=rows[job];
+  if(!row?.receipt||row.amountUsdc!==POLICY.jobUsdc)throw Error('Finalized bounded payment required');
+  const resultHash=runtimeResult(flags[1],job);
+  if(row.resultHash!==resultHash||!Buffer.from(row.wire,'base64').includes(Buffer.from(`BATTERY:v1:${job}:${resultHash}`)))throw Error('Finalized payment/result hash mismatch');
+  const tx=await rpc('getTransaction',[row.signature,{encoding:'base64',commitment:'finalized',maxSupportedTransactionVersion:0}]);
+  const result=verifyConfirmation(row,tx);
+  if(JSON.stringify(result)!==JSON.stringify(row.receipt))throw Error('Saved payment receipt differs');
+  console.log(JSON.stringify(result));return;
+ }
  if(!flags.includes('--execute-budget-5-usdc'))throw Error('Financial command disabled: explicit --execute-budget-5-usdc required after funding');
- if(['setup','run'].includes(command))await budgetPrice();
+ if(['setup','run','pay-job'].includes(command))await budgetPrice();
  const outboxFile=join(state,'outbox.json'),outbox=existsSync(outboxFile)?read(outboxFile):{};
  const save=()=>durableJson(outboxFile,outbox);
  const execute=async(id,ixs,payer,amountUsdc=0,resultHash=null,withdrawTo=null)=>{
@@ -88,7 +128,7 @@ async function main(){
   if(outbox[id]?.receipt)return outbox[id].receipt;
   for(const [other,row] of Object.entries(outbox))if(other!==id&&!row.receipt)throw Error('Another transaction uncertain; reconcile it first');
   return driveTransaction({id,store:outbox,save,rpc,afterSend:()=>{
-   if(id==='research-002'&&flags.includes('--crash-after-send'))process.exit(74);
+   if((command==='pay-job'||id==='research-002')&&flags.includes('--crash-after-send'))process.exit(74);
   },prepare:async()=>{
    const {fee,lifetime}=await feeQuote(ixs,payer);
    const bal=(await rpc('getBalance',[payer.address,{commitment:'confirmed'}])).value;
@@ -131,6 +171,13 @@ async function main(){
   const receipt=await execute('setup',ixs,owner);
   const s=await chainState(a);if(s.remainingUsdc!==POLICY.allowanceUsdc||s.reserveUsdc!==POLICY.reserveUsdc)throw Error('Setup state mismatch');
   console.log(JSON.stringify({receipt,reserveUsdc:s.reserveUsdc,remainingUsdc:s.remainingUsdc}));
+ }else if(command==='pay-job'){
+  if(!outbox.setup?.receipt)throw Error('Confirmed setup required');
+  if(outbox.revoke||outbox['return-owner']||outbox['return-worker'])throw Error('Canary closed; payment refused');
+  const [job,file]=flags;if(!/^research-00[123]$/.test(job)||!file)throw Error('Bounded job and durable result path required');
+  const resultHash=runtimeResult(file,job);
+  const receipt=await execute(job,await paymentInstructions(worker,a,POLICY.jobUsdc,resultHash,job),worker,POLICY.jobUsdc,resultHash);
+  console.log(JSON.stringify(receipt));
  }else if(command==='run'){
   if(!outbox.setup?.receipt)throw Error('Confirmed setup required');
   const reportPath=join(root,'evidence/mainnet-agent.json'),report=read(reportPath);
