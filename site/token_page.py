@@ -10,4 +10,4 @@ if TWITTER:
 def social_link():
  return f'<a class="text-button" href="{html.escape(TWITTER,quote=True)}" target="_blank" rel="noopener noreferrer">[ TWITTER / X ]</a>' if TWITTER else ''
 def build_token(shell,head,panel):
- shell('token','Token information',head('PROJECT / TOKEN','A NEW CHAPTER.','Token information is being revised.')+panel('TOKEN DETAILS ARE NOT DISPLAYED','<p>The contract address and purchase links have been removed from this website. Follow project updates on Twitter.</p><div class="actions">'+social_link()+'<a class="text-button" href="/">[ BACK TO BATTERY ]</a></div>'))
+ shell('token','Token information',head('PROJECT / TOKEN','A NEW CHAPTER.','Token information is being revised.')+panel('TOKEN DETAILS ARE NOT DISPLAYED','<p>The contract address and purchase links have been removed from this website. Follow project updates on Twitter.</p><div class="actions">'+social_link()+'<a class="text-button" href="/">[ BACK TO HOME ]</a></div>'))
