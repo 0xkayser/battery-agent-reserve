@@ -51,7 +51,7 @@ Local inference has zero provider charge; hardware/electricity unmeasured. USD l
 
 ## Open gates / product research
 
-No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, hosted customer USDC custody/deposits/withdrawals, independently audited BATTERY custody contract or a production paid-service guarantee. A project token mint is published below; no BATTERY custody program exists; the completed canary used an existing mainnet delegation program.
+No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, hosted customer USDC custody/deposits/withdrawals, independently audited BATTERY custody contract or a production paid-service guarantee. Token information is currently withheld from the website. No BATTERY custody program exists; the completed canary used an existing mainnet delegation program.
 
 Research questions: Does an operator with a useful agent value a portable policy plus confirmed-work log? Can a provider adapter reliably bound maximum charges? Does a cheaper model meet task acceptance criteria after takeover? Does reduced lost work justify a service fee? Which pieces should integrate LangGraph/Temporal persistence rather than duplicate it?
 

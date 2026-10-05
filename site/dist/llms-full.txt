@@ -72,7 +72,7 @@ Local inference has zero provider charge; hardware/electricity unmeasured. USD l
 
 ## Open gates / product research
 
-No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, hosted customer USDC custody/deposits/withdrawals, independently audited BATTERY custody contract or a production paid-service guarantee. A project token mint is published below; no BATTERY custody program exists; the completed canary used an existing mainnet delegation program.
+No authenticated paid receipts/headroom, hosted customer AI runtime, arbitrary framework/browser migration, distributed leases, hosted customer USDC custody/deposits/withdrawals, independently audited BATTERY custody contract or a production paid-service guarantee. Token information is currently withheld from the website. No BATTERY custody program exists; the completed canary used an existing mainnet delegation program.
 
 Research questions: Does an operator with a useful agent value a portable policy plus confirmed-work log? Can a provider adapter reliably bound maximum charges? Does a cheaper model meet task acceptance criteria after takeover? Does reduced lost work justify a service fee? Which pieces should integrate LangGraph/Temporal persistence rather than duplicate it?
 
@@ -151,7 +151,7 @@ Reserve policy + durable local receipts + controlled recovery for agents whose r
 | SQLite ledger | Paper microUSD, protected floor, worst-case reservation, daily/job caps, supplied provider headroom, receipt deduplication, stale-worker fencing, unknown outcomes held |
 | Owned AI researcher | Actual public devnet data + local Ollama generation; durable receipt, forced process exit, Qwen -> Llama recovery and continuation |
 | Public network API | Fixed read-only devnet RPC batch, validated genesis/schema, actual slot/epoch/performance sample, 30s cache, explicit upstream failures |
-| ASCII product | Live console, evidence, docs, browser-local policies, simulation journal, import/export, source and brand downloads |
+| Public website tools | Real read-only Solana wallet power check, runway estimate/card export, live console, evidence, docs, browser-local policy simulations and source/brand downloads |
 | Devnet memo tool | Implemented and offline tested. Published run has no confirmed signature: faucet refused test SOL. Not an onchain vault. |
 
 October 5, 2026: **3 tasks / 3 inference calls / 0 duplicate calls**. Receipt survived exit 73; approved fallback inherited both prior results. Restart through completion: **5.641 seconds** in this one local run. Actual model generation and RPC reads; paper USD reserves. Zero provider charge; hardware/electricity not measured. Not an uptime SLA or a hosted AI service.
@@ -169,7 +169,7 @@ node chain/verify-canary.mjs          # artifact integrity and relationships onl
 node chain/verify-canary.mjs --live   # finalized RPC bytes, USDC deltas and final accounts
 ```
 
-This closes the bounded owned-agent financial canary; hosted customer execution, authenticated paid-provider billing and a BATTERY custody/token deployment are still absent.
+This closes the bounded owned-agent financial canary; hosted customer execution and authenticated paid-provider billing remain absent. The SDK deploys no custody program. This rebrand creates no new asset or change to an existing mint.
 
 ## Interleaved controller / actual mainnet run
 
@@ -180,12 +180,12 @@ This closes the bounded owned-agent financial canary; hosted customer execution,
 Python 3.10+ and Node 22+; no package dependencies, accounts, models or money required.
 
 ```sh
-python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py test_paid_provider.py
+python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py test_paid_provider.py test_paid_resource.py
 python3 paper_replay.py
 python3 verify_evidence.py
 node --test devnet/anchor.test.mjs
 cd site
-node --test test-network.mjs
+node --test test-network.mjs test-wallet.mjs
 ```
 
 Offline tests use named fixtures. Evidence verification checks hashes and event/task relationships; it does not authenticate the model or reconstruct an unpublished machine.
@@ -323,7 +323,7 @@ workers.py is deterministic. live_agent.py runs actual local Ollama with zero pr
 - Hashes prove internal integrity, not factual truth/provider authenticity. Events are operator-controlled records; reproduction is stronger evidence than trusting a coherent log.
 - Unknown effects stay held. Receipt recovery only covers a receipt already saved durably. Stronger paid-provider claims require idempotency/outbox/authenticated billing.
 - Optional test signer hard-locks devnet, quotes fees and protects a balance. Never import/fund with mainnet assets. Persisted transaction retries reuse one signature; expiry does not authorize automatic replacement.
-- No custody vault, token mint, withdrawal service, paid provider or distributed lease is deployed.
+- The SDK deploys no custody vault, withdrawal service, hosted paid provider or distributed lease. This rebrand creates no new asset and does not alter any existing mint.
 
 Optional `paid_provider.py` is local only, fixed OpenAI HTTPS with redirects/proxies/retries disabled. Keys stay in private env. Request/response IDs and usage are API evidence, not signed billing or credit balance. Full allocation stays held; unknown requests are never automatically repeated. Journal is not an account-wide cap; trusted operator can bypass it. [Runbook](paid-provider.md).
 

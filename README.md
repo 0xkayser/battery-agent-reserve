@@ -39,7 +39,7 @@ Reserve policy + durable local receipts + controlled recovery for agents whose r
 | SQLite ledger | Paper microUSD, protected floor, worst-case reservation, daily/job caps, supplied provider headroom, receipt deduplication, stale-worker fencing, unknown outcomes held |
 | Owned AI researcher | Actual public devnet data + local Ollama generation; durable receipt, forced process exit, Qwen -> Llama recovery and continuation |
 | Public network API | Fixed read-only devnet RPC batch, validated genesis/schema, actual slot/epoch/performance sample, 30s cache, explicit upstream failures |
-| ASCII product | Live console, evidence, docs, browser-local policies, simulation journal, import/export, source and brand downloads |
+| Public website tools | Real read-only Solana wallet power check, runway estimate/card export, live console, evidence, docs, browser-local policy simulations and source/brand downloads |
 | Devnet memo tool | Implemented and offline tested. Published run has no confirmed signature: faucet refused test SOL. Not an onchain vault. |
 
 October 5, 2026: **3 tasks / 3 inference calls / 0 duplicate calls**. Receipt survived exit 73; approved fallback inherited both prior results. Restart through completion: **5.641 seconds** in this one local run. Actual model generation and RPC reads; paper USD reserves. Zero provider charge; hardware/electricity not measured. Not an uptime SLA or a hosted AI service.
@@ -57,7 +57,7 @@ node chain/verify-canary.mjs          # artifact integrity and relationships onl
 node chain/verify-canary.mjs --live   # finalized RPC bytes, USDC deltas and final accounts
 ```
 
-This closes the bounded owned-agent financial canary; hosted customer execution, authenticated paid-provider billing and a BATTERY custody/token deployment are still absent.
+This closes the bounded owned-agent financial canary; hosted customer execution and authenticated paid-provider billing remain absent. The SDK deploys no custody program. This rebrand creates no new asset or change to an existing mint.
 
 ## Interleaved controller / actual mainnet run
 
@@ -68,12 +68,12 @@ This closes the bounded owned-agent financial canary; hosted customer execution,
 Python 3.10+ and Node 22+; no package dependencies, accounts, models or money required.
 
 ```sh
-python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py test_paid_provider.py
+python3 -m unittest -v test_battery.py test_live_agent.py test_integrated_runtime.py test_paid_provider.py test_paid_resource.py
 python3 paper_replay.py
 python3 verify_evidence.py
 node --test devnet/anchor.test.mjs
 cd site
-node --test test-network.mjs
+node --test test-network.mjs test-wallet.mjs
 ```
 
 Offline tests use named fixtures. Evidence verification checks hashes and event/task relationships; it does not authenticate the model or reconstruct an unpublished machine.

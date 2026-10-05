@@ -7,7 +7,7 @@
 - Hashes prove internal integrity, not factual truth/provider authenticity. Events are operator-controlled records; reproduction is stronger evidence than trusting a coherent log.
 - Unknown effects stay held. Receipt recovery only covers a receipt already saved durably. Stronger paid-provider claims require idempotency/outbox/authenticated billing.
 - Optional test signer hard-locks devnet, quotes fees and protects a balance. Never import/fund with mainnet assets. Persisted transaction retries reuse one signature; expiry does not authorize automatic replacement.
-- No custody vault, token mint, withdrawal service, paid provider or distributed lease is deployed.
+- The SDK deploys no custody vault, withdrawal service, hosted paid provider or distributed lease. This rebrand creates no new asset and does not alter any existing mint.
 
 Optional `paid_provider.py` is local only, fixed OpenAI HTTPS with redirects/proxies/retries disabled. Keys stay in private env. Request/response IDs and usage are API evidence, not signed billing or credit balance. Full allocation stays held; unknown requests are never automatically repeated. Journal is not an account-wide cap; trusted operator can bypass it. [Runbook](paid-provider.md).
 
