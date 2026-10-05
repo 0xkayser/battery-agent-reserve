@@ -29,3 +29,6 @@ PRODUCT.md
 working_pages.py
 dev-server.mjs
 test-network.mjs
+
+__pycache__/
+*.pyc
