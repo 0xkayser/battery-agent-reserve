@@ -1,0 +1,17 @@
+{
+  "schema": "battery.devnet-fee-quote/1",
+  "cluster": "devnet",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "observedAt": "2026-10-05T09:37:50.527Z",
+  "checkpointSha256": "eafa7f65fd308faa585e4af58b8e1f567f73a8cbc7d768502f58bb82bd0f5baf",
+  "payer": "F4PYcJ417j25Am4XENwLxAEsVBvMHB73Y7fhSufMpdfa",
+  "payerBalanceLamports": 0,
+  "blockhash": "ATKKJmXuKikGPooa3CzQ2oExVTPqADWUtGPoSocWSXMa",
+  "lastValidBlockHeight": 494933847,
+  "feeQuoteLamports": 5000,
+  "contextSlot": 507688779,
+  "memo": "BATTERY:checkpoint:v1:eafa7f65fd308faa585e4af58b8e1f567f73a8cbc7d768502f58bb82bd0f5baf",
+  "messageBase64": "AQABAtDh2eBhUs+2czheLxqgx+hdl7qqaEz4xfZVJNOySQmlBUpTWpkpIQZNJOhxYNo4fHw1td28kruB5B+oQEEFRI2Mdv4v4bckV4RI2BrwIBbIzl0foPMXghqYu/iObA3AeQEBAQBWQkFUVEVSWTpjaGVja3BvaW50OnYxOmVhZmE3ZjY1ZmQzMDhmYWE1ODVlNGFmNThiOGUxZjU2N2Y3M2E4Y2JjN2Q3Njg1MDJmNThiYjgyYmQwZjViYWY=",
+  "broadcast": false,
+  "meaning": "Actual public RPC acceptance and fee quote for an unsigned bounded Memo message; not a submitted or confirmed transaction"
+}
