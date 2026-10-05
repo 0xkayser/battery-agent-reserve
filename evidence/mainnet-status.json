@@ -34,12 +34,13 @@
   "localProgramTests": 15,
   "ownedAgentTasks": 3,
   "duplicateModelCalls": 0,
-  "fundingAddressPublished": false,
+  "fundingAddressPublished": true,
   "settlementPayments": 3,
   "receivedUsdc": 5000000,
   "returnedUsdc": 5000000,
   "delegationClosed": true,
   "proofSha256": "5e11f8cb16b3304a2c1ff5ac974af1dedb636f73283db300afdc1a988186620a",
   "proofUrl": "/evidence/mainnet-canary.json",
-  "mainnetSigningEnabledOnWebsite": false
+  "mainnetSigningEnabledOnWebsite": false,
+  "publicDepositService": false
 }
