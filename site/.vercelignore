@@ -36,3 +36,6 @@ __pycache__/
 WORKING-QA.json
 
 resource_page.py
+
+token_page.py
+token-config.json

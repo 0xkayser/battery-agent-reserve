@@ -2,6 +2,7 @@
 > Reserve policy and controlled recovery for owned agents. Developer SDK v0.4 preparation; completed bounded mainnet canary.
 
 ## Documentation
+- [Token status](https://usebattery.xyz/token): upcoming $BATTERY on Solana; CA and purchase links unannounced.
 - [Direct paid work](https://usebattery.xyz/power): Exa x402 controller; live unpaid offer; paid canary awaits separate funding.
 - [Paid resource runbook](https://usebattery.xyz/developer/paid-resource.md): exact vendor expense, floor, cap and recovery boundaries.
 - [Research brief](https://usebattery.xyz/agents.md): hypothesis, evidence and limits.

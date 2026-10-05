@@ -29,3 +29,11 @@ dialog{overflow:hidden}.guide-scroll{max-height:calc(90vh - 160px);overflow:auto
 .ascii-edge{max-width:100%;overflow:hidden}.release-strip>a{min-width:0;max-width:100%;overflow-wrap:anywhere}
 .ascii-edge,.ascii-rule{color:#777}
 .proof-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:25px 0}.proof-stats dt{font-size:.75rem;color:#aaa}.proof-stats dd{font-size:2rem;margin:8px 0}.proof-stats>div{min-width:0}.code{overflow-wrap:anywhere}.text-button:disabled{cursor:wait;color:#aaa}.panel a{overflow-wrap:anywhere}@media(max-width:760px){.proof-stats{grid-template-columns:1fr;gap:14px}.proof-stats dd{font-size:1.75rem}}
+
+/* Token status uses text and character borders; no pre-launch trading actions. */
+.token-launch{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:30px;align-items:center}
+.token-launch-title h2{font-size:2rem;margin:8px 0}.token-launch-title p{margin:10px 0 0}
+.token-facts{margin:0}.token-facts dt{color:#999;font-size:.75rem}.token-facts dd{margin:6px 0 0;font-size:1.125rem}
+.token-launch-info{min-width:0}.token-launch-info .fine{margin:12px 0}.text-button.token-pending:disabled{color:#777;cursor:default;text-decoration:none}
+footer{flex-wrap:wrap}footer .text-button{font-size:.75rem;min-height:32px}
+@media(max-width:760px){.token-launch{grid-template-columns:minmax(0,1fr);gap:22px}.token-launch-title h2{font-size:1.75rem}}

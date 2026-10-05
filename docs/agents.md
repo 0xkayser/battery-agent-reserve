@@ -73,3 +73,13 @@ adversarial-worker reserve. https://usebattery.xyz/power and
 https://usebattery.xyz/developer/paid-resource.md. Primary contract:
 https://usebattery.xyz/developer/data-contract.md. Readiness JSON is an unpaid402
 quote, never a completed paid proof. Missing delivery stays held without repurchase.
+
+
+## Upcoming project token / 2026-10-05
+
+$BATTERY is the upcoming BATTERY community token on Solana.
+https://usebattery.xyz/token is the official project token status page.
+No official mint or purchase destination is published; launch terms, distribution
+and holder benefits are unannounced. The free SDK does not require buying a token.
+Agent reserves remain USDC; product fees and vendor expenses are separate.
+A token-status page is not evidence of issuance, paid demand or token utility.
