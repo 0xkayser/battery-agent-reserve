@@ -37,7 +37,7 @@ The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM ch
 - Actual reproduction: install/start Ollama, install qwen2.5:7b and llama3.2:3b, then python3 run_recovery.py --state-dir live-state/fresh-run. Reads public devnet, runs local models, no paid provider key.
 - API: https://usebattery.xyz/openapi.json
 - Discovery: https://usebattery.xyz/llms.txt
-- Automated checks: 53 Python and 28 offline Node checks plus 15 local program checks passed for the published SDK release.
+- Automated checks: 55 Python and 28 offline Node checks plus 15 local program checks passed for the published SDK release.
 
 ## What the proof establishes
 
@@ -84,7 +84,7 @@ quote, never a completed paid proof. Missing delivery stays held without repurch
 New finite controller: reserve -> buy Exa search via Solana x402 -> verify actual
 payment and primary-source result -> book USDC expense -> recover -> return capital.
 Actual unpaid HTTP402/0.007USDC offer checked. New purchases are **not yet executed**;
-separate funding required.15 new fault/message checks pass (8 Python,7 Node).
+separate funding required.17 new fault/message checks pass (10 Python,7 Node).
 
 - [Runbook and monetary boundaries](docs/paid-resource.md)
 - [Data contract](docs/data-contract.md)

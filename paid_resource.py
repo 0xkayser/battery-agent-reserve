@@ -202,7 +202,7 @@ class ResourceRuntime:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('command', choices=('prepare','probe','status','run','cancel','export'))
-    parser.add_argument('--approve-max-0.03-usdc', action='store_true')
+    parser.add_argument('--approve-max-0.03-usdc', dest='approve_max_0_03_usdc', action='store_true')
     parser.add_argument('--crash-after-receipt', type=int, choices=(1,2,3))
     args = parser.parse_args()
     STATE.mkdir(parents=True, exist_ok=True, mode=0o700)

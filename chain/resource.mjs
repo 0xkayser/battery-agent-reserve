@@ -123,7 +123,8 @@ async function context(){
 function rowPath(id){safeTask(id);return join(state,id+'.json');}
 function loadRow(id){const p=rowPath(id);if(!existsSync(p))return null;const r=read(p);
  if(r.requestHash!==sha(safeTask(id).request)||canonical(r.request)!==canonical(safeTask(id).request)||r.offer&&canonical(r.offer)!==canonical(selectOffer(r.challenge))||
-    r.payment&&sha(r.payment)!==r.paymentHash||r.response&&sha(r.response)!==r.responseHash)throw Error('Payment journal integrity mismatch');return r;}
+    r.payment&&sha(r.payment)!==r.paymentHash||r.response&&sha(r.response)!==r.responseHash||r.result&&sha(r.result)!==r.resultHash)throw Error('Payment journal integrity mismatch');
+ if(r.status==='complete'&&(canonical(r.result)!==canonical(sources(JSON.parse(r.response.body)))||canonical(r.confirmation)!==canonical(verifyPayment(r,r.chain))))throw Error('Completed payment/result binding changed');return r;}
 export async function main(args=process.argv.slice(2)){
  if(process.env.BATTERY_RESOURCE_LOCK!=='1')throw Error('Use paid_resource.py for single-operator exclusion');
  const [command,id,...flags]=args;

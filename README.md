@@ -5,7 +5,7 @@
 New finite controller: reserve -> buy Exa search via Solana x402 -> verify actual
 payment and primary-source result -> book USDC expense -> recover -> return capital.
 Actual unpaid HTTP402/0.007USDC offer checked. New purchases are **not yet executed**;
-separate funding required.15 new fault/message checks pass (8 Python,7 Node).
+separate funding required.17 new fault/message checks pass (10 Python,7 Node).
 
 - [Runbook and monetary boundaries](docs/paid-resource.md)
 - [Data contract](docs/data-contract.md)

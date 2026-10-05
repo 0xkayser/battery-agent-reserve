@@ -122,6 +122,31 @@ class ResourceTests(unittest.TestCase):
             self.assertFalse((self.path/'vendor/vendor.json').exists())
         finally:r.close()
 
+    def test_actual_cli_budget_flag_dispatches_only_the_injected_offline_vendor(self):
+        from unittest.mock import patch
+        import paid_resource
+        from contextlib import redirect_stdout
+        import io
+        output=io.StringIO()
+        with patch.object(paid_resource,'STATE',self.path),patch.object(paid_resource,'ResourceCommand',return_value=FixtureVendor(self.path/'vendor')),patch.object(sys,'argv',['paid_resource.py','run','--approve-max-0.03-usdc']),redirect_stdout(output):
+            paid_resource.main()
+        self.assertTrue(json.loads(output.getvalue())['closed'])
+        self.assertEqual(self.vendor_state()['dispatches'],3)
+
+    def test_supervisor_replay_preserves_crash_witness_and_uses_readonly_child(self):
+        from unittest.mock import patch
+        import run_paid_resource
+        from contextlib import redirect_stdout
+        import io
+        witness={'schema':'battery.resource-supervisor/1','exitCodes':[76,0],'plannedCrashExit':76,'closedReplayPassed':True}
+        path=self.path/'supervisor.json';path.write_text(canonical(witness))
+        result=subprocess.CompletedProcess([],0,canonical({'closed':True}),'')
+        with patch.object(run_paid_resource,'STATE',self.path),patch.object(sys,'argv',['run_paid_resource.py','--approve-max-0.03-usdc']),patch.object(run_paid_resource.subprocess,'run',return_value=result) as child,redirect_stdout(io.StringIO()):
+            run_paid_resource.main()
+        self.assertEqual(json.loads(path.read_text()),witness)
+        self.assertEqual(child.call_count,1)
+        self.assertNotIn('--approve-max-0.03-usdc',child.call_args.args[0])
+
     def test_cli_kernel_lock_refuses_another_process_before_init(self):
         import fcntl
         from paid_resource import STATE
