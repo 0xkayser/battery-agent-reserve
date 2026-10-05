@@ -37,7 +37,7 @@ The downloaded Solana Subscriptions mainnet executable passes15 local LiteSVM ch
 - Actual reproduction: install/start Ollama, install qwen2.5:7b and llama3.2:3b, then python3 run_recovery.py --state-dir live-state/fresh-run. Reads public devnet, runs local models, no paid provider key.
 - API: https://usebattery.xyz/openapi.json
 - Discovery: https://usebattery.xyz/llms.txt
-- Automated checks: 29 Python and 21 offline Node checks plus 15 local program checks passed for the published SDK release.
+- Automated checks: 45 Python and 21 offline Node checks plus 15 local program checks passed for the published SDK release.
 
 ## What the proof establishes
 

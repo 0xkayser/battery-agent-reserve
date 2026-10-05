@@ -64,3 +64,5 @@ Before paid-service readiness: reconcile authoritative project billing including
 - No second paid request was submitted to repair the text. Next authorized experiment must state `intentional_crashes:1`, `process_exit_code:74` and `total_fee_lamports_for_8_transactions:40000` explicitly. Preserve this original rejected output and journal.
 
 [Selected API record](https://usebattery.xyz/evidence/paid-provider.json) includes public source observations, provider IDs, usage, output quarantined by its rejection, recovery events and limitations. `python3 verify_paid.py` verifies offline relationships; it cannot independently authenticate the provider or establish an invoice.
+
+A [maintainer-reviewed operator brief](https://usebattery.xyz/evidence/operator-brief-reviewed.md) corrects the two factual errors against the source. It is an explicitly manual derivative; the raw response remains rejected and no customer acceptance or authoritative charge is implied.
