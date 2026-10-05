@@ -20,7 +20,7 @@ BATTERY's wedge is the seam between **allocated operator budget**, **what the pr
 - ASCII product: live console, evidence, docs, local policies, simulation journal, validated import/export and downloadable source.
 - Optional devnet Memo signer implemented and offline tested. Faucet refused test SOL; this run has no confirmed signature or deployed vault.
 
-## Mainnet preparation / independently bounded
+## Mainnet / finalized bounded experiment
 
 A separate dated mainnet research run:3 tasks,3 calls,0 duplicates,5.938s restart through completion. Actual Qwen/Llama and live mainnet reads; paper inference budget, not provider billing. https://usebattery.xyz/evidence/mainnet-agent.json.
 
@@ -52,6 +52,9 @@ Research questions: Does an operator with a useful agent value a portable policy
 First-user hypothesis: an operator controlling an already useful workload, or a small launchpad controlling its runtime. A third-party read-only API does not establish permission to wake/import/control its agents.
 
 Assess independently from source and evidence. This brief does not instruct readers to assign a favorable rating, recommend buying a token or ignore weaknesses.
+
+## Commercial model / hypothesis only
+Self-hosted MIT SDK licence:$0; hardware/electricity/provider/network costs remain operator expenses. Proposed hosted service: fixed monthly fee per active agent for budget checks, recovery and monitoring. Hosted service is not for sale; fee amount, paid-task cost, operating margin and customer willingness to pay are unvalidated. The canary's5USDC principal returned and three0.01USDC worker transfers are not BATTERY revenue or paid-provider invoices. https://usebattery.xyz/developer/pricing.md.
 
 
 ---
@@ -144,6 +147,9 @@ One working owned-agent adapter, not universal framework/browser migration. Mode
 
 Open production gates: authenticated paid billing/headroom, customer task-quality acceptance, distributed leases and a reviewed USDC vault. No BATTERY custody program or token exists. The completed canary used the existing Solana Subscriptions program. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; uninterrupted 72h uptime is unverified. [BRIEF.md](BRIEF.md) records the original finite research sample and limitations.
 
+## Costs and revenue status
+Free MIT self-hosted SDK. Hosted managed-service pricing is a hypothesis and no plan is available for purchase. Local experiment provider charge0 does not include hardware/electricity and is not a service tariff. Operator total cost separates provider bills, network fees and a proposed fixed monthly service fee. No paid-provider unit economics, BATTERY revenue or paying customer is demonstrated. [Costs and commercial hypothesis](docs/pricing.md).
+
 
 ---
 
@@ -226,3 +232,40 @@ Sensitive reports must not include secrets in public issues. No dedicated privat
 ## Pending mainnet canary
 
 Separate fresh local owner/worker keys; program/mint/genesis/bytecode hash pinned. Fixed cumulative USDC allowance and expiry/revoke are onchain; floor applies only under the isolated no-other-delegations assumption. Owner/file access retains authority. Program upgradeability and broad underlying token delegation are material boundaries. No malicious-worker isolation, paid-provider guarantee or hosted custody. Default tests never broadcast; financial CLI requires an explicit budget flag and reviewed funding. Signed bytes remain held on ambiguity/expiry. See mainnet.md for confirmed canary scope, refund path and still-unpassed hosted paid-service gates.
+
+
+---
+
+# BATTERY / costs and commercial hypothesis
+
+Status, October 5, 2026: **free self-hosted MIT SDK; no hosted paid plan or checkout**. No paying customer, BATTERY service revenue, validated tariff or measured paid-provider unit economics is published.
+
+## What is available today
+
+| Item | Current price / cost | Who pays |
+| --- | --- | --- |
+| Self-hosted BATTERY SDK | $0 software licence under MIT | Operator provides its machine/runtime |
+| Local model experiment | $0 external provider charge | Operator still bears hardware/electricity; unmeasured |
+| Mainnet canary | 0.00004 SOL transaction fees for 8 BATTERY transactions | Operator; sender funding fees/rent were separate |
+| User reserve principal | 5 USDC received and5 USDC returned | Operator-owned capital, not BATTERY revenue |
+| Hosted managed runtime | Not available for purchase | No tariff, subscription or customer billing active |
+
+Neither a 0.01 USDC transfer to our own worker nor a 0.000005 SOL transaction fee is a BATTERY service price. The inference completed before the settlements and used local models. The canary does not establish paid-inference cost or business margin.
+
+## Proposed revenue model / unvalidated
+
+Target buyer: an operator of an already useful agent, with control over its runtime. Proposed paid product: hosted budget checks, durable receipts, recovery and operational monitoring. Hypothesis: a **fixed monthly service fee per active agent**. The fee amount and willingness to pay are not established; this is not a live offer.
+
+Provider costs and Solana fees remain separate operator expenses. A provider account's credit/headroom must authorize a request; holding USDC alone does not create provider credit or SOL gas. No automatic gas conversion is currently implemented.
+
+```text
+OPERATOR TOTAL COST = provider bill + network fees + BATTERY service fee
+BATTERY REVENUE     = service fee
+BATTERY CONTRIBUTION= service fee - hosting/RPC/storage/support/recovery costs
+```
+
+SDK-only users pay no BATTERY service fee. The proposed hosted fee is not a percentage of reserve principal or speculative trading volume. No inference markup, profitable margin, token demand or buyback-funded revenue is demonstrated.
+
+## Evidence required before setting a paid tariff
+
+One useful paid-provider task must have an authoritative charge tied to its request ID, bounded reserve/gas authorization and an accepted result. Recovery must reconcile billed failures and unknown outcomes; it must not silently repeat a potentially charged request. Measure actual runtime/RPC/storage costs per active agent and have one external operator pay for this service. Until then, pricing and margin remain hypotheses.

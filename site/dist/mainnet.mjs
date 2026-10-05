@@ -10,17 +10,4 @@ async function refresh(){
  finally{button.disabled=false;window.dispatchEvent(new Event('battery-render'));}
 }
 button.addEventListener('click',refresh);setInterval(age,1000);refresh();
-const verifyButton=document.getElementById('verify-financial-proof'),integrity=document.getElementById('financial-integrity');
-verifyButton?.addEventListener('click',async()=>{
- verifyButton.disabled=true;integrity.textContent='[ CHECKING PUBLISHED ARTIFACT ]';
- try{
-  const response=await fetch('/evidence/mainnet-canary.json',{signal:AbortSignal.timeout(15000)});
-  if(!response.ok)throw Error('Artifact unavailable');const proof=await response.json();
-  if(proof.schema!=='battery.mainnet-financial-proof/1')throw Error('Wrong artifact schema');
-  const bytes=new TextEncoder().encode(JSON.stringify(proof.body));
-  const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
-  if(digest!==proof.sha256)throw Error('Hash mismatch');
-  integrity.textContent=`[ HASH MATCH / ${Object.keys(proof.body.receipts).length} RECEIPTS ]\n${digest}\nIntegrity only. Follow transaction links or run --live for chain verification.`;
- }catch(e){integrity.textContent='[ VERIFICATION FAILED ] '+e.message;}
- finally{verifyButton.disabled=false;window.dispatchEvent(new Event('battery-render'));}
-});
+import './financial-integrity.mjs';

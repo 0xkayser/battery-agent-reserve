@@ -85,3 +85,6 @@ Read [architecture](docs/architecture.md), [adapter contract](docs/adapters.md),
 One working owned-agent adapter, not universal framework/browser migration. Model output is text, never executable commands or financial authority. Local QA server: `cd site && node dev-server.mjs`, loopback only, port 4183.
 
 Open production gates: authenticated paid billing/headroom, customer task-quality acceptance, distributed leases and a reviewed USDC vault. No BATTERY custody program or token exists. The completed canary used the existing Solana Subscriptions program. Browser lab and 72 logical-hour replay are simulations. The separate hourly observer had gaps; uninterrupted 72h uptime is unverified. [BRIEF.md](BRIEF.md) records the original finite research sample and limitations.
+
+## Costs and revenue status
+Free MIT self-hosted SDK. Hosted managed-service pricing is a hypothesis and no plan is available for purchase. Local experiment provider charge0 does not include hardware/electricity and is not a service tariff. Operator total cost separates provider bills, network fees and a proposed fixed monthly service fee. No paid-provider unit economics, BATTERY revenue or paying customer is demonstrated. [Costs and commercial hypothesis](docs/pricing.md).

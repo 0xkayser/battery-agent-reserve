@@ -1,3 +1,4 @@
+import './financial-integrity.mjs';
 const result=document.getElementById('integrity-result'),button=document.getElementById('verify-checkpoint');
 const canonical=v=>v===null||typeof v!=='object'?JSON.stringify(v):Array.isArray(v)?'['+v.map(canonical).join(',')+']':'{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}';
 button.addEventListener('click',async()=>{

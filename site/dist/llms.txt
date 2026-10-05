@@ -5,6 +5,7 @@
 - [Research brief](https://usebattery.xyz/agents.md): hypothesis, evidence and limits.
 - [Full text](https://usebattery.xyz/llms-full.txt): README, architecture, adapters and security.
 - [Developer docs](https://usebattery.xyz/docs): reproduce actual inference and recovery.
+- [Costs and commercial hypothesis](https://usebattery.xyz/developer/pricing.md): free SDK; hosted pricing, paid costs and revenue unvalidated.
 - [OpenAPI](https://usebattery.xyz/openapi.json): fixed read-only devnet API.
 
 ## Evidence

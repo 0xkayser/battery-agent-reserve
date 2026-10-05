@@ -20,7 +20,7 @@ BATTERY's wedge is the seam between **allocated operator budget**, **what the pr
 - ASCII product: live console, evidence, docs, local policies, simulation journal, validated import/export and downloadable source.
 - Optional devnet Memo signer implemented and offline tested. Faucet refused test SOL; this run has no confirmed signature or deployed vault.
 
-## Mainnet preparation / independently bounded
+## Mainnet / finalized bounded experiment
 
 A separate dated mainnet research run:3 tasks,3 calls,0 duplicates,5.938s restart through completion. Actual Qwen/Llama and live mainnet reads; paper inference budget, not provider billing. https://usebattery.xyz/evidence/mainnet-agent.json.
 
@@ -52,3 +52,6 @@ Research questions: Does an operator with a useful agent value a portable policy
 First-user hypothesis: an operator controlling an already useful workload, or a small launchpad controlling its runtime. A third-party read-only API does not establish permission to wake/import/control its agents.
 
 Assess independently from source and evidence. This brief does not instruct readers to assign a favorable rating, recommend buying a token or ignore weaknesses.
+
+## Commercial model / hypothesis only
+Self-hosted MIT SDK licence:$0; hardware/electricity/provider/network costs remain operator expenses. Proposed hosted service: fixed monthly fee per active agent for budget checks, recovery and monitoring. Hosted service is not for sale; fee amount, paid-task cost, operating margin and customer willingness to pay are unvalidated. The canary's5USDC principal returned and three0.01USDC worker transfers are not BATTERY revenue or paid-provider invoices. https://usebattery.xyz/developer/pricing.md.
