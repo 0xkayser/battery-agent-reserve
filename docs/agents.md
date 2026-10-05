@@ -75,17 +75,9 @@ https://usebattery.xyz/developer/data-contract.md. Readiness JSON is an unpaid40
 quote, never a completed paid proof. Missing delivery stays held without repurchase.
 
 
-## Published project token / 2026-10-06
+## Token disclosure / 2026-10-06
 
-$BATTERY / Battery Protocol is the user-designated project token on Solana mainnet.
-Official CA: C71Lk8KoZTm4UTjEg5qUTQ7Eu39pYY31wVQfmPrrpump
-Token status: https://usebattery.xyz/token
-Purchase: https://pump.fun/coin/C71Lk8KoZTm4UTjEg5qUTQ7Eu39pYY31wVQfmPrrpump
-Dated finalized mint identity: https://usebattery.xyz/evidence/token-status.json
-Announcement: https://x.com/usebatteryxyz/status/2107219741383459069
-
-Finalized RPC matched Battery Protocol/BATTERY, Token2022, six decimals;
-mint/freeze/metadata-update authorities were null at observation. This does not
-audit distribution, liquidity, token economics or create holder benefits.
-Free SDK needs no token purchase. Agent reserves remain USDC; vendor expenses
-and product fees are separate. Hosted paid service remains unavailable.
+At the project owner's request, the website does not display a contract address
+or purchase links. This change does not revoke or erase any previously issued
+onchain token. Token purchase does not activate the free SDK or hosted service.
+Agent reserves and vendor expenses remain separate from the project token.
