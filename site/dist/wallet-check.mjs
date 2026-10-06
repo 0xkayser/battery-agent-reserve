@@ -27,10 +27,10 @@ async function check(){
   $('power-result').hidden=false;$('check-status').textContent='Observation ready. Add your daily spend for a runway estimate.';
   if($('daily-spend').value.trim())estimateRunway();
  }catch(e){if(request===own&&e.name!=='AbortError')$('check-status').textContent=e.message;}
- finally{if(request===own){$('check-button').disabled=false;$('check-button').innerHTML='Check runway <span aria-hidden="true">↗</span>';}}
+ finally{if(request===own){$('check-button').disabled=false;$('check-button').innerHTML='Check wallet <img class="ui-icon" src="/assets/second-life/icons/arrow-right.svg" alt="" width="18" height="18">';}}
 }
 $('wallet-form').addEventListener('submit',e=>{e.preventDefault();check();});
-$('wallet').addEventListener('input',()=>{request?.abort();request=null;clear();$('check-button').disabled=false;$('check-button').textContent='Check runway ↗';$('check-status').textContent='Wallet changed. Run a new check.';});
+$('wallet').addEventListener('input',()=>{request?.abort();request=null;clear();$('check-button').disabled=false;$('check-button').textContent='Check wallet';$('check-status').textContent='Wallet changed. Run a new check.';});
 $('example-wallet').addEventListener('click',()=>{$('wallet').value=sample;check();});
 $('estimate-form').addEventListener('submit',e=>{e.preventDefault();estimateRunway();});
 for(const id of ['daily-spend','protected-floor'])$(id).addEventListener('input',()=>{projection=null;$('report-link-box').hidden=true;$('share-card').hidden=true;$('save-card').hidden=true;$('estimate-error').textContent='Estimate inputs changed. Calculate again before sharing.';});
@@ -44,10 +44,10 @@ $('share-report').addEventListener('click',async()=>{if(!observation)return;cons
 $('save-card').addEventListener('click',()=>{
  if(!projection||!observation)return;
  const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=675;const c=canvas.getContext('2d');
- c.fillStyle='#d6fa4b';c.fillRect(0,0,1200,675);c.fillStyle='#20241d';c.font='bold 36px Arial';c.fillText('UNHALT',64,82);c.font='18px Arial';c.fillText('AGENT RUNWAY CARD / SOLANA',736,82);
- c.font='bold 112px Arial';c.fillText(projection.label,62,262);c.font='24px Arial';c.fillText('USDC runway / operator spend estimate',66,312);
- const days=projection.days==='>365'?365:Number(projection.days);for(let i=0;i<5;i++){c.fillStyle='#b7d442';c.fillRect(66+i*218,366,194,52);c.fillStyle='#20241d';c.fillRect(66+i*218,366,194*Math.max(0,Math.min(1,days/7*5-i)),52);}c.font='16px Arial';c.fillText('0–7 days / USDC runway scale',66,443);
- c.fillStyle='#20241d';c.font='24px Arial';c.fillText(`${amount(observation.usdc.spendableUnits)} USDC observed · ${amount(projection.dailyUnits)} USDC/day assumed`,66,472);
+ c.fillStyle='#120d13';c.fillRect(0,0,1200,675);c.fillStyle='#f2ede8';c.font='bold 36px Arial';c.fillText('UNHALT',64,82);c.font='18px Arial';c.fillText('AGENT RUNWAY CARD / SOLANA',736,82);
+ c.fillStyle='#ff826f';c.font='112px Continuity, Georgia';c.fillText(projection.label,62,262);c.font='24px Arial';c.fillText('USDC runway / operator spend estimate',66,312);
+ const days=projection.days==='>365'?365:Number(projection.days);for(let i=0;i<5;i++){c.fillStyle='#51332f';c.fillRect(66+i*218,366,194,52);c.fillStyle='#f2ede8';c.fillStyle='#ff826f';c.fillRect(66+i*218,366,194*Math.max(0,Math.min(1,days/7*5-i)),52);}c.font='16px Arial';c.fillText('0–7 days / USDC runway scale',66,443);
+ c.fillStyle='#f2ede8';c.font='24px Arial';c.fillText(`${amount(observation.usdc.spendableUnits)} USDC observed · ${amount(projection.dailyUnits)} USDC/day assumed`,66,472);
  c.font='21px Arial';c.fillText(`${amount(projection.floorUnits)} USDC floor assumed · ${short(observation.wallet)}${projection.belowFloor?' · BELOW FLOOR':''}`,66,512);
  c.font='17px Arial';c.fillText(`Observed ${observation.observedAt} · finalized · usebattery.xyz`,66,579);c.fillText('USDC only. Gas/fees separate. Not provider credit or agent-health attestation.',66,618);
  canvas.toBlob(blob=>{if(blob)blobDownload(blob,'unhalt-runway-card.png');},'image/png');
