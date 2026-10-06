@@ -1,4 +1,5 @@
-// Decorative motion of the existing artwork. This never reads wallet/runtime data.
+// A 12-second, authored transfer in the existing artwork. No generated geometry,
+// wallet data or runtime state: one held shape, one impulse, one quiet recovery.
 const image = document.querySelector('.memory-art');
 const hero = document.querySelector('.living-hero');
 const toggle = document.querySelector('.memory-toggle');
@@ -40,6 +41,9 @@ if (image && hero && toggle) {
   function draw() {
     gl.uniform1f(timeUniform, elapsed);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
+    const beat = elapsed % 12;
+    hero.dataset.motionPhase = beat < 2 ? 'rest' : beat < 4 ? 'gather'
+      : beat < 5.8 ? 'transfer' : beat < 9 ? 'recover' : 'rest';
   }
 
   function resize() {
@@ -109,31 +113,43 @@ if (image && hero && toggle) {
         uniform sampler2D artwork;
         uniform float time;
         uniform vec2 fit;
+        float bell(float t,float a,float b){
+          float v=clamp((t-a)/(b-a),0.,1.);
+          return pow(sin(v*3.14159265),2.);
+        }
         void main(){
           vec2 p=(uv-.5)/fit+.5;
           vec3 background=vec3(18.,13.,19.)/255.;
           if(p.x<0.||p.x>1.||p.y<0.||p.y>1.){gl_FragColor=vec4(background,1.);return;}
-          float side=smoothstep(.02,.24,abs(p.x-.5));
+          float beat=mod(time,12.);
+          float gather=bell(beat,2.,5.2);
+          float recover=bell(beat,5.,9.);
+          float pass=bell(beat,3.8,5.8);
+          vec2 anchor=vec2(.502,.492);
+          float left=1.-smoothstep(.46,.50,p.x);
+          float right=smoothstep(.51,.56,p.x);
           float edge=smoothstep(0.,.06,p.x)*smoothstep(0.,.06,1.-p.x)
             *smoothstep(0.,.08,p.y)*smoothstep(0.,.08,1.-p.y);
-          // Local flow, anchored at the connecting node. No whole-page zoom.
-          vec2 drift=vec2(sin(p.y*10.+time*.55)+.45*sin(p.x*19.-time*.37),
-            sin(p.x*13.-time*.48)+.35*cos(p.y*16.+time*.31));
-          p+=drift*vec2(.0038,.009)*side*edge;
+          // Coherent strain: lobes pull against the fixed connection, then release.
+          // No noise field, independent wobble or movement of the camera/background.
+          vec2 relative=p-anchor;
+          p+=relative*vec2(.020,-.012)*gather*left*edge;
+          p-=relative*vec2(.012,.021)*recover*right*edge;
           vec3 base=texture2D(artwork,p).rgb;
-          float detail=smoothstep(.12,.55,max(base.r,max(base.g,base.b)));
-          float tissue=.055*sin(time*.8+p.x*12.-p.y*7.);
-          // A slow wave highlights existing filaments, rather than drawing fake paths.
-          float travel=fract(time/6.5)*1.24-.12;
-          float sweep=exp(-pow((p.x-travel)/.055,2.));
-          float trunk=.48+.045*sin((p.x-.5)*5.);
-          float channel=exp(-pow((p.y-trunk)/.19,2.));
-          vec2 center=(p-vec2(.502,.492))*vec2(2.566,1.);
-          float heartbeat=.5+.5*sin(time*1.4);
-          float node=exp(-dot(center,center)/.0009)*(.08+.11*heartbeat);
-          float shimmer=.07*sin(time*1.05+p.x*43.+p.y*24.);
-          vec3 light=vec3(1.,.48,.35)*detail*(sweep*(.16+.48*channel)+tissue+shimmer*.35);
-          gl_FragColor=vec4(base+light+vec3(1.,.62,.45)*node,1.);
+          // Gate light to warm filaments already present in the source. The packet
+          // follows only the connecting stem, never a vertical band of the image.
+          float detail=smoothstep(.18,.65,max(base.r,max(base.g,base.b)));
+          float warm=smoothstep(.025,.16,base.r-base.b);
+          float travel=mix(.27,.76,smoothstep(3.8,5.8,beat));
+          float stem=.492+.085*sin((p.x-.502)*3.1);
+          float packet=exp(-pow((p.x-travel)/.034,2.))
+            *exp(-pow((p.y-stem)/.032,2.))*pass;
+          vec2 center=(p-anchor)*vec2(2.566,1.);
+          float handoff=bell(beat,4.35,5.25);
+          float node=exp(-dot(center,center)/.00042)*handoff;
+          float receive=bell(beat,5.5,8.3)*right;
+          vec3 light=vec3(1.,.42,.27)*detail*warm*(packet*.38+receive*.035);
+          gl_FragColor=vec4(base+light+vec3(1.,.62,.45)*node*.13,1.);
         }
       `);
       program = gl.createProgram();
