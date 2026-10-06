@@ -1,8 +1,8 @@
-// A 12-second, authored transfer in the existing artwork. No generated geometry,
-// wallet data or runtime state: one held shape, one impulse, one quiet recovery.
+// A visible eight-second transfer in the original artwork, not live telemetry.
 const image = document.querySelector('.memory-art');
 const hero = document.querySelector('.living-hero');
 const toggle = document.querySelector('.memory-toggle');
+const replay = document.querySelector('.memory-replay');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 
 if (image && hero && toggle) {
@@ -24,6 +24,7 @@ if (image && hero && toggle) {
     hero.classList.remove('memory-animated');
     canvas.remove();
     toggle.hidden = true;
+    if (replay) replay.hidden = true;
     hero.dataset.motion = 'static';
   }
 
@@ -41,9 +42,9 @@ if (image && hero && toggle) {
   function draw() {
     gl.uniform1f(timeUniform, elapsed);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
-    const beat = elapsed % 12;
-    hero.dataset.motionPhase = beat < 2 ? 'rest' : beat < 4 ? 'gather'
-      : beat < 5.8 ? 'transfer' : beat < 9 ? 'recover' : 'rest';
+    const beat = elapsed % 8;
+    hero.dataset.motionPhase = beat < 1.15 ? 'gather' : beat < 3.15 ? 'transfer'
+      : beat < 6.8 ? 'recover' : 'rest';
   }
 
   function resize() {
@@ -85,6 +86,7 @@ if (image && hero && toggle) {
     const staticPreference = reduced.matches;
     hero.classList.toggle('memory-animated', ready && !failed && !staticPreference);
     toggle.hidden = !ready || failed || staticPreference;
+    if (replay) replay.hidden = toggle.hidden;
     toggle.textContent = paused ? 'Resume motion' : 'Pause motion';
     toggle.setAttribute('aria-label', paused ? 'Resume decorative animation' : 'Pause decorative animation');
     toggle.setAttribute('aria-pressed', String(paused));
@@ -121,10 +123,10 @@ if (image && hero && toggle) {
           vec2 p=(uv-.5)/fit+.5;
           vec3 background=vec3(18.,13.,19.)/255.;
           if(p.x<0.||p.x>1.||p.y<0.||p.y>1.){gl_FragColor=vec4(background,1.);return;}
-          float beat=mod(time,12.);
-          float gather=bell(beat,2.,5.2);
-          float recover=bell(beat,5.,9.);
-          float pass=bell(beat,3.8,5.8);
+          float beat=mod(time,8.);
+          float gather=bell(beat,0.,2.7);
+          float recover=smoothstep(2.6,3.7,beat)-smoothstep(5.3,6.8,beat);
+          float pass=bell(beat,1.1,3.2);
           vec2 anchor=vec2(.502,.492);
           float left=1.-smoothstep(.46,.50,p.x);
           float right=smoothstep(.51,.56,p.x);
@@ -133,23 +135,32 @@ if (image && hero && toggle) {
           // Coherent strain: lobes pull against the fixed connection, then release.
           // No noise field, independent wobble or movement of the camera/background.
           vec2 relative=p-anchor;
-          p+=relative*vec2(.020,-.012)*gather*left*edge;
-          p-=relative*vec2(.012,.021)*recover*right*edge;
+          p+=relative*vec2(.105,-.040)*gather*left*edge;
+          p-=relative*vec2(.085,.105)*recover*right*edge;
+          // A small coherent twist opens the receiving membrane. It does not
+          // independently shake individual pixels or move the joining anchor.
+          p+=vec2(-relative.y*.018,relative.x*.055)*recover*right*edge;
           vec3 base=texture2D(artwork,p).rgb;
           // Gate light to warm filaments already present in the source. The packet
           // follows only the connecting stem, never a vertical band of the image.
           float detail=smoothstep(.18,.65,max(base.r,max(base.g,base.b)));
           float warm=smoothstep(.025,.16,base.r-base.b);
-          float travel=mix(.27,.76,smoothstep(3.8,5.8,beat));
+          float travel=mix(.20,.83,smoothstep(1.1,3.2,beat));
           float stem=.492+.085*sin((p.x-.502)*3.1);
-          float packet=exp(-pow((p.x-travel)/.034,2.))
-            *exp(-pow((p.y-stem)/.032,2.))*pass;
+          float packet=exp(-pow((p.x-travel)/.052,2.))
+            *exp(-pow((p.y-stem)/.048,2.))*pass;
           vec2 center=(p-anchor)*vec2(2.566,1.);
-          float handoff=bell(beat,4.35,5.25);
-          float node=exp(-dot(center,center)/.00042)*handoff;
-          float receive=bell(beat,5.5,8.3)*right;
-          vec3 light=vec3(1.,.42,.27)*detail*warm*(packet*.38+receive*.035);
-          gl_FragColor=vec4(base+light+vec3(1.,.62,.45)*node*.13,1.);
+          float handoff=bell(beat,1.75,2.6);
+          float node=exp(-dot(center,center)/.0012)*handoff;
+          float radius=length((p-anchor)*vec2(1.,.39));
+          float front=mix(.025,.44,smoothstep(2.35,4.5,beat));
+          float spread=exp(-pow((radius-front)/.048,2.))*bell(beat,2.35,5.);
+          // Dark → alive is legible even on a phone. Brighten only original
+          // filaments, then reveal a branching front inside the receiving lobe.
+          base*=1.+detail*(left*gather*.17+right*(-.40+recover*.73));
+          vec3 light=vec3(1.,.42,.27)*detail
+            *(warm*packet*.95+right*spread*.23);
+          gl_FragColor=vec4(base+light+vec3(1.,.62,.45)*node*.32,1.);
         }
       `);
       program = gl.createProgram();
@@ -183,6 +194,10 @@ if (image && hero && toggle) {
       observer.observe(hero);
       new ResizeObserver(resize).observe(image);
       toggle.addEventListener('click', () => {paused = !paused; sync();});
+      replay?.addEventListener('click', () => {
+        elapsed = 0; last = 0; paused = false;
+        draw(); sync();
+      });
       reduced.addEventListener('change', sync);
       document.addEventListener('visibilitychange', sync);
       canvas.addEventListener('webglcontextlost', event => {event.preventDefault(); staticFallback();});
