@@ -173,6 +173,7 @@
   "site/dist/llms.txt",
   "site/dist/mainnet.html",
   "site/dist/mainnet.mjs",
+  "site/dist/memory-motion.mjs",
   "site/dist/observer.json",
   "site/dist/openapi.json",
   "site/dist/policies.html",

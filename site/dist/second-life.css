@@ -25,3 +25,15 @@ body{font-family:Manrope,Arial,sans-serif;background:var(--paper);color:var(--in
 
 .check-proof{display:flex;align-items:center;justify-content:center;gap:14px;font-size:12px;text-decoration:none;margin:25px auto 0;width:fit-content;border-bottom:1px solid var(--line);padding-bottom:4px}.check-proof .ui-icon{filter:invert(1)}.check-proof:hover{color:var(--coral)}
 .bench-head h1,.check-page-head h1{font-family:Continuity,Georgia,serif;font-weight:400}
+
+/* The same source artwork is displaced and lit locally; copy and layout stay fixed. */
+.memory-art{animation:none;transform:none;opacity:1}
+.memory-motion{display:none;aspect-ratio:2009 / 783}
+.memory-animated .memory-art:not(.memory-motion){opacity:0}
+.memory-animated .memory-motion{display:block}
+.memory-toggle{position:absolute;right:4%;top:294px;z-index:3;border:0;border-bottom:1px solid #78636f;background:rgba(18,13,19,.7);color:var(--muted);font:11px Manrope,Arial,sans-serif;padding:8px 0;cursor:pointer}
+.memory-toggle:hover{color:var(--coral)}
+@media(max-width:1100px){.memory-toggle{top:297px}}
+@media(max-width:700px){.memory-toggle{top:372px;right:22px;font-size:10px;min-height:44px}.memory-caption{top:354px}}
+@media(max-width:380px){.memory-toggle{top:346px;right:18px}.memory-caption{top:334px}}
+@media(prefers-reduced-motion:reduce){.memory-motion{display:none!important}.memory-art:not(.memory-motion){opacity:1!important}.memory-toggle{display:none!important}}
