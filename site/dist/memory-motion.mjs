@@ -40,7 +40,8 @@ if (image && hero && toggle) {
   }
 
   function draw() {
-    gl.uniform1f(timeUniform, elapsed);
+    // Keep mobile mediump shader clocks precise even in a long-open tab.
+    gl.uniform1f(timeUniform, elapsed % 8);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     const beat = elapsed % 8;
     hero.dataset.motionPhase = beat < 1.15 ? 'gather' : beat < 3.15 ? 'transfer'
